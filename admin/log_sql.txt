@@ -1,0 +1,416 @@
+07 12 2020 13:32:18: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:33:01: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:33:01: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:34:31: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:34:36: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:34:58: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:38:55: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:40:42: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:40:45: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:40:46: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:42:22: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:42:24: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:42:25: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:42:59: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:43:06: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:43:13: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:43:16: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:43:22: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:43:25: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:45:54: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:45:59: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:46:05: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:46:05: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:46:35: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:47:01: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:47:12: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:48:01: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:48:29: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:48:31: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:48:40: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:48:42: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:48:50: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:48:54: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:49:02: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:49:11: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:49:14: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:49:24: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:49:33: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:49:39: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:49:47: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:49:52: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:50:12: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:52:07: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:52:20: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:53:22: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:53:31: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:55:29: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:56:59: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:57:01: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:57:13: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:57:57: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:57:59: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:58:18: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:58:21: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:58:22: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:59:04: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:59:06: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:59:07: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 13:59:11: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:00:08: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:00:25: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:18: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:21: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:27: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:33: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:34: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:35: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:36: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:37: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:38: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:40: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:01:45: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:08:29: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:08:33: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:08:37: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:08:40: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:08:43: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:09:52: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:09:54: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:10:11: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:10:23: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:10:31: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:10:37: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:11:29: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:11:31: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:12:03: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:12:06: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:12:06: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:12:43: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:12:43: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:13:15: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:13:20: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:13:29: Table 'proyectobase_db.comunicados' doesn't exist
+-- Query name: obtComunicadoPorIdDB
+-- Query str: SELECT * FROM comunicados WHERE idComunicado=0 
+
+07 12 2020 14:13:43: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:13:48: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 14:14:57: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 15:36:41: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 15:36:49: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 15:36:53: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 15:39:58: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 15:40:59: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 15:41:05: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 15:42:51: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
+07 12 2020 15:43:01: Table 'proyectobase_db.cat_ayudas' doesn't exist
+-- Query name: ObtTodosCatAyudasDB
+-- Query str: SELECT * FROM cat_ayudas  WHERE  tipo=1  ORDER BY idAyuda
+
