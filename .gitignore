@@ -1,4 +1,3 @@
 # Deshabilitar archivos zip, rar, sql
 *.rar
 *.zip
-*.sql
