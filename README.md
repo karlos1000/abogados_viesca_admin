@@ -1,2 +1,2 @@
 Sistema para el control de casos
-Cliente: Juan
+Cliente: Cristian Lopez
