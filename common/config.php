@@ -6,9 +6,9 @@
  *  Descripción: Values neccessary for connection
  */
 $cfg_server='127.0.0.1';
-$cfg_user='carlos';
+$cfg_user='root';
 $cfg_db='abogadosviesca_db';
-$cfg_pw='root';
+$cfg_pw='';
 $siteURL='http://127.0.0.1/abogados_viesca_admin/';
 /*CONFIGURACIONES PARA ENVIO DE EMAIL SMTP*/
 /*$email_from = 'tester@framelova.info';
