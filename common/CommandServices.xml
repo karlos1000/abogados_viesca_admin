@@ -190,4 +190,88 @@
   </Command> -->
 
 
+  <!--Consultas cat tipo casos -->
+  <Command id="ObtCatTipoCasosDB">
+   <query>SELECT * FROM cat_tipo_casos ?</query>
+  </Command>
+  <Command id="TipoCasoPorIdDB">
+    <query>SELECT * FROM cat_tipo_casos WHERE idTipo=?</query>
+  </Command>
+  <Command id="crearTipoCasoDB">
+   <query>INSERT INTO cat_tipo_casos (nombre, activo) VALUES ('?', '?')</query>
+  </Command>
+
+
+  <!--Consultas cat conceptos -->
+  <Command id="ObtCatConceptosDB">
+   <query>SELECT * FROM cat_conceptos ?</query>
+  </Command>
+  <Command id="ConceptoPorIdDB">
+    <query>SELECT * FROM cat_conceptos WHERE idConcepto=?</query>
+  </Command>
+  <Command id="CrearConceptoDB">
+   <query>INSERT INTO cat_conceptos (nombre, activo) VALUES ('?', '?')</query>
+  </Command>
+
+
+  <!--Consultas clientes -->
+  <Command id="ObtClientesDB">
+   <query>SELECT * FROM clientes ?</query>
+  </Command>
+  <Command id="ClientePorIdDB">
+    <query>SELECT * FROM clientes WHERE idCliente=?</query>
+  </Command>
+  <Command id="CrearClienteDB">
+   <query>INSERT INTO clientes (nombre, telefono, email, direccion, fechaAct, fechaCreacion) VALUES ('?', '?', '?', '?', '?', '?')</query>
+  </Command>
+  <Command id="EditarClienteDB">
+   <query>UPDATE clientes SET nombre='?', telefono='?', email='?', direccion='?', fechaAct='?' WHERE idCliente=?</query>
+  </Command>
+
+
+  <!--Consultas casos -->
+  <Command id="ObtCasosDB">
+   <query>SELECT * FROM casos ?</query>
+  </Command>
+  <Command id="CasoPorIdDB">
+    <query>SELECT * FROM casos WHERE idCaso=?</query>
+  </Command>
+  <Command id="CrearCasoDB">
+   <query>INSERT INTO casos (clienteId, tipoId, titularId, autorizadosIds, fechaAlta, fechaAct, fechaCreacion) VALUES (?, ?, ?, '?', '?', '?', '?')</query>
+  </Command>
+  <Command id="EditarCasoDB">
+   <query>UPDATE casos SET clienteId=?, tipoId=?, titularId=?, autorizadosIds='?', fechaAlta='?', fechaAct='?' WHERE idCaso=?</query>
+  </Command>
+
+
+  <!--Consultas caso acciones -->
+  <Command id="ObtCasoAccionesDB">
+   <query>SELECT * FROM caso_acciones ?</query>
+  </Command>
+  <Command id="CasoAccionesPorIdDB">
+    <query>SELECT * FROM caso_acciones WHERE idAccion=?</query>
+  </Command>
+  <Command id="CrearCasoAccionDB">
+   <query>INSERT INTO caso_acciones (casoId, nombre, comentarios, fechaAlta, fechaAct, fechaCreacion) VALUES (?, '?', '?', '?', '?', '?')</query>
+  </Command>
+  <Command id="EditarCasoAccionDB">
+   <query>UPDATE caso_acciones SET casoId=?, nombre='?', comentarios='?', fechaAlta='?', fechaAct='?' WHERE idAccion=?</query>
+  </Command>
+
+
+  <!--Consultas accion gstos -->
+  <Command id="ObtAccionGastosDB">
+   <query>SELECT * FROM accion_gastos ?</query>
+  </Command>
+  <Command id="AccionGastosPorIdDB">
+    <query>SELECT * FROM accion_gastos WHERE idGasto=?</query>
+  </Command>
+  <Command id="CrearAccionGastoDB">
+   <query>INSERT INTO accion_gastos (casoId, accionId, conceptoId, monto, fechaAlta, fechaAct, fechaCreacion) VALUES (?, ?, ?, ?, '?', '?', '?')</query>
+  </Command>
+  <Command id="EditarAccionGastoDB">
+   <query>UPDATE accion_gastos SET casoId=?, accionId=?, conceptoId=?, monto=?, fechaAlta='?', fechaAct='?' WHERE idGasto=?</query>
+  </Command>
+
+
 </Commands>

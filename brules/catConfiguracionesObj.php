@@ -9,9 +9,9 @@ class catConfiguracionesObj {
     private $_valor = '';
     private $_fechaCreacion = '';
     private $_fechaAct = '';
-   
+
     //get y set
-    public function __get($name) {             
+    public function __get($name) {
         return $this->{"_".$name};
     }
     public function __set($name, $value) {
@@ -28,39 +28,39 @@ class catConfiguracionesObj {
         $fAl = ($fAl!="") ?$this->convertDate($fAl) :"";
 
         $result = $ds->ObtTodasConfiguracionesDB($fDel, $fAl);
-        $array = $datosBD->arrDatos($result);     
+        $array = $datosBD->arrDatos($result);
 
-        return $array;            
+        return $array;
     }
-    
+
     public function ObtConfiguracionByID($id){
         $DS = new catConfiguracionesDB;
         $obj = new catConfiguracionesObj();
         $datosBD = new datosBD();
 
-        $result = $DS->ConfiguracionByID($id);        
+        $result = $DS->ConfiguracionByID($id);
         return $datosBD->setDatos($result, $obj);
     }
-    
-    
+
+
      //Salvar cuentas por cobrar
     public function GuardarConfiguracion()
-    {   
+    {
         $objDB = new catConfiguracionesDB;
         $this->_idConfiguracion = $objDB->insConfiguracionDB($this->getParams());
     }
-    
-    public function ActualizarConfiguracion(){   
+
+    public function ActualizarConfiguracion(){
         $objDB = new catConfiguracionesDB();
         return $objDB->updateConfiguracionDB($this->getParams(true));
     }
 
     private function getParams($update = false){
         $param[0] = $this->_nombre;
-        $param[1] = $this->_valor;        
-                
+        $param[1] = $this->_valor;
+
         if($update){
-            $param[3] = $this->_idConfiguracion;        
+            $param[3] = $this->_idConfiguracion;
         }
         return $param;
     }
@@ -146,7 +146,7 @@ class catConfiguracionesObj {
                 $column->AddItem($rolTmp->rol,$rolTmp->idRol);
             }
         }
-        elseif($name_field == 'valor2'){            
+        elseif($name_field == 'valor2'){
             $column = new GridTextAreaColumn();
             $column->AllowHtmlRender = true;
             $column->BoxHeight = "10px";
