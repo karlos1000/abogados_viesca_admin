@@ -43,11 +43,11 @@ class usuariosBD {
         $query = array();
 
         if($idRol != ""){
-            $query[] = " A.idRol=$idRol ";
+            $query[] = " a.idRol=$idRol ";
         }
 
         if($esDirector != ""){
-            $query[] = " B.esDirector=$esDirector ";
+            $query[] = " b.esDirector=$esDirector ";
         }
         //En caso de llevar filtro
         if(count($query) > 0){

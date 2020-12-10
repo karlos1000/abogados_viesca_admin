@@ -66,7 +66,7 @@
     <query>INSERT INTO usuarios (idRol, nombre, email, password, fechaCreacion) VALUES ('@idRol','@nombre', '@email', '@password', NOW())</query>
   </Command>
   <Command id="obtTodosUsuariosDB">
-    <query>SELECT * FROM usuarios ?</query>
+    <query>SELECT a.* FROM usuarios AS a ?</query>
   </Command>
   <Command id="UserByEmailDB">
     <query>SELECT * FROM usuarios WHERE email='?' limit 0,1</query>
@@ -231,7 +231,13 @@
 
   <!--Consultas casos -->
   <Command id="ObtCasosDB">
-   <query>SELECT * FROM casos ?</query>
+    <query>
+      SELECT a.*, b.nombre AS cliente, c.nombre AS tipocaso, DATE_FORMAT(a.fechaAlta, "%d/%m/%Y") AS fechaAlta2, DATE_FORMAT(a.fechaAct, "%d/%m/%Y") AS fechaAct2
+      FROM casos AS a
+      LEFT JOIN clientes AS b ON b.idCliente=a.clienteId
+      LEFT JOIN cat_tipo_casos AS c ON c.idTipo=a.tipoId
+      ?
+    </query>
   </Command>
   <Command id="CasoPorIdDB">
     <query>SELECT * FROM casos WHERE idCaso=?</query>

@@ -42,7 +42,7 @@ $(document).ready(function(){
 	if($("#vista").length){
 		$("nav>li").removeClass("active");
 		$("#li_"+$("#vista").val()).addClass("active");
-    }
+  }
 
 	/*
 	  //Validar formulario
@@ -1161,6 +1161,10 @@ function edicionGrid(grid, id){
 
   if(grid=="comunicados"){
     location.href="frmcomunicado.php?id="+id;
+  }
+
+  if(grid=="casos"){
+    location.href="frmCasoEdit.php?id="+id;
   }
 }
 
@@ -2374,4 +2378,12 @@ function eliminar_reg(id, opc){
       }).set({labels:{ok:'Aceptar', cancel: 'Cancelar'}, padding: false});
     break;
   }
+}
+
+// Limpiar campos de un formulario
+function clearForm(frm){
+  // console.log(frm);
+  $('#'+frm)[0].reset();
+  let validator = $('#'+frm).validate();
+  validator.resetForm();
 }

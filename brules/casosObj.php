@@ -94,11 +94,11 @@ class casosObj extends configuracionesGridObj{
         $configGrid = new configuracionesGridObj();
 
         $configGrid->defineGrid($grid, $ds);
-        $configGrid->defineColumn($grid, "idCaso", "ID", false, true);
-        $configGrid->defineColumn($grid, "clienteId", "Cliente", true, false, 1);
-        $configGrid->defineColumn($grid, "tipoId", "Tipo", true, false, 1);
-        $configGrid->defineColumn($grid, "fechaAlta", "F. Alta", true, false, 1);
-        $configGrid->defineColumn($grid, "fechaAct", "Ult. Act.", false, false);
+        $configGrid->defineColumn($grid, "idCaso", "ID", true, true);
+        $configGrid->defineColumn($grid, "cliente", "Cliente", true, false, 1);
+        $configGrid->defineColumn($grid, "tipocaso", "Tipo", true, false, 1);
+        $configGrid->defineColumn($grid, "fechaAlta2", "F. Alta", true, false, 1);
+        $configGrid->defineColumn($grid, "fechaAct2", "Ult. Act.", true, false);
         // $configGrid->defineColumn($grid, "opcionInfo", "T. Gastos", false, false);
         // if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){
             $configGrid->defineColumnEdit($grid);

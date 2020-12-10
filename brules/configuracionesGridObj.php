@@ -219,12 +219,18 @@ class configuracionesGridObj {
                 $column->ItemTemplate = '
                 <a href="frmUsuario.php?id={idUsuario}" class="kgrLinkEdit"></a>'
                 . '<a class="kgrLinkDelete btnFancy" onclick="verificaUsoTabla(\'usuarios\', {idUsuario})" href="#fancyElimCat" title="Eliminar"></a>';
-            }elseif($grid->id == "comunicados"){
+            }
+            elseif($grid->id == "comunicados"){
                 $column->ItemTemplate = '
                 <a class="kgrLinkEdit" onclick="edicionGrid(\'comunicados\', {idComunicado});" href="javascript:void 0" title="Editar"></a>'
                     .' <a class="kgrLinkDelete" onclick="grid_delete(this)" href="javascript:void 0" title="Eliminar"></a>'
                 // . '<a class="btnDesactivarUsuario" onclick="muestraDesactivarUsuario({idUsuario},\'usuariosGrid\',\'usuarios\',{activo})"  href="#fancyDesactivarUsuario" title="Activar/Desactivar usuario"><img src="../images/{nombreImg}" class="iconoDesactivar" ></a>'
                 ;
+            }
+            elseif($grid->id == "casos"){
+                $link = '';
+                $link .= '<a class="kgrLinkEdit" onclick="edicionGrid(\'casos\', {idCaso});" href="javascript:void 0" title="Editar"></a>';
+                $column->ItemTemplate = $link;
             }
             else{
                 $column->ItemTemplate = '

@@ -1,4 +1,0 @@
-09 12 2020 16:15:21: 
--- Query name: LoginUser
--- Query str: SELECT * FROM usuarios WHERE email='superadmin@framelova.com' AND password='superadmin_pass'
-

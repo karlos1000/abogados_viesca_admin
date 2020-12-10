@@ -5,6 +5,25 @@
  */
 
 $(document).ready(function(){
+
+  // Evento cada vez que actualiza el listbox
+  $('#c_autorizados').change(function() {
+    if($(this).val()!=null){
+        $("#c_idsautorizados").val($(this).val());
+    }else{
+        $("#c_idsautorizados").val("");
+    }
+  });
+
+  // Popup tipo
+  $('.agregarCliente').click(function() {
+    clearForm("formCrearCliente");
+  });
+
+  // Popup tipo
+  $('.agregarTipo').click(function() {
+    clearForm("formCrearTipo");
+  });
 });
 
 
@@ -21,7 +40,7 @@ function obtListaClientes(){
   var params = {funct: 'tblListaClientes', idTabla:idTabla, idUsuario:usuarioIdCreador};
   ajaxData(params, function(data){
     hideLoading2("busca_clientes");
-    console.log(data);
+    // console.log(data);
 
     if(data.success){
       $("#cont_listaclientes").html(data.tblListaClientes);
@@ -69,7 +88,7 @@ function obtListaTitulares(){
   var params = {funct: 'tblListaTitulares', idTabla:idTabla, idUsuario:usuarioIdCreador};
   ajaxData(params, function(data){
     hideLoading2("busca_titular");
-    console.log(data);
+    // console.log(data);
 
     if(data.success){
       $("#cont_listatitulares").html(data.tblListaTitulares);
@@ -91,7 +110,7 @@ function obtListaTitulares(){
     }
   });
 }
-function btnObtIdCliente(){
+function btnObtIdTitular(){
   var selRow = accounting.unformat($("#id_sel_titular").val());
 
   if(selRow>0){
@@ -103,3 +122,94 @@ function btnObtIdCliente(){
   }
 }
 // Fin obtener titulares
+
+function crearCaso(){
+  var validator = $("#formCaso").validate({ });
+  //Validar formulario
+  if($("#formCaso").valid()){
+    // var htmlOriginal = showLoading('btnCrearCaso');
+
+    var datosForm = $("#formCaso").serializeJSON();
+    console.log(datosForm);
+    params = paramsB64(datosForm);
+    params['funct'] = 'crearCaso';
+    console.log(params);
+    // return false;
+    ajaxData(params, function(data){
+      console.log(data);
+
+      if(data.success){
+        alertify.success("Registro creado correctamente.");
+        setTimeout(function(){
+          location.href="frmCasoEdit.php?id="+data.id+"";
+        }, 1000);
+      }else{
+        alertify.error("El registro no fue creado, intentar nuevamente.");
+      }
+    });
+  }else{
+    validator.focusInvalid();
+    return false;
+  }
+}
+
+// Popup para crear el cliente
+function btnCrearCliente() {
+  var validator = $("#formCrearCliente").validate({ });
+  //Validar formulario
+  if($("#formCrearCliente").valid()){
+    // var htmlOriginal = showLoading('btnCrearCliente');
+
+    var datosForm = $("#formCrearCliente").serializeJSON();
+    // console.log(datosForm);
+    params = paramsB64(datosForm);
+    params['funct'] = 'crearCliente';
+    console.log(params);
+    // return false;
+    ajaxData(params, function(data){
+      console.log(data);
+
+      $('.modal').modal('hide');
+      if(data.success){
+        alertify.success("Registro creado correctamente.");
+      }else{
+        alertify.error("El registro no fue creado, intentar nuevamente.");
+      }
+    });
+  }else{
+    validator.focusInvalid();
+    return false;
+  }
+}
+
+// Popup para crear tipo
+function btnCrearTipo() {
+  var validator = $("#formCrearTipo").validate({ });
+  //Validar formulario
+  if($("#formCrearTipo").valid()){
+    // var htmlOriginal = showLoading('btnCrearCliente');
+
+    var datosForm = $("#formCrearTipo").serializeJSON();
+    // console.log(datosForm);
+    params = paramsB64(datosForm);
+    params['funct'] = 'crearTipo';
+    // console.log(params);
+    // return false;
+    ajaxData(params, function(data){
+      console.log(data);
+
+      $('.modal').modal('hide');
+      if(data.success){
+        let opcion = data.opcion;
+        // Agregar opciones tipo
+        $("#c_tipo").append('<option value="'+opcion.id+'">'+opcion.val+'</option>');
+        alertify.success("Registro creado correctamente.");
+      }else{
+        alertify.error("El registro no fue creado, intentar nuevamente.");
+      }
+    });
+  }else{
+    validator.focusInvalid();
+    return false;
+  }
+}

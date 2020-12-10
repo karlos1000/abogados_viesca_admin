@@ -29,7 +29,7 @@ $result = $casosObj->ObtListadoCasosGrid($filSel, $filTexto, $filEstatus);
     <?php echo getHeaderMain($_SESSION['myusername'], true);?>
     <?php $menu = getAdminMenu(); ?>
 
-    <input type="hidden" name="vista" id="vista" value="inicio">
+    <input type="hidden" name="vista" id="vista" value="listadocasos">
 
     <section class="section-internas">
         <div class="panel-body">

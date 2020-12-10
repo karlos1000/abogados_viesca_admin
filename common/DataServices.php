@@ -103,7 +103,7 @@ class DataServices{
 
 		/*Registra error de sql*/
 		if(!$result){
-			$dateByZone = new DateTime("now", new DateTimeZone('America/Mexico_City') );
+				$dateByZone = new DateTime("now", new DateTimeZone('America/Mexico_City') );
        			$dateTime = $dateByZone->format('d m Y H:i:s'); //fecha Actual
 			// echo mysqli_error($this->connectionStatus);
 			if(!file_exists("log_sql.txt"))
@@ -111,11 +111,12 @@ class DataServices{
 				$file = fopen("log_sql.txt", "w");
 				fclose($file);
 			}
-			$file = fopen("log_sql.txt", "a");
-			fwrite($file, $dateTime.": ".mysqli_error($this->connectionStatus) . PHP_EOL);
-			fwrite($file, "-- Query name: ".$queryName . PHP_EOL);
-			fwrite($file, "-- Query str: ".$queryStr . PHP_EOL. PHP_EOL);
-			fclose($file);
+			// $file = fopen("log_sql.txt", "a");
+			$file = @fopen("log_sql.txt", "a+");
+			@fwrite($file, $dateTime.": ".mysqli_error($this->connectionStatus) . PHP_EOL);
+			@fwrite($file, "-- Query name: ".$queryName . PHP_EOL);
+			@fwrite($file, "-- Query str: ".$queryStr . PHP_EOL. PHP_EOL);
+			@fclose($file);
 		}
 
 		if ($id == TRUE)
