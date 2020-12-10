@@ -21,7 +21,8 @@ function getAdminMenu(){
 
     $menu .= '<li id="li_inicio"><a href="index.php"><img src="../images/iconos/iconos_menu_lateral/inicio.png"><p>Inicio</p></a></li>';
     if($_SESSION['idRol'] == 1 || $_SESSION['idRol'] == 2){
-        $menu .= '<li id="li_catalogos"><a href="catalogos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Cat&aacute;logos</p></a></li>';
+      $menu .= '<li id="li_catalogos"><a href="catalogos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Cat&aacute;logos</p></a></li>';
+      $menu .= '<li id="li_catalogos"><a href="listadocasos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Mis Casos</p></a></li>';
     }
     elseif($_SESSION['idRol'] == 3){
 
@@ -195,9 +196,9 @@ function estilosPagina($level=false){
   <!-- <link href="../css/alertify.default.css" rel="stylesheet" type="text/css" /> -->
   <link rel="stylesheet" href="../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />*/
 
-  /*
   $link .= ' <link href="'.$level.'css/jquery-ui.css" rel="stylesheet" type="text/css" />';
-  $link .= ' <link href="'.$level.'css/jquery.signature.css" rel="stylesheet" type="text/css" />';
+  /*
+   $link .= ' <link href="'.$level.'css/jquery.signature.css" rel="stylesheet" type="text/css" />';
   $link .= ' <link href="'.$level.'css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />';
   $link .= ' <link href="'.$level.'css/jquery.timepicker.css" rel="stylesheet" type="text/css" />';
   */
@@ -240,8 +241,9 @@ function scriptsPagina($level=false){
   /*
   $link .= ' <script type="text/javascript" src="'.$level.'js/jquery.timepicker.min.js?upd='.$upd.'"></script>';
   $link .= ' <script type="text/javascript" src="'.$level.'js/jquery-ui-timepicker.js?upd='.$upd.'"></script>';
-  $link .= ' <script type="text/javascript" src="'.$level.'js/spanish_datapicker.js?upd='.$upd.'"></script>';
   */
+  
+  $link .= ' <script type="text/javascript" src="'.$level.'js/spanish_datapicker.js?upd='.$upd.'"></script>';
   $link .= ' <script type="text/javascript" src="'.$level.'js/functionsGlobals.js?upd='.$upd.'"></script>'; //Solo para las funciones globales para todo el sitio
   $link .= ' <script type="text/javascript" src="'.$level.'js/functions.js?upd='.$upd.'"></script>';
   return $link;

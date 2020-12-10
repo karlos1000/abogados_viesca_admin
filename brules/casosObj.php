@@ -81,24 +81,25 @@ class casosObj extends configuracionesGridObj{
         $resAct = $objDB->ActCampoEnfermedadDB($param);
         return $resAct;
     }
+    */
 
     //Grid
-    public function ObtEnfermedadesGrid(){
+    public function ObtListadoCasosGrid($filSel="", $filTexto="", $filEstatus=""){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
         $uDB = new casosDB();
-        $ds = $uDB->EnfermedadesDataSet($ds);
-        $grid = new KoolGrid("cat_enfermedades");
+        $ds = $uDB->CasosDataSet($ds);
+        $grid = new KoolGrid("casos");
         $configGrid = new configuracionesGridObj();
 
         $configGrid->defineGrid($grid, $ds);
-        $configGrid->defineColumn($grid, "idEnfermedad", "ID", false, true);
-        $configGrid->defineColumn($grid, "nombre", "Nombre", true, false, 1);
-        $configGrid->defineColumn($grid, "tratamientoId", "Tratamiento", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionId", "Opcion", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionInfo", "Mensaje", false, false);
-        $configGrid->defineColumn($grid, "activo", "Activo", true, false, 0);
+        $configGrid->defineColumn($grid, "idCaso", "ID", false, true);
+        $configGrid->defineColumn($grid, "clienteId", "Cliente", true, false, 1);
+        $configGrid->defineColumn($grid, "tipoId", "Tipo", true, false, 1);
+        $configGrid->defineColumn($grid, "fechaAlta", "F. Alta", true, false, 1);
+        $configGrid->defineColumn($grid, "fechaAct", "Ult. Act.", false, false);
+        // $configGrid->defineColumn($grid, "opcionInfo", "T. Gastos", false, false);
         // if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){
             $configGrid->defineColumnEdit($grid);
         // }
@@ -107,7 +108,7 @@ class casosObj extends configuracionesGridObj{
         $grid->Process();
 
         return $grid;
-    } */
+    }
 
     /* // Imp. obt nombre de Enfermedades por ids
     public function obtNombreEnfermedadesPorIds($id){

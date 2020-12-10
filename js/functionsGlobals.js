@@ -9,47 +9,57 @@ $(document).ready(function(){
   //Para todas las vistas que tengan fechas con kool agregar atributo readonly
   //$("#fechaDel").attr("readonly", "readonly");
   //$("#fechaAl").attr("readonly", "readonly");
-  
+
+  $('.inputfechaGral').datepicker({
+      showOn: "button",
+      buttonImage: '../images/calendar.gif',
+      buttonImageOnly: true,
+      buttonText: "Select date",
+      autoclose: true,
+      // minDate: getCurrentDate(1),
+      // maxDate: "+2M"
+  });
+
     // Remover caracteres que no reconoce la codificacion
-    $('.quitarCaracterNoUTF8').on("change",function(e) {    
+    $('.quitarCaracterNoUTF8').on("change",function(e) {
       var texto = quitarCaracterNoUTF8($(this).val());
       $(this).val(texto);
 	});
-  
-	//Para poder abrir un modal sobre otro
-    $(document).on('show.bs.modal', '.modal', function (event) {
-      var zIndex = 1040 + (10 * $('.modal:visible').length);
-      $(this).css('z-index', zIndex);
-      setTimeout(function() {
-          $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-      }, 0);
-    });
 
-    $(document).on('hidden.bs.modal', '.modal', function () {
-        $('.modal:visible').length && $(document.body).addClass('modal-open');
-    });
-	
+	/* //Para poder abrir un modal sobre otro
+  $(document).on('show.bs.modal', '.modal', function (event) {
+    var zIndex = 1040 + (10 * $('.modal:visible').length);
+    $(this).css('z-index', zIndex);
+    setTimeout(function() {
+        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+    }, 0);
+  });
+
+  $(document).on('hidden.bs.modal', '.modal', function () {
+      $('.modal:visible').length && $(document.body).addClass('modal-open');
+  }); */
+
 	if($("#vista").length){
 		$("nav>li").removeClass("active");
 		$("#li_"+$("#vista").val()).addClass("active");
     }
-	
+
 	/*
-	  //Validar formulario 
-	  if($("#formEjemplo").length){    
+	  //Validar formulario
+	  if($("#formEjemplo").length){
 		$("#formEjemplo").validate({
-		  submitHandler: function(form) {           
+		  submitHandler: function(form) {
 			  form.submit();
 			}
 		  });
 	  }
 	  */
-	  
+
 	/*
 	  //para la seccion de tabs
 	  if($(".tabs_proceso").length){
 		$(".tabs_proceso").champ();
-	}*/  
+	}*/
 
   $('input[name=\"activo\"]').click(function() {
     var v = $(this).val();
@@ -63,9 +73,9 @@ $(document).ready(function(){
   }
 
   //initialize all modals
-    $('.modal').modal({
-        dismissible: false,
-    });
+  // $('.modal').modal({
+  //   dismissible: false,
+  // });
 
   // Para los listbox
   if($(".duallb").length){
@@ -125,16 +135,16 @@ $(document).ready(function(){
       }
     });
   }
-	
+
 	/*
-    //Ejemplo cargar datos con ajax 
-    $("#btn_ajax_ejemplo").click(function(){    
+    //Ejemplo cargar datos con ajax
+    $("#btn_ajax_ejemplo").click(function(){
 	  $("#cont_div_ejemplo").hide();
 	  loadingAjax("cont_div_ejemplo");
 	  var params = {funct: 'obtDatosEjemplo'};
 	  ajaxData(params, function(data){
 		  // console.log(data);
-		  if(data.success==true){			
+		  if(data.success==true){
 		  }
 	  });
     });
@@ -370,7 +380,7 @@ function ajaxDataPost(url, data, response){
   });
 }
 
-////metodo para llamadas ajax tipo get con url personalizada 
+////metodo para llamadas ajax tipo get con url personalizada
 function ajaxDataGet(url, data, response){
   $.ajax({
       type: 'GET',
@@ -608,7 +618,7 @@ function defineAlertify(){
           }
         };
  }
-  
+
 //Mostrar alerta de mensajes personalizados
 function msgAlertify(msj, msjPer, tipo){
   if(msj!=""){
@@ -907,7 +917,7 @@ function sumarDiasFechaTexto(dateText, numDias){
   return fechaObj;
 }
 
-//Funcion para generar una contraseÒa aleatoria a un input por su id
+//Funcion para generar una contraseÔøΩa aleatoria a un input por su id
 function generarPassword(idInput){
     console.log(idInput);
     var params = {
@@ -1074,7 +1084,7 @@ function eliminarRegCatalogo(grid){
             case 'usuarios':
               usuariosGrid.refresh();
               usuariosGrid.commit();
-            break;         
+            break;
 
             default:break;
           }
@@ -1382,8 +1392,8 @@ function validateClave(clave){
   $("#msgLong").hide();
   var division = Array.from(clave.value);
   if (division.length==5) {
-  var letras="abcdefghijklmnÒopqrstuvwxyz";
-  var letrasMay="ABCDEFGHIJKLMN—OPQRSTUVWXYZ";
+  var letras="abcdefghijklmnÔøΩopqrstuvwxyz";
+  var letrasMay="ABCDEFGHIJKLMNÔøΩOPQRSTUVWXYZ";
   for (var i = 0; i < division.length; i++) {
     if (i>1) {
       if (isNaN(division[i])) {//si no es numero
@@ -2044,11 +2054,11 @@ function replaceTodo(string, find="", replace=""){
 }
 
 
-// Inicio obtener usuarios (responsables)
+/* // Inicio obtener usuarios (responsables)
 var datosListaUsuarioRealizo;
-function obtListaUsuariosRealizo(){  
+function obtListaUsuariosRealizo(){
   showLoading("busca_realizo");
-  var usuarioIdCreador = accounting.unformat($("#usuarioIdCreador").val()); 
+  var usuarioIdCreador = accounting.unformat($("#usuarioIdCreador").val());
   // console.log(usuarioIdCreador);
 
   $("#id_sel_usuario_realizo").val(0);
@@ -2061,15 +2071,15 @@ function obtListaUsuariosRealizo(){
 
     if(data.success){
       $("#cont_listausuarios_realizo").html(data.tblListaUsuarios);
-      $('#modalListaUsuariosRealizo').modal('show');      
+      $('#modalListaUsuariosRealizo').modal('show');
       //grid
       var grid_listausuarios = initGridBTListas(idTabla);
 
       //Accion para tomar el seleccionado
-      $('#'+idTabla+' tbody').on('click', 'tr', function() {        
+      $('#'+idTabla+' tbody').on('click', 'tr', function() {
         var data = grid_listausuarios.row(this).data();
         datosListaUsuarioRealizo = data;
-        $("#id_sel_usuario_realizo").val(data[0]);        
+        $("#id_sel_usuario_realizo").val(data[0]);
 
         $("table tr").removeClass('bg_tr_selected');
         $(this).addClass('bg_tr_selected');
@@ -2080,8 +2090,8 @@ function obtListaUsuariosRealizo(){
   });
 }
 function btnObtIdUsuarioRealizo(){
-  var selRow = accounting.unformat($("#id_sel_usuario_realizo").val());  
-  
+  var selRow = accounting.unformat($("#id_sel_usuario_realizo").val());
+
   if(selRow>0){
     $("#dp_realizo_id_hid").val(selRow);
     $("#dp_realizo").val(datosListaUsuarioRealizo[1]);
@@ -2090,7 +2100,7 @@ function btnObtIdUsuarioRealizo(){
     alertify.error("Debe seleccionar alg&uacute;n registro.");
   }
 }
-// Fin obtener usuarios (responsables)
+// Fin obtener usuarios (responsables) */
 
 
 function guardaValorTextoDeSelect(select, idInput, idInput2){
@@ -2103,7 +2113,7 @@ function guardaValorTextoDeSelect(select, idInput, idInput2){
   }
 }
 
-//Remueve caracteres que no existen en la codificacion utf8 
+//Remueve caracteres que no existen en la codificacion utf8
 function quitarCaracterNoUTF8(string){
   string = string.replace(/\oÃÅ/g, '');
   return string;
@@ -2133,7 +2143,7 @@ function obtenerParametrosDataTable(idTabla, parameters){
            "url": "../ajaxcall/ajaxDataTable.php?tabla=gridHistorico&idTutor="+$("#idTutor").val(),
            "type": "POST",
            complete: function(dataRG) {
-                 
+
                 },
            error: function (xhr, error, thrown) {
                             // alert("Un error ha ocurrio durante la actualizacion, por favor notifica a soporte:.\n"+thrown );
@@ -2149,7 +2159,7 @@ function obtenerParametrosDataTable(idTabla, parameters){
      { targets: "colSegmento", "name": "segmentoId"},
      { targets: "colGrupo", "name": "cotGrupoId"},
      { targets: "colClave", "name": "claveMat"},
-     { targets: "colNombre", "name": "nombre"},    
+     { targets: "colNombre", "name": "nombre"},
    ]
  }
 
@@ -2352,7 +2362,7 @@ function eliminar_reg(id, opc){
   switch (opc){
     case 'gama_modelo':
       msg += ", si es asi se borraran las versiones que lo contengan";
-      alertify.confirm("<strong>"+msg+ "?</strong>", function(){        
+      alertify.confirm("<strong>"+msg+ "?</strong>", function(){
 		/*
         var url ='gamamodelos.php';
         var arrParams = [];
@@ -2360,7 +2370,7 @@ function eliminar_reg(id, opc){
         arrParams[1] = {"name":"eliminarModelo", "val":"ok"};
         postDinamico(url, arrParams, "");
 		*/
-      },function(){        
+      },function(){
       }).set({labels:{ok:'Aceptar', cancel: 'Cancelar'}, padding: false});
     break;
   }

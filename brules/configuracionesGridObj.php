@@ -44,9 +44,12 @@ class configuracionesGridObj {
             }elseif ($grid->id == "comunicados") {
                 $grid->MasterTable->ShowFunctionPanel = true;
                 $grid->MasterTable->FunctionPanel->ShowInsertButton = false;
+            }elseif ($grid->id == "casos") {
+                $grid->MasterTable->ShowFunctionPanel = false;
+                // $grid->MasterTable->FunctionPanel->ShowInsertButton = false;
             }
             else {
-            $grid->MasterTable->ShowFunctionPanel = true;
+                $grid->MasterTable->ShowFunctionPanel = true;
             }
         }
         //Insert Settings
@@ -58,8 +61,7 @@ class configuracionesGridObj {
         $grid->ClientSettings->ClientEvents["OnRowDelete"] = "Handle_OnRowDelete";
 
         switch ($grid->id) {
-            case 'cat_cursos':
-            case 'comunicados':
+            case 'casos':
                 $grid->Width = "960px";
             break;
             /*case 'patentes_competencia':

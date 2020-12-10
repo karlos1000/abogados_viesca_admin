@@ -11,6 +11,7 @@ include_once $dirname.'/brules/usuariosObj.php';
 include_once $dirname.'/brules/catAyudasObj.php';
 include_once $dirname.'/brules/comunicadosObj.php';
 include_once $dirname.'/brules/utilsObj.php';
+include_once $dirname.'/brules/clientesObj.php';
 
 
 //Fisrt check the function name
@@ -25,7 +26,7 @@ switch ($function){
 
     case "obtDatosConfiguracion":
         obtDatosConfiguracion();
-    break;    
+    break;
 
     case "guardarConfiguracion":
         guardarConfiguracion($_POST['idConfiguracion'], $_POST['valor']);
@@ -62,10 +63,111 @@ switch ($function){
     case "cargaSelector":
         cargaSelector($_GET['callback']);
       break;
-    
+
+    // Listados de clientes
+    case "tblListaClientes": tblListaClientes(); break;
+    case "tblListaTitulares": tblListaTitulares(); break;
+
     default:
       echo "Not valid call";
 }
+
+
+// Obtener la lista de clientes
+function tblListaClientes(){
+  $callback = (isset($_GET['callback']) !="")?$_GET['callback']:"";
+  $idTabla = (isset($_GET['idTabla']) !="")?$_GET['idTabla']:"";
+  // $idUsuario = (isset($_GET['idUsuario']) !="")?$_GET['idUsuario']:"";
+
+  $clientesObj = new clientesObj();
+  $colRes = $clientesObj->ObtClientes();
+  $arr = array("success"=>false);
+
+  // echo "<pre>";
+  // print_r($colRes);
+  // echo "</pre>";
+  // exit();
+  if(count($colRes)>0){
+    // table-striped
+    $html = '
+        <table id="'.$idTabla.'" class="table table-bordered table-condensed dataTable no-footer dt-responsive hover" role="grid" cellspacing="0" width="100%" >
+            <thead>
+                <tr>
+                    <th>ID <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                    <th>Nombre <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+            ';
+              foreach($colRes as $item){
+                // if($idUsuario!=$item->idUsuario && $item->idRol!=4){
+                  $html .= '
+                  <tr>
+                      <td>'.$item->idCliente.'</td>
+                      <td>'.$item->nombre.'</td>
+                  </tr>
+                  ';
+                // }
+              }
+        $html .= '
+            </tbody>
+        </table>
+    ';
+
+    $arr = array("success"=>true, "tblListaClientes"=>$html);
+  }
+
+  echo $callback . '(' . json_encode($arr) . ');';
+}
+
+// Obtener la lista titulares
+function tblListaTitulares(){
+  $callback = (isset($_GET['callback']) !="")?$_GET['callback']:"";
+  $idTabla = (isset($_GET['idTabla']) !="")?$_GET['idTabla']:"";
+  // $idUsuario = (isset($_GET['idUsuario']) !="")?$_GET['idUsuario']:"";
+
+  $usuariosObj = new usuariosObj();
+  $colRes = $usuariosObj->obtTodosUsuarios();
+  $arr = array("success"=>false);
+
+  // echo "<pre>";
+  // print_r($colRes);
+  // echo "</pre>";
+  // exit();
+  if(count($colRes)>0){
+    // table-striped
+    $html = '
+        <table id="'.$idTabla.'" class="table table-bordered table-condensed dataTable no-footer dt-responsive hover" role="grid" cellspacing="0" width="100%" >
+            <thead>
+                <tr>
+                    <th>ID <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                    <th>Nombre <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+            ';
+              foreach($colRes as $item){
+                // if($idUsuario!=$item->idUsuario && $item->idRol!=4){
+                  $html .= '
+                  <tr>
+                      <td>'.$item->idUsuario.'</td>
+                      <td>'.$item->nombre.'</td>
+                  </tr>
+                  ';
+                // }
+              }
+        $html .= '
+            </tbody>
+        </table>
+    ';
+
+    $arr = array("success"=>true, "tblListaTitulares"=>$html);
+  }
+
+  echo $callback . '(' . json_encode($arr) . ');';
+}
+
+
 
 function funcionEjemplo($callback, $id, $valor){
     $gamaModelosObj = new gamaModelosObj();
@@ -88,12 +190,12 @@ function verificaExisteEmail($callback, $email){
     echo $callback . '(' . json_encode($return_arr) . ');';
 }
 
-function guardarConfiguracion($idConfiguracion, $valor){  
+function guardarConfiguracion($idConfiguracion, $valor){
   $dirname = dirname(__DIR__);
   include  $dirname.'/common/config.php';
   $valor = base64_decode($valor);
   $valor = convertirTextoEnriquecido($valor,$siteURL, true );
-  
+
   $catConfiguracionesObj = new catConfiguracionesObj();
   $catConfiguracionesObj->valor = convertirTextoEnriquecido($valor);
   $catConfiguracionesObj->idConfiguracion = $idConfiguracion;
@@ -107,16 +209,16 @@ function guardarConfiguracion($idConfiguracion, $valor){
 
 // obtener datos de la configuracion imp 17/10/19
 function obtDatosConfiguracion(){
-  $catConfiguracionesObj = new catConfiguracionesObj();  
+  $catConfiguracionesObj = new catConfiguracionesObj();
 
   $callback = (isset($_GET['callback']) !="")?$_GET['callback']:"";
-  $idConfiguracion = (isset($_GET['idConfiguracion']) !="")?$_GET['idConfiguracion']:0;    
+  $idConfiguracion = (isset($_GET['idConfiguracion']) !="")?$_GET['idConfiguracion']:0;
   $arr = array("success"=>false);
 
   if($idConfiguracion>0){
     $datosConf = $catConfiguracionesObj->ObtConfiguracionByID($idConfiguracion);
     if($datosConf->idConfiguracion>0){
-      $arr = array("success"=>true, "datosConf"=>$datosConf);      
+      $arr = array("success"=>true, "datosConf"=>$datosConf);
     }
   }
 
@@ -213,7 +315,7 @@ function eliminarRegCatalogo($callback, $elimTipo, $elimRegId){
       $usuariosObj = new usuariosObj();
       $res = $usuariosObj->EliminarUsuario($elimRegId);
       break;
-    
+
     default:break;
   }
 
@@ -247,7 +349,7 @@ function guardarComunicado($post){
     $comunicadosObj->activo = $post["activo"];
     $comunicadosObj->urlComunicado = convertirTextoEnriquecido($post["urlComunicado"]);
     $comunicadosObj->urlVideo = convertirTextoEnriquecido($post["urlVideo"]);
-    
+
     if($post["idComunicado"] == 0){
         $comunicadosObj->imgComunicado = $imgComunicado;
         $comunicadosObj->GuardarComunicado();
@@ -280,15 +382,15 @@ function guardarComunicado($post){
     $titulo = '';
 
     switch($tabla){
-      case 'dispositivos': 
+      case 'dispositivos':
         $regDispObj = new registroDispositivo();
         $usuariosObj = new usuariosObj();
 
 
         $regDispObj->usuarioId = $id;
-        $dispositivos = $regDispObj->obtTodosRegDispositivoPorIdUsr2(); 
+        $dispositivos = $regDispObj->obtTodosRegDispositivoPorIdUsr2();
         $usuario = $usuariosObj->UserByID($id);
-    
+
         $titulo = "Dispositivos del tutor ".$usuario->nombre;
 
         $html .= '<div class="table-responsive" id="tablaDetVentaRenov">';
@@ -300,20 +402,20 @@ function guardarComunicado($post){
         $html .= '<th class="text-center">Fecha registro</th>';
         $html .= '</tr>';
         $html .= '</thead>';
-    
+
         $html .= '<tbody>';
-    
+
         foreach ($dispositivos as $dispositivo) {
-      
+
             $html .= '<tr>';
             $html .= '<td class="text-right">'.$dispositivo->navegadorCont.'</td>';
             $html .= '<td class="">'.$dispositivo->alias.'</td>';
             $html .= '<td>'.convertirFechaVista($dispositivo->fechaCreacion).'</td>';
             $html .= '</tr>';
         }
-    
+
         $html .= '</tbody>';
-    
+
         $html .= '</table>';
         $html .= '</div>';
       break;
@@ -324,9 +426,9 @@ function guardarComunicado($post){
         $usuariosObj = new usuariosObj();
 
         $historicos = $historicosObj->GetAllHistoricos($id);
-        
+
         $usuario = $usuariosObj->UserByID($id);
-    
+
         $titulo = "Notificaciones del tutor ".$usuario->nombre;
 
         $html .= '<div class="table-responsive" id="tablaDetVentaRenov">';
@@ -340,15 +442,15 @@ function guardarComunicado($post){
         $html .= '<th class="text-center">Registrado</th>';
         $html .= '</tr>';
         $html .= '</thead>';
-    
+
         $html .= '<tbody>';
-    
+
         foreach ($historicos as $historico) {
             $alumno = $alumnosObj->obtAlumnoPorId($historico->alumnoId);
             switch($historico->tipo){
               case 1: $tipo = "Entrada";break;
               case 2: $tipo = "Salida";break;
-  
+
           }
           $arrFecha = explode(" ",$historico->fecha);
           $hora = $arrFecha[1];
@@ -360,21 +462,21 @@ function guardarComunicado($post){
             $html .= convertirFechaVistaConHora($historico->fechaCreacion);
             $html .= '</tr>';
         }
-    
+
         $html .= '</tbody>';
-    
+
         $html .= '</table>';
         $html .= '</div>';
       break;
 
-      default: 
+      default:
       break;
     }
-  
-    
-  
+
+
+
     $return_arr = array("success"=>true, "html"=>$html, "titulo"=>$titulo);
-  
+
     echo $callback . '(' . json_encode($return_arr) . ');';
   }
 
@@ -434,21 +536,21 @@ function guardarComunicado($post){
 
 
     $arr = array("success" => true, "html" => $html);
-    echo $callback . '(' . json_encode($arr) . ');'; 
+    echo $callback . '(' . json_encode($arr) . ');';
 }
 
 
 
 
 
-function subirArchivo($name_input, $save_folder){    
+function subirArchivo($name_input, $save_folder){
     $dateByZone = new DateTime("now", new DateTimeZone('America/Mexico_City') );
     $dateTime = $dateByZone->format('Y-m-d'); //fecha Actual
     $date=explode("-",$dateTime);
-        
+
     //Obtener la extrension
     $extension = obtenerExtension($_FILES[$name_input]['name']);
-    //Cambiar nombre a la imagen 
+    //Cambiar nombre a la imagen
     $nuevaImg = generarPassword(10, TRUE, TRUE, FALSE, FALSE).".".$extension;
     $destino = $save_folder.$date[0]."/".$date[1]."/".$nuevaImg;
 
