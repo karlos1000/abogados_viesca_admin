@@ -1,4 +1,6 @@
 # Deshabilitar archivos zip, rar, sql
+
+common/config.php
+
 *.rar
 *.zip
-*/common/config.php
