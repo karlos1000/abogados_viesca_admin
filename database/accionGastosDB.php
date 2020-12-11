@@ -56,7 +56,7 @@ class accionGastosDB {
         return $result;
     }*/
 
-    public function AccionesDataSet($ds){
+    public function AccionesGastosDataSet($ds){
         $dsO = new DataServices();
         $param[0] = "";
         $ds->SelectCommand = $dsO->ExecuteDS("ObtAccionGastosDB", $param);

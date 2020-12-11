@@ -14,6 +14,7 @@ include_once $dirname.'/brules/utilsObj.php';
 include_once $dirname.'/brules/clientesObj.php';
 include_once $dirname.'/brules/catTipoCasosObj.php';
 include_once $dirname.'/brules/casosObj.php';
+include_once $dirname.'/brules/casoAccionesObj.php';
 
 //Fisrt check the function name
 $function= $_GET['funct'];
@@ -71,6 +72,7 @@ switch ($function){
     case "crearCliente": crearCliente(); break;
     case "crearTipo": crearTipo(); break;
     case "crearCaso": crearCaso(); break;
+    case "crearAccion": crearAccion(); break;
 
     default:
       echo "Not valid call";
@@ -644,15 +646,43 @@ function crearCaso(){
   $casosObj = new casosObj();
 
   // Setear datos
-  $casosObj->clienteId = (isset($_GET['c_idcliente']) && $_GET['c_idcliente']!="")?$_GET['c_idcliente']:"";;
-  $casosObj->tipoId = (isset($_GET['c_tipo']) && $_GET['c_tipo']!="")?$_GET['c_tipo']:"";;
-  $casosObj->titularId = (isset($_GET['c_idtitular']) && $_GET['c_idtitular']!="")?$_GET['c_idtitular']:"";;
-  $casosObj->autorizadosIds = (isset($_GET['c_idsautorizados']) && $_GET['c_idsautorizados']!="")?$_GET['c_idsautorizados']:"";;
-  $casosObj->fechaAlta = (isset($_GET['c_falta']) && $_GET['c_falta']!="")?conversionFechas($_GET['c_falta']):"";;
+  $casosObj->clienteId = (isset($_GET['c_idcliente']) && $_GET['c_idcliente']!="")?$_GET['c_idcliente']:"";
+  $casosObj->tipoId = (isset($_GET['c_tipo']) && $_GET['c_tipo']!="")?$_GET['c_tipo']:"";
+  $casosObj->titularId = (isset($_GET['c_idtitular']) && $_GET['c_idtitular']!="")?$_GET['c_idtitular']:"";
+  $casosObj->autorizadosIds = (isset($_GET['c_idsautorizados']) && $_GET['c_idsautorizados']!="")?$_GET['c_idsautorizados']:"";
+  $casosObj->fechaAlta = (isset($_GET['c_falta']) && $_GET['c_falta']!="")?conversionFechas($_GET['c_falta']):"";
   $casosObj->CrearCaso();
 
   if($casosObj->idCaso){
     $arr = array("success"=>true, "id"=>$casosObj->idCaso);
+  }
+
+  echo $callback . '(' . json_encode($arr) . ');';
+  // echo "<pre>";
+  // print_r($_GET);
+  // echo "</pre>";
+  // exit();
+}
+
+// Crear accion
+function crearAccion(){
+  $tz = obtDateTimeZone();
+  unset($_GET['funct']); //remover el nombre de la funcion para evitar errores
+  base64DecodeSubmit(0, $_GET);
+
+  $arr = array("success"=>false);
+  $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $casoAccionesObj = new casoAccionesObj();
+
+  // Setear datos
+  $casoAccionesObj->casoId = (isset($_GET['pa_casoid']) && $_GET['pa_casoid']!="")?$_GET['pa_casoid']:"";
+  $casoAccionesObj->nombre = (isset($_GET['pa_accion']) && $_GET['pa_accion']!="")?$_GET['pa_accion']:"";
+  $casoAccionesObj->comentarios = (isset($_GET['pa_comentario']) && $_GET['pa_comentario']!="")?$_GET['pa_comentario']:"";
+  $casoAccionesObj->fechaAlta = (isset($_GET['pa_fechaaccion']) && $_GET['pa_fechaaccion']!="")?conversionFechas($_GET['pa_fechaaccion']):"";
+  $casoAccionesObj->CrearCasoAccion();
+
+  if($casoAccionesObj->idAccion){
+    $arr = array("success"=>true);
   }
 
   echo $callback . '(' . json_encode($arr) . ');';

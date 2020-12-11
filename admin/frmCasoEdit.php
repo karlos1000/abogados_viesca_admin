@@ -51,17 +51,17 @@ $fechaAct = (isset($datosCaso->fechaAct))?conversionFechaF6($datosCaso->fechaAct
 $tGastos = formatoMoneda(0);
 $autorizadosIds = (isset($datosCaso->autorizadosIds))?$datosCaso->autorizadosIds:"";
 $arrIdsAutorizados = explode(",", $autorizadosIds);
+// Obtener grid de acciones
+$gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
 
-$gridAcciones = $casoAccionesObj->ObtAccionesGrid();
-
-echo "<pre>";
+// echo "<pre>";
 // print_r($colTipos);
 // print_r($colAbogados);
 // print_r($datosCaso);
 // print_r($datosCliente);
 // print_r($datosTitular);
 // print_r($arrIdsAutorizados);
-echo "</pre>";
+// echo "</pre>";
 
 
 /* if(isset($_POST["idUsuario"])){
@@ -260,7 +260,8 @@ echo "</pre>";
 
                         <div class="row">
                             <div class="text-right col-md-12">
-                                <a href="#" class="btn btn-primary" role="button" id="btnAgregarAccion">Agregar</a>
+                                <!-- <a href="#" class="btn btn-primary" role="button" id="btnAgregarAccion">Agregar</a> -->
+                                <a href="#" data-toggle="modal" data-target="#popup_modalCrearAccion" class="btn btn-primary agregarAccion" title="Agregar acci&oacute;n"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"> Agregar</a>
                             </div>
                         </div>
                         <br>
@@ -421,7 +422,7 @@ echo "</pre>";
           </div>
         </div>
 
-        <!-- Modal crear cliente -->
+        <!-- Modal crear tipo -->
         <div class="modal fade" id="popup_modalCrearTipo" role="dialog" data-backdrop="static" data-keyboard="false" style="display:none;">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -463,8 +464,65 @@ echo "</pre>";
           </div>
         </div>
 
+        <!-- Modal crear accion -->
+        <div class="modal fade" id="popup_modalCrearAccion" role="dialog" data-backdrop="static" data-keyboard="false" style="display:none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Crear Acci&oacute;n</h4>
+                </div>
+                <div class="row">
+                  <form role="form" id="formCrearAccion" name="formCrearAccion" method="post" action="" enctype="multipart/form-data">
+                    <input type="hidden" name="pa_casoid" id="pa_casoid" value="<?php echo $id;?>">
+                    <br>
+                    <div class="col-md-offset-1 col-md-10">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Fecha:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input class="form-control inputfechaGral required" type="text" name="pa_fechaaccion" id="pa_fechaaccion" value="<?php echo $tz->fechaF2;?>" style="width:50%;display:inline-block;" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                              <label for="pa_accion">Acci&oacute;n:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control required" name="pa_accion" id="pa_accion">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                              <label for="pa_comentario">Comentario:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <textarea class="form-control" name="pa_comentario" id="pa_comentario" rows="6"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+                      <div class="row">
+                        <div class="col-md-offset-6 col-md-3 text-right">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                        <div class="col-md-3 text-right">
+                          <a class="btn btn-primary" id="btnCrearTipo" onclick="btnCrearAccion();">Aceptar</a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12"><br/></div>
+                  </form>
+                </div>
+            </div>
+          </div>
+        </div>
+
     </section>
-        <footer>
+    <footer>
         <div class="panel-footer">
             <?php echo getPiePag(true); ?>
         </div>

@@ -81,12 +81,12 @@ class casoAccionesObj extends configuracionesGridObj{
     }*/
 
     //Grid
-    public function ObtAccionesGrid(){
+    public function ObtAccionesGrid($casoId=0){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
         $uDB = new casoAccionesDB();
-        $ds = $uDB->AccionesDataSet($ds);
+        $ds = $uDB->AccionesDataSet($ds, $casoId);
         $grid = new KoolGrid("caso_acciones");
         $configGrid = new configuracionesGridObj();
 

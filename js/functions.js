@@ -24,6 +24,11 @@ $(document).ready(function(){
   $('.agregarTipo').click(function() {
     clearForm("formCrearTipo");
   });
+
+  // Popup accion
+  $('.agregarAccion').click(function() {
+    clearForm("formCrearAccion");
+  });
 });
 
 
@@ -203,6 +208,37 @@ function btnCrearTipo() {
         let opcion = data.opcion;
         // Agregar opciones tipo
         $("#c_tipo").append('<option value="'+opcion.id+'">'+opcion.val+'</option>');
+        alertify.success("Registro creado correctamente.");
+      }else{
+        alertify.error("El registro no fue creado, intentar nuevamente.");
+      }
+    });
+  }else{
+    validator.focusInvalid();
+    return false;
+  }
+}
+
+// Popup para crear accion
+function btnCrearAccion() {
+  var validator = $("#formCrearAccion").validate({ });
+  //Validar formulario
+  if($("#formCrearAccion").valid()){
+    // var htmlOriginal = showLoading('btnCrearCliente');
+
+    var datosForm = $("#formCrearAccion").serializeJSON();
+    console.log(datosForm);
+    params = paramsB64(datosForm);
+    params['funct'] = 'crearAccion';
+    // console.log(params);
+    // return false;
+    ajaxData(params, function(data){
+      console.log(data);
+
+      $('.modal').modal('hide');
+      if(data.success){
+        caso_acciones.refresh();
+        caso_acciones.commit();
         alertify.success("Registro creado correctamente.");
       }else{
         alertify.error("El registro no fue creado, intentar nuevamente.");

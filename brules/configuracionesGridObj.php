@@ -47,6 +47,8 @@ class configuracionesGridObj {
             }elseif ($grid->id == "casos") {
                 $grid->MasterTable->ShowFunctionPanel = false;
                 // $grid->MasterTable->FunctionPanel->ShowInsertButton = false;
+            }elseif ($grid->id == "caso_acciones") {
+                $grid->MasterTable->ShowFunctionPanel = false;
             }
             else {
                 $grid->MasterTable->ShowFunctionPanel = true;
@@ -231,6 +233,11 @@ class configuracionesGridObj {
             elseif($grid->id == "casos"){
                 $link = '';
                 $link .= '<a class="" onclick="edicionGrid(\'casos\', {idCaso});" href="javascript:void 0" title="Editar"><img src="../images/iconos/iconos_grid/editar.png" class="iconoDesactivar" ></a>';
+                $column->ItemTemplate = $link;
+            }
+            elseif($grid->id == "caso_acciones"){
+                $link = '';
+                // $link .= '<a class="" onclick="edicionGrid(\'casos\', {idCaso});" href="javascript:void 0" title="Editar"><img src="../images/iconos/iconos_grid/editar.png" class="iconoDesactivar" ></a>';
                 $column->ItemTemplate = $link;
             }
             else{

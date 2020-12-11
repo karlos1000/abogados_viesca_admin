@@ -56,14 +56,23 @@ class casoAccionesDB {
         return $result;
     }*/
 
-    public function AccionesDataSet($ds){
+    public function AccionesDataSet($ds, $casoId){
         $dsO = new DataServices();
         $param[0] = "";
+
+        if($casoId > 0){
+            $query[] = " casoId=$casoId ";
+        }
+
+        //En caso de llevar filtro
+        if(count($query) > 0){
+          $wordWhere = " WHERE ";
+          $setWhere = implode(" AND ", $query);
+          // echo $setWhere;
+          $param[0] = $wordWhere.$setWhere;
+        }
+
         $ds->SelectCommand = $dsO->ExecuteDS("ObtCasoAccionesDB", $param);
-        // $param = null;
-        // $ds->InsertCommand = $dsO->ExecuteDS("insEnfermedadGrid", $param);
-        // $ds->UpdateCommand = $dsO->ExecuteDS("actEnfermedadGrid", $param);
-        // $ds->DeleteCommand = $dsO->ExecuteDS("delEnfermedadGrid", $param);
         $dsO->CloseConnection();
 
         return $ds;
