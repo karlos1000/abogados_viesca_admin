@@ -252,7 +252,7 @@
 
   <!--Consultas caso acciones -->
   <Command id="ObtCasoAccionesDB">
-   <query>SELECT * FROM caso_acciones ?</query>
+   <query>SELECT *, DATE_FORMAT(fechaAlta, "%d/%m/%Y") AS fechaAlta2 FROM caso_acciones ?</query>
   </Command>
   <Command id="CasoAccionesPorIdDB">
     <query>SELECT * FROM caso_acciones WHERE idAccion=?</query>

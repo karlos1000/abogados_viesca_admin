@@ -80,16 +80,16 @@ class accionGastosObj extends configuracionesGridObj{
         $objDB = new accionGastosDB();
         $resAct = $objDB->ActCampoEnfermedadDB($param);
         return $resAct;
-    }
+    }*/
 
     //Grid
-    public function ObtEnfermedadesGrid(){
+    public function ObtAccionesGastoGrid(){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
         $uDB = new accionGastosDB();
-        $ds = $uDB->EnfermedadesDataSet($ds);
-        $grid = new KoolGrid("cat_enfermedades");
+        $ds = $uDB->AccionesDataSet($ds);
+        $grid = new KoolGrid("accion_gastos");
         $configGrid = new configuracionesGridObj();
 
         $configGrid->defineGrid($grid, $ds);
@@ -107,7 +107,7 @@ class accionGastosObj extends configuracionesGridObj{
         $grid->Process();
 
         return $grid;
-    } */
+    }
 
     /* // Imp. obt nombre de Enfermedades por ids
     public function obtNombreEnfermedadesPorIds($id){

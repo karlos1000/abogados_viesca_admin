@@ -62,6 +62,7 @@ class configuracionesGridObj {
 
         switch ($grid->id) {
             case 'casos':
+            case 'caso_acciones':
                 $grid->Width = "960px";
             break;
             /*case 'patentes_competencia':
@@ -229,7 +230,7 @@ class configuracionesGridObj {
             }
             elseif($grid->id == "casos"){
                 $link = '';
-                $link .= '<a class="kgrLinkEdit" onclick="edicionGrid(\'casos\', {idCaso});" href="javascript:void 0" title="Editar"></a>';
+                $link .= '<a class="" onclick="edicionGrid(\'casos\', {idCaso});" href="javascript:void 0" title="Editar"><img src="../images/iconos/iconos_grid/editar.png" class="iconoDesactivar" ></a>';
                 $column->ItemTemplate = $link;
             }
             else{

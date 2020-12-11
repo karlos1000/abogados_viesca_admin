@@ -78,25 +78,30 @@ class casoAccionesObj extends configuracionesGridObj{
         $objDB = new casoAccionesDB();
         $resAct = $objDB->ActCampoEnfermedadDB($param);
         return $resAct;
-    }
+    }*/
 
     //Grid
-    public function ObtEnfermedadesGrid(){
+    public function ObtAccionesGrid(){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
         $uDB = new casoAccionesDB();
-        $ds = $uDB->EnfermedadesDataSet($ds);
-        $grid = new KoolGrid("cat_enfermedades");
+        $ds = $uDB->AccionesDataSet($ds);
+        $grid = new KoolGrid("caso_acciones");
         $configGrid = new configuracionesGridObj();
 
         $configGrid->defineGrid($grid, $ds);
-        $configGrid->defineColumn($grid, "idEnfermedad", "ID", false, true);
-        $configGrid->defineColumn($grid, "nombre", "Nombre", true, false, 1);
-        $configGrid->defineColumn($grid, "tratamientoId", "Tratamiento", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionId", "Opcion", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionInfo", "Mensaje", false, false);
-        $configGrid->defineColumn($grid, "activo", "Activo", true, false, 0);
+        $configGrid->defineColumn($grid, "idAccion", "ID", false, true);
+        $configGrid->defineColumn($grid, "fechaAlta2", "F. Alta", true, false, 1);
+        $configGrid->defineColumn($grid, "nombre", "Acci&oacute;n", true, false, 1);
+        $configGrid->defineColumn($grid, "comentarios", "Comentarios", true, false, 1);
+
+        // $configGrid->defineColumn($grid, "tGastos", "Gastos", true, false, 1);
+        // $configGrid->defineColumn($grid, "nombre", "Nombre", true, false, 1);
+        // $configGrid->defineColumn($grid, "tratamientoId", "Tratamiento", true, false, 1);
+        // $configGrid->defineColumn($grid, "opcionId", "Opcion", true, false, 1);
+        // $configGrid->defineColumn($grid, "opcionInfo", "Mensaje", false, false);
+        // $configGrid->defineColumn($grid, "activo", "Activo", true, false, 0);
         // if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){
             $configGrid->defineColumnEdit($grid);
         // }
@@ -105,7 +110,7 @@ class casoAccionesObj extends configuracionesGridObj{
         $grid->Process();
 
         return $grid;
-    } */
+    }
 
     /* // Imp. obt nombre de Enfermedades por ids
     public function obtNombreEnfermedadesPorIds($id){

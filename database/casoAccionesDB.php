@@ -54,19 +54,19 @@ class casoAccionesDB {
         $result = $ds->Execute("ActCampoEnfermedadDB", $param, false, true);
         $ds->CloseConnection();
         return $result;
-    }
+    }*/
 
-    public function EnfermedadesDataSet($ds){
+    public function AccionesDataSet($ds){
         $dsO = new DataServices();
         $param[0] = "";
-        $ds->SelectCommand = $dsO->ExecuteDS("ObtCatEnfermedadesDB", $param);
-        $param = null;
-        $ds->InsertCommand = $dsO->ExecuteDS("insEnfermedadGrid", $param);
-        $ds->UpdateCommand = $dsO->ExecuteDS("actEnfermedadGrid", $param);
-        $ds->DeleteCommand = $dsO->ExecuteDS("delEnfermedadGrid", $param);
+        $ds->SelectCommand = $dsO->ExecuteDS("ObtCasoAccionesDB", $param);
+        // $param = null;
+        // $ds->InsertCommand = $dsO->ExecuteDS("insEnfermedadGrid", $param);
+        // $ds->UpdateCommand = $dsO->ExecuteDS("actEnfermedadGrid", $param);
+        // $ds->DeleteCommand = $dsO->ExecuteDS("delEnfermedadGrid", $param);
         $dsO->CloseConnection();
 
         return $ds;
-    } */
+    }
 
 }

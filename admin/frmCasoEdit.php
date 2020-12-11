@@ -17,9 +17,15 @@ libreriasKool();
 include_once $dirname.'/brules/casosObj.php';
 include_once $dirname.'/brules/catTipoCasosObj.php';
 include_once $dirname.'/brules/usuariosObj.php';
+include_once $dirname.'/brules/clientesObj.php';
+include_once $dirname.'/brules/casoAccionesObj.php';
+include_once $dirname.'/brules/accionGastosObj.php';
 $casosObj = new casosObj();
 $catTipoCasosObj = new catTipoCasosObj();
 $usuariosObj = new usuariosObj();
+$clientesObj = new clientesObj();
+$casoAccionesObj = new casoAccionesObj();
+$accionGastosObj = new accionGastosObj();
 
 //establecer la zona horaria
 $tz = obtDateTimeZone();
@@ -31,10 +37,31 @@ $id = (isset($_GET['id']))?$_GET['id']:0;
 $colTipos = $catTipoCasosObj->ObtCatTipoCasos();
 $colAbogados = $usuariosObj->obtTodosUsuarios(true, 4);
 
-// echo "<pre>";
+$datosCaso = $casosObj->CasoPorId($id);
+$datosCliente = $clientesObj->ClientePorId($id);
+$datosTitular = $usuariosObj->UserByID($id);
+
+$clienteId = (isset($datosCaso->clienteId))?$datosCaso->clienteId:0;
+$idTipo = (isset($datosCaso->tipoId))?$datosCaso->tipoId:0;
+$cliente = (isset($datosCliente->nombre))?$datosCliente->nombre:"";
+$idtitular = (isset($datosTitular->idUsuario))?$datosTitular->idUsuario:0;
+$titular = (isset($datosTitular->nombre))?$datosTitular->nombre:"";
+$fechaAlta = (isset($datosCaso->fechaAlta))?conversionFechaF2($datosCaso->fechaAlta):"";
+$fechaAct = (isset($datosCaso->fechaAct))?conversionFechaF6($datosCaso->fechaAct):"";
+$tGastos = formatoMoneda(0);
+$autorizadosIds = (isset($datosCaso->autorizadosIds))?$datosCaso->autorizadosIds:"";
+$arrIdsAutorizados = explode(",", $autorizadosIds);
+
+$gridAcciones = $casoAccionesObj->ObtAccionesGrid();
+
+echo "<pre>";
 // print_r($colTipos);
 // print_r($colAbogados);
-// echo "</pre>";
+// print_r($datosCaso);
+// print_r($datosCliente);
+// print_r($datosTitular);
+// print_r($arrIdsAutorizados);
+echo "</pre>";
 
 
 /* if(isset($_POST["idUsuario"])){
@@ -68,24 +95,14 @@ $colAbogados = $usuariosObj->obtTodosUsuarios(true, 4);
     else{
         $msjResponse .= "No hay cambios que guardar";
     }
-
 } */
-
-
-$cliente = "";
-$idTipo = 0;
-$titular = "";
-$fechaAlta = $tz->fechaF2;
-$autorizadosIds = "";
-$arrIdsAutorizados = explode(",", $autorizadosIds);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Nuevo Caso</title>
+    <title>Editar Caso</title>
     <?php echo estilosPagina(true); ?>
 </head>
 
@@ -102,10 +119,10 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                     </div>
 
                     <div class="col-md-10">
-                        <h1 class="titulo">Nuevo Caso<span class="pull-right"><a id="btnAyudaweb" onclick="mostrarAyuda('web_prospectos')" href="#fancyAyudaWeb"><img src="../images/icon_ayuda.png" width="20px"></a></span></h1>
+                        <h1 class="titulo">Editar Caso<span class="pull-right"><a id="btnAyudaweb" onclick="mostrarAyuda('web_prospectos')" href="#fancyAyudaWeb"><img src="../images/icon_ayuda.png" width="20px"></a></span></h1>
                         <ol class="breadcrumb">
                             <li><a href="listadocasos.php">Mis casos</a></li>
-                            <li class="active">Nuevo caso</li>
+                            <li class="active">Editar caso</li>
                         </ol>
 
                         <!--Mostrar en caso de presionar el boton de guardar-->
@@ -117,10 +134,15 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                         <?php } ?>
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-offset-8 col-md-2">
+                                <!-- <a onclick="crearCaso()" class="btn btn-primary" role="button" id="btnCrearCaso">Guardar</a> -->
+                                <a href="#" class="btn btn-primary" role="button" id="btnCrearCaso">Guardar</a>
+                            </div>
+                            <div class="col-md-2">
                                 <a href="listadocasos.php" class="btn btn-danger" role="button">Regresar</a>
                             </div>
                         </div>
+                        <br>
 
                         <form role="form" id="formCaso" name="formCaso" method="post" action="">
                             <input type="hidden" name="form_caso">
@@ -132,17 +154,16 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                             <input type="hidden" id="salvarSinCrearVer" name="salvarSinCrearVer" value="0">
                             <input type="hidden" id="check_soloLectura" value="<?php echo $soloLectura;?>"> -->
 
-
                             <div class="content_wrapper">
                                 <div class="row">
                                     <!-- columna 1 -->
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-3 text-right">
-                                                <label>Fecha alta:</label>
+                                                <label>ID:</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input class="form-control inputfechaGral required" type="text" name="c_falta" id="c_falta" value="<?php echo $fechaAlta;?>" style="width:50%;display:inline-block;" readonly>
+                                                <input class="form-control" type="text" name="c_id" id="c_id" value="<?php echo $id;?>" style="width:50%;display:inline-block;" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -150,12 +171,8 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                                                 <label>Cliente:</label>
                                             </div>
                                             <div class="col-md-7 form-group">
-                                                <input type="hidden" id="c_idcliente" name="c_idcliente" value="0"/>
+                                                <input type="hidden" id="c_idcliente" name="c_idcliente" value="<?php echo $clienteId; ?>"/>
                                                 <input type="text" id="c_cliente" name="c_cliente" value="<?php echo $cliente;?>" class="form-control required" readonly style="width:72%;display:inline-block;"/>
-                                                <button type="button" class="btn btn-primary" role="button" title="Buscar" id="busca_clientes" value="Buscar" onclick="obtListaClientes();">
-                                                    <span class="glyphicon glyphicon-search"></span>
-                                                </button>
-                                                <span>&nbsp;<a href="#" data-toggle="modal" data-target="#popup_modalCrearCliente" class="agregarCliente" title="Agregar cliente"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"></a></span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -172,7 +189,6 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                                                             }
                                                         ?>
                                                 </select>
-                                                <span>&nbsp;<a href="#" data-toggle="modal" data-target="#popup_modalCrearTipo" class="agregarTipo" title="Agregar tipo"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"></a></span>
                                             </div>
                                         </div>
                                         <br/>
@@ -181,13 +197,14 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                                                 <label>Titular:</label>
                                             </div>
                                             <div class="col-md-7 form-group">
-                                                <input type="hidden" id="c_idtitular" name="c_idtitular" value="0"/>
+                                                <input type="hidden" id="c_idtitular" name="c_idtitular" value="<?php echo $idtitular;?>"/>
                                                 <input type="text" id="c_titular" name="c_titular" value="<?php echo $titular;?>" class="form-control required" readonly style="width:80%;display:inline-block;"/>
                                                 <button type="button" class="btn btn-primary" role="button" title="Buscar" id="busca_titular" value="Buscar" onclick="obtListaTitulares();">
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
                                             </div>
                                         </div>
+
                                         <div class="row">
                                             <div class="col-md-3 text-right">
                                                 <label>Autorizados:</label>
@@ -201,81 +218,60 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                                                         }else{
                                                             $sel = '';
                                                         }
-                                                        echo '<option value="'.$elem->idUsuario.'">'.$elem->nombre.'</option>';
+                                                        echo '<option '.$sel.' value="'.$elem->idUsuario.'">'.$elem->nombre.'</option>';
                                                     }
                                                     ?>
                                                 </select>
                                                 <input type="hidden" id="c_idsautorizados" name="c_idsautorizados" value="<?php echo $autorizadosIds;?>" />
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-md-offset-2 col-md-10">
-                                                <a onclick="crearCaso()" class="btn btn-primary" role="button" id="btnCrearCaso">Aceptar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="cont_btnrequisicion">
-                                        <div class="new_line">
-                                        </div>
                                     </div>
 
                                     <!-- columna 2 -->
-                                    <!-- <div class="col-md-6">
+                                    <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-3 text-right">
-                                                <label>Estatus:</label>
+                                                <label>Fecha alta:</label>
                                             </div>
-                                            <div class="col-md-7 form-group  alert alert-info">
-                                                ?php
-                                                if($idP>0){
-                                                    if($estatusDp==1){
-                                                        echo '<span class="texto_estatus">En creaci&oacute;n</span>';
-                                                    }
-                                                    if($estatusDp==2){
-                                                        echo '<span class="texto_estatus">Espera de aprobaci&oacute;n</span>';
-                                                    }
-                                                    if($estatusDp==3){
-                                                        echo '<span class="texto_estatus">Aprobado</span>';
-                                                    }
-                                                    if($estatusDp==4){
-                                                        echo '<span class="texto_estatus">Rechazado</span>';
-                                                    }
-
-                                                    echo '<input type="hidden" id="dp_estatus" name="dp_estatus" value="'.$estatusDp.'">';
-                                                }else{
-                                                    echo '<span class="texto_estatus">En creaci&oacute;n</span>';
-                                                    echo '<input type="hidden" id="dp_estatus" name="dp_estatus" value="1">'; //Valor default en creacion
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="col-md-2 text-right">
-                                                <button type="button" class="btn btn-primary" role="button" title="Imprimir Proceso" onclick="printProcess()">
-                                                    <span class="glyphicon glyphicon-print"></span>
-                                                </button>
+                                            <div class="col-md-7">
+                                                <input class="form-control" type="text" name="c_falta" id="c_falta" value="<?php echo $fechaAlta;?>" style="width:50%;display:inline-block;" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                            <label>Revisiones:</label>
+                                            <div class="col-md-3 text-right">
+                                                <label>Ult. Act.:</label>
                                             </div>
-                                            <div class="col-md-12">
-                                            ?php
-                                                echo $koolajax->Render();
-                                                if($resultRevs != null){
-                                                    echo $resultRevs->Render();
-                                                }
-                                            ?>
+                                            <div class="col-md-7">
+                                                <input class="form-control" type="text" name="c_falta" id="c_falta" value="<?php echo $fechaAct;?>" style="width:50%;display:inline-block;" readonly>
                                             </div>
                                         </div>
-                                    </div> -->
+                                        <div class="row">
+                                            <div class="col-md-3 text-right">
+                                                <label>Total Gastos:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input class="form-control text-right" type="text" name="c_tgastos" id="c_tgastos" value="<?php echo $tGastos;?>" style="width:50%;display:inline-block;" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </form>
 
-
+                        <div class="row">
+                            <div class="text-right col-md-12">
+                                <a href="#" class="btn btn-primary" role="button" id="btnAgregarAccion">Agregar</a>
+                            </div>
+                        </div>
+                        <br>
+                        <form name="grids" method="post">
+                            <?php
+                            echo $koolajax->Render();
+                            if($gridAcciones != null){
+                                echo $gridAcciones->Render();
+                            }
+                            ?>
+                        </form>
                     </div>
     			</div>
     		</div>

@@ -8,7 +8,7 @@ $dirname = dirname(__DIR__);
 
 function formatoMoneda($amount = 0){
     if($amount !== ''){
-        return "$ ".number_format($amount, 2);
+        return "$".number_format($amount, 2);
     }else{
         return $amount;
     }
@@ -329,6 +329,16 @@ function conversionFechaF5($fecha){
     $hora = $explFecha[1];
     $fecha = conversionFechaF2($explFecha[0]);
     $fecha = $fecha." ".$hora;
+
+    return $fecha;
+}
+
+//convertir fechas de formato (YYYY-mm-dd hh:mm:ss) a (dd/mm/YYYY)
+function conversionFechaF6($fecha){
+    $explFecha = explode(" ", $fecha);
+    $hora = $explFecha[1];//.':00';
+    $fecha = conversionFechaF2($explFecha[0]);
+    $fecha = $fecha;
 
     return $fecha;
 }
