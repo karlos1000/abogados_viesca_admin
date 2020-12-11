@@ -49,6 +49,8 @@ class configuracionesGridObj {
                 // $grid->MasterTable->FunctionPanel->ShowInsertButton = false;
             }elseif ($grid->id == "caso_acciones") {
                 $grid->MasterTable->ShowFunctionPanel = false;
+            }elseif ($grid->id == "accion_gastos") {
+                $grid->MasterTable->ShowFunctionPanel = false;
             }
             else {
                 $grid->MasterTable->ShowFunctionPanel = true;
@@ -67,10 +69,10 @@ class configuracionesGridObj {
             case 'caso_acciones':
                 $grid->Width = "960px";
             break;
-            /*case 'patentes_competencia':
-                $grid->Width = "960px";
+            case 'accion_gastos':
+                $grid->Width = "490px";
             break;
-            case 'uso_estadisticas':
+            /*case 'uso_estadisticas':
                 $grid->Width = "1000px";
                 $grid->MasterTable->ShowFunctionPanel = false; //Show Function Panel
                 // $grid->MasterTable->Pager->Position = "top";//Show both pager
@@ -238,6 +240,9 @@ class configuracionesGridObj {
             elseif($grid->id == "caso_acciones"){
                 $link = '';
                 // $link .= '<a class="" onclick="edicionGrid(\'casos\', {idCaso});" href="javascript:void 0" title="Editar"><img src="../images/iconos/iconos_grid/editar.png" class="iconoDesactivar" ></a>';
+                $link .= '<a href="#" data-toggle="modal" data-target="#popup_modalCrearAccion" class="agregarAccion" title="Editar acci&oacute;n" idAccion="{idAccion}"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>';
+                // $link .= '&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#popup_modalCrearGasto" class="agregarGasto" title="Agregar gasto" idAccion="{idAccion}"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"></a>';
+                $link .= '&nbsp; <a href="javascript:void(0);" onclick="popupCreaEditaGasto({casoId}, {idAccion}, \'{nombre}\')" title="Agregar gasto"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"></a>';
                 $column->ItemTemplate = $link;
             }
             else{

@@ -267,7 +267,12 @@
 
   <!--Consultas accion gstos -->
   <Command id="ObtAccionGastosDB">
-   <query>SELECT * FROM accion_gastos ?</query>
+   <query>
+      SELECT a.*, b.nombre AS concepto, DATE_FORMAT(a.fechaAlta, "%d/%m/%Y") AS fechaAlta2, CONCAT("$", FORMAT(a.monto, 2)) AS monto2
+      FROM accion_gastos AS a
+      LEFT JOIN cat_conceptos AS b ON b.idConcepto=a.conceptoId
+      ?
+    </query>
   </Command>
   <Command id="AccionGastosPorIdDB">
     <query>SELECT * FROM accion_gastos WHERE idGasto=?</query>

@@ -5,14 +5,14 @@ include_once  $dirname.'/common/DataServices.php';
 class accionGastosDB {
 
     //method declaration
-    public function ObtAccionGastosDB(){
+    public function ObtAccionGastosDB($accionId){
         $ds = new DataServices();
         $param[0] = "";
         $query = array();
 
-        // if($activo > 0){
-        //     $query[] = " activo=$activo ";
-        // }
+        if($accionId > 0){
+            $query[] = " accionId=$accionId ";
+        }
 
         //En caso de llevar filtro
         if(count($query) > 0){
@@ -56,14 +56,10 @@ class accionGastosDB {
         return $result;
     }*/
 
-    public function AccionesGastosDataSet($ds){
+    public function GastosDataSet($ds){
         $dsO = new DataServices();
         $param[0] = "";
         $ds->SelectCommand = $dsO->ExecuteDS("ObtAccionGastosDB", $param);
-        $param = null;
-        // $ds->InsertCommand = $dsO->ExecuteDS("insEnfermedadGrid", $param);
-        // $ds->UpdateCommand = $dsO->ExecuteDS("actEnfermedadGrid", $param);
-        // $ds->DeleteCommand = $dsO->ExecuteDS("delEnfermedadGrid", $param);
         $dsO->CloseConnection();
 
         return $ds;

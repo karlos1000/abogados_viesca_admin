@@ -15,6 +15,7 @@ include_once $dirname.'/brules/clientesObj.php';
 include_once $dirname.'/brules/catTipoCasosObj.php';
 include_once $dirname.'/brules/casosObj.php';
 include_once $dirname.'/brules/casoAccionesObj.php';
+include_once $dirname.'/brules/accionGastosObj.php';
 
 //Fisrt check the function name
 $function= $_GET['funct'];
@@ -73,6 +74,7 @@ switch ($function){
     case "crearTipo": crearTipo(); break;
     case "crearCaso": crearCaso(); break;
     case "crearAccion": crearAccion(); break;
+    case "tblListaGastos": tblListaGastos(); break;
 
     default:
       echo "Not valid call";
@@ -690,6 +692,64 @@ function crearAccion(){
   // print_r($_GET);
   // echo "</pre>";
   // exit();
+}
+
+// Obtener la lista de gastos
+function tblListaGastos(){
+  $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $idTabla = (isset($_GET['idTabla']) && $_GET['idTabla']!="")?$_GET['idTabla']:"";
+  $idAccion = (isset($_GET['idAccion']) && $_GET['idAccion']!="")?$_GET['idAccion']:"";
+  // $idUsuario = (isset($_GET['idUsuario']) !="")?$_GET['idUsuario']:"";
+
+  $accionGastosObj = new accionGastosObj();
+  $colRes = $accionGastosObj->ObtAccionGastos($idAccion);
+  $arr = array("success"=>false);
+
+  // echo "<pre>";
+  // print_r($colRes);
+  // echo "</pre>";
+  // exit();
+  // if(count($colRes)>0){
+    // table-striped
+    $html = '
+        <table id="'.$idTabla.'" class="table table-bordered table-condensed dataTable no-footer dt-responsive " role="grid" cellspacing="0" width="100%" >
+            <thead>
+                <tr>
+                    <th>ID <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                    <th>Fecha <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                    <th>Concepto <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                    <th>Monto <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                    <th>Acciones <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+            ';
+              foreach($colRes as $item){
+                // if($idUsuario!=$item->idUsuario && $item->idRol!=4){
+                  $html .= '
+                  <tr style="cursor:initial !important;">
+                      <td>'.$item->idGasto.'</td>
+                      <td>'.$item->fechaAlta2.'</td>
+                      <td>'.$item->concepto.'</td>
+                      <td>'.$item->monto2.'</td>
+                      <td>
+                        <!--<a href="#" data-toggle="modal" data-target="#popup_modalEditarGasto" class="editargasto" title="Editar gasto" idGasto="'.$item->idGasto.'"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>-->
+                        <a href="javascript:void(0);" onclick="editargasto('.$item->idGasto.')" title="Editar gasto"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>
+                        &nbsp; <a href="javascript:void(0);" onclick="eliminargasto('.$item->idGasto.')" title="Eliminar gasto"><img width="16px" src="../images/iconos/iconos_grid/eliminar.png"></a>
+                      </td>
+                  </tr>
+                  ';
+                // }
+              }
+        $html .= '
+            </tbody>
+        </table>
+    ';
+
+    $arr = array("success"=>true, "tblListaGastos"=>$html);
+  // }
+
+  echo $callback . '(' . json_encode($arr) . ');';
 }
 
 

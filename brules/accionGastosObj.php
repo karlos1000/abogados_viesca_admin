@@ -24,11 +24,11 @@ class accionGastosObj extends configuracionesGridObj{
     }
 
     //Obtener coleccion
-    public function ObtAccionGastos(){
+    public function ObtAccionGastos($accionId=0){
         $array = array();
         $ds = new accionGastosDB();
         $datosBD = new datosBD();
-        $result = $ds->ObtAccionGastosDB();
+        $result = $ds->ObtAccionGastosDB($accionId);
         $array =  $datosBD->arrDatosObj($result);
 
         return $array;
@@ -83,22 +83,20 @@ class accionGastosObj extends configuracionesGridObj{
     }*/
 
     //Grid
-    public function ObtAccionesGastoGrid(){
+    public function ObtGastoGrid($accionId=0){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
         $uDB = new accionGastosDB();
-        $ds = $uDB->AccionesDataSet($ds);
+        $ds = $uDB->GastosDataSet($ds);
         $grid = new KoolGrid("accion_gastos");
         $configGrid = new configuracionesGridObj();
 
         $configGrid->defineGrid($grid, $ds);
-        $configGrid->defineColumn($grid, "idEnfermedad", "ID", false, true);
-        $configGrid->defineColumn($grid, "nombre", "Nombre", true, false, 1);
-        $configGrid->defineColumn($grid, "tratamientoId", "Tratamiento", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionId", "Opcion", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionInfo", "Mensaje", false, false);
-        $configGrid->defineColumn($grid, "activo", "Activo", true, false, 0);
+        $configGrid->defineColumn($grid, "idGasto", "ID", false, true);
+        $configGrid->defineColumn($grid, "fechaAlta2", "Fecha", true, false, 1);
+        $configGrid->defineColumn($grid, "concepto", "Concepto", true, false, 1);
+        $configGrid->defineColumn($grid, "monto2", "Monto", true, false, 1);
         // if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){
             $configGrid->defineColumnEdit($grid);
         // }

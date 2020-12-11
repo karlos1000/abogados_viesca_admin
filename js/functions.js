@@ -28,6 +28,17 @@ $(document).ready(function(){
   // Popup accion
   $('.agregarAccion').click(function() {
     clearForm("formCrearAccion");
+    let idAccion = accounting.unformat($(this).attr("idAccion"));
+    $('#pa_idaccion').val( idAccion );
+
+    if(idAccion>0){
+      showLoading("cont_listagastos");
+      setTimeout(function(){
+        obtListaGastos();
+      }, 500);
+    }else{
+      $("#cont_gastos").hide();
+    }
   });
 });
 
@@ -63,7 +74,7 @@ function obtListaClientes(){
         $(this).addClass('bg_tr_selected');
       });
     }else{
-      alertify.error("No existe ning&uacute;n cliente para mostrar.");
+      alertify.error("No existe ning&uacute;n registro para mostrar.");
     }
   });
 }
@@ -111,7 +122,7 @@ function obtListaTitulares(){
         $(this).addClass('bg_tr_selected');
       });
     }else{
-      alertify.error("No existe ning&uacute;n cliente para mostrar.");
+      alertify.error("No existe ning&uacute;n registro para mostrar.");
     }
   });
 }
@@ -239,6 +250,95 @@ function btnCrearAccion() {
       if(data.success){
         caso_acciones.refresh();
         caso_acciones.commit();
+        alertify.success("Registro creado correctamente.");
+      }else{
+        alertify.error("El registro no fue creado, intentar nuevamente.");
+      }
+    });
+  }else{
+    validator.focusInvalid();
+    return false;
+  }
+}
+
+// Inicio obtener grid de gastos
+var datosListaGastos;
+function obtListaGastos(){
+  // showLoading("cont_listagastos");
+  let usuarioIdCreador = 0; //accounting.unformat($("#usuarioIdCreador").val());
+  let idAccion = accounting.unformat($("#pa_idaccion").val());
+  // console.log(idAccion);
+  var idTabla = "grid_listagastos";
+
+  var params = {funct: 'tblListaGastos', idTabla:idTabla, idUsuario:usuarioIdCreador, idAccion:idAccion};
+  ajaxData(params, function(data){
+    hideLoading2("cont_listagastos");
+    // console.log(data);
+
+    if(data.success){
+      $("#cont_listagastos").html(data.tblListaGastos);
+      $("#cont_gastos").show();
+      //grid
+      var datosLista = initGridBTListas(idTabla);
+
+      //Accion para tomar el seleccionado
+      $('#'+idTabla+' tbody').on('click', 'tr', function() {
+        var data = datosLista.row(this).data();
+        datosListaGastos = data;
+        $("table tr").removeClass('bg_tr_selected');
+        // $(this).addClass('bg_tr_selected');
+      });
+    }else{
+      alertify.error("No existe ning&uacute;n registro para mostrar.");
+    }
+  });
+}
+// Fin obtener grid de gastos
+
+// Editar gasto
+function editargasto(idGasto){
+  console.log(idGasto);
+}
+
+// Eliminar gasto
+function eliminargasto(idGasto){
+  console.log(idGasto);
+}
+
+// Popup crear y editar gasto
+function popupCreaEditaGasto(casoId, idAccion, accion){
+  console.log(casoId);
+  console.log(idAccion);
+  console.log(accion);
+  clearForm("formCrearGasto");
+  $("#pg_accion").val(accion);
+  $("#pg_idaccion").val(idAccion);
+  $('#popup_modalCrearGasto').modal('show');
+
+
+}
+// Crear gasto
+function btnCrearGasto(){
+  var validator = $("#formCrearGasto").validate({ });
+  //Validar formulario
+  if($("#formCrearGasto").valid()){
+    // var htmlOriginal = showLoading('btnCrearGasto');
+    // showLoading("btnCrearGasto");
+
+    var datosForm = $("#formCrearGasto").serializeJSON();
+    console.log(datosForm);
+    params = paramsB64(datosForm);
+    params['funct'] = 'crearGasto';
+    console.log(params);
+    return false;
+    ajaxData(params, function(data){
+      console.log(data);
+      // hideLoading2("btnCrearGasto");
+
+      $('.modal').modal('hide');
+      if(data.success){
+        // caso_acciones.refresh();
+        // caso_acciones.commit();
         alertify.success("Registro creado correctamente.");
       }else{
         alertify.error("El registro no fue creado, intentar nuevamente.");

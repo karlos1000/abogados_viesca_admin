@@ -20,12 +20,14 @@ include_once $dirname.'/brules/usuariosObj.php';
 include_once $dirname.'/brules/clientesObj.php';
 include_once $dirname.'/brules/casoAccionesObj.php';
 include_once $dirname.'/brules/accionGastosObj.php';
+include_once $dirname.'/brules/catConceptosObj.php';
 $casosObj = new casosObj();
 $catTipoCasosObj = new catTipoCasosObj();
 $usuariosObj = new usuariosObj();
 $clientesObj = new clientesObj();
 $casoAccionesObj = new casoAccionesObj();
 $accionGastosObj = new accionGastosObj();
+$catConceptosObj = new catConceptosObj();
 
 //establecer la zona horaria
 $tz = obtDateTimeZone();
@@ -36,6 +38,7 @@ $id = (isset($_GET['id']))?$_GET['id']:0;
 
 $colTipos = $catTipoCasosObj->ObtCatTipoCasos();
 $colAbogados = $usuariosObj->obtTodosUsuarios(true, 4);
+$colConceptos = $catConceptosObj->ObtCatConceptos();
 
 $datosCaso = $casosObj->CasoPorId($id);
 $datosCliente = $clientesObj->ClientePorId($id);
@@ -61,6 +64,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
 // print_r($datosCliente);
 // print_r($datosTitular);
 // print_r($arrIdsAutorizados);
+// print_r($colConceptos);
 // echo "</pre>";
 
 
@@ -261,7 +265,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                         <div class="row">
                             <div class="text-right col-md-12">
                                 <!-- <a href="#" class="btn btn-primary" role="button" id="btnAgregarAccion">Agregar</a> -->
-                                <a href="#" data-toggle="modal" data-target="#popup_modalCrearAccion" class="btn btn-primary agregarAccion" title="Agregar acci&oacute;n"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"> Agregar</a>
+                                <a href="#" data-toggle="modal" data-target="#popup_modalCrearAccion" class="btn btn-primary agregarAccion" title="Agregar acci&oacute;n" idAccion="0"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"> Agregar</a>
                             </div>
                         </div>
                         <br>
@@ -475,6 +479,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                 <div class="row">
                   <form role="form" id="formCrearAccion" name="formCrearAccion" method="post" action="" enctype="multipart/form-data">
                     <input type="hidden" name="pa_casoid" id="pa_casoid" value="<?php echo $id;?>">
+                    <input type="hidden" name="pa_idaccion" id="pa_idaccion" value="0">
                     <br>
                     <div class="col-md-offset-1 col-md-10">
                         <div class="row">
@@ -502,7 +507,6 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-offset-1 col-md-10 col-md-offset-1">
                       <div class="row">
                         <div class="col-md-offset-6 col-md-3 text-right">
@@ -510,6 +514,91 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                         </div>
                         <div class="col-md-3 text-right">
                           <a class="btn btn-primary" id="btnCrearTipo" onclick="btnCrearAccion();">Aceptar</a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-offset-1 col-md-10" id="cont_gastos" style="display:none;">
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Gastos:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+                            <div id="cont_listagastos"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12"><br/></div>
+                  </form>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal crear gasto -->
+        <div class="modal fade" id="popup_modalCrearGasto" role="dialog" data-backdrop="static" data-keyboard="false" style="display:none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Crear Gasto</h4>
+                </div>
+                <div class="row">
+                  <form role="form" id="formCrearGasto" name="formCrearGasto" method="post" action="" enctype="multipart/form-data">
+                    <input type="hidden" name="pg_casoid" id="pg_casoid" value="<?php echo $id;?>">
+                    <input type="hidden" name="pg_idaccion" id="pg_idaccion" value="0">
+                    <br>
+                    <div class="col-md-offset-1 col-md-10">
+                        <div class="row">
+                            <div class="col-md-3">
+                              <label for="pg_accion">Acci&oacute;n:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" name="pg_accion" id="pg_accion" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Fecha:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input class="form-control inputfechaGral required" type="text" name="pg_fechagasto" id="pg_fechagasto" value="<?php echo $tz->fechaF2;?>" style="width:50%;display:inline-block;" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Concepto:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <select id="pg_concepto" name="pg_concepto" class="form-control required">
+                                    <option value="">---Seleccionar---</option>
+                                        <?php
+                                            foreach ($colConceptos as $elem) {
+                                                echo '<option value="'.$elem->idConcepto.'">'.$elem->nombre.'</option>';
+                                            }
+                                        ?>
+                                </select>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-3">
+                              <label for="pg_monto">Monto:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control text-right required" name="pg_monto" id="pg_monto" value="$0.00">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+                      <div class="row">
+                        <div class="col-md-offset-6 col-md-3 text-right">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                        <div class="col-md-3 text-right">
+                          <a class="btn btn-primary" id="btnCrearGasto" onclick="btnCrearGasto();">Aceptar</a>
                         </div>
                       </div>
                     </div>
