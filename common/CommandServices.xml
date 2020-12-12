@@ -255,7 +255,7 @@
    <query>SELECT *, DATE_FORMAT(fechaAlta, "%d/%m/%Y") AS fechaAlta2 FROM caso_acciones ?</query>
   </Command>
   <Command id="CasoAccionesPorIdDB">
-    <query>SELECT * FROM caso_acciones WHERE idAccion=?</query>
+    <query>SELECT *, DATE_FORMAT(fechaAlta, "%d/%m/%Y") AS fechaAlta2 FROM caso_acciones WHERE idAccion=?</query>
   </Command>
   <Command id="CrearCasoAccionDB">
    <query>INSERT INTO caso_acciones (casoId, nombre, comentarios, fechaAlta, fechaAct, fechaCreacion) VALUES (?, '?', '?', '?', '?', '?')</query>
@@ -275,7 +275,7 @@
     </query>
   </Command>
   <Command id="AccionGastosPorIdDB">
-    <query>SELECT * FROM accion_gastos WHERE idGasto=?</query>
+    <query>SELECT *, DATE_FORMAT(fechaAlta, "%d/%m/%Y") AS fechaAlta2 FROM accion_gastos WHERE idGasto=?</query>
   </Command>
   <Command id="CrearAccionGastoDB">
    <query>INSERT INTO accion_gastos (casoId, accionId, conceptoId, monto, fechaAlta, fechaAct, fechaCreacion) VALUES (?, ?, ?, ?, '?', '?', '?')</query>

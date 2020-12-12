@@ -42,12 +42,14 @@ $colConceptos = $catConceptosObj->ObtCatConceptos();
 
 $datosCaso = $casosObj->CasoPorId($id);
 $datosCliente = $clientesObj->ClientePorId($id);
-$datosTitular = $usuariosObj->UserByID($id);
+//Obtener datos del titular
+$idtitular = (isset($datosCaso->titularId))?$datosCaso->titularId:0;
+$datosTitular = $usuariosObj->UserByID($idtitular);
 
 $clienteId = (isset($datosCaso->clienteId))?$datosCaso->clienteId:0;
 $idTipo = (isset($datosCaso->tipoId))?$datosCaso->tipoId:0;
 $cliente = (isset($datosCliente->nombre))?$datosCliente->nombre:"";
-$idtitular = (isset($datosTitular->idUsuario))?$datosTitular->idUsuario:0;
+// $idtitular = (isset($datosTitular->idUsuario))?$datosTitular->idUsuario:0;
 $titular = (isset($datosTitular->nombre))?$datosTitular->nombre:"";
 $fechaAlta = (isset($datosCaso->fechaAlta))?conversionFechaF2($datosCaso->fechaAlta):"";
 $fechaAct = (isset($datosCaso->fechaAct))?conversionFechaF6($datosCaso->fechaAct):"";
@@ -139,8 +141,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
 
                         <div class="row">
                             <div class="col-md-offset-8 col-md-2">
-                                <!-- <a onclick="crearCaso()" class="btn btn-primary" role="button" id="btnCrearCaso">Guardar</a> -->
-                                <a href="#" class="btn btn-primary" role="button" id="btnCrearCaso">Guardar</a>
+                                <a onclick="crearCaso()" class="btn btn-primary" role="button" id="btnCrearCaso">Guardar</a>
                             </div>
                             <div class="col-md-2">
                                 <a href="listadocasos.php" class="btn btn-danger" role="button">Regresar</a>
@@ -246,7 +247,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                                                 <label>Ult. Act.:</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input class="form-control" type="text" name="c_falta" id="c_falta" value="<?php echo $fechaAct;?>" style="width:50%;display:inline-block;" readonly>
+                                                <input class="form-control" type="text" name="c_fact" id="c_fact" value="<?php echo $fechaAct;?>" style="width:50%;display:inline-block;" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -264,8 +265,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
 
                         <div class="row">
                             <div class="text-right col-md-12">
-                                <!-- <a href="#" class="btn btn-primary" role="button" id="btnAgregarAccion">Agregar</a> -->
-                                <a href="#" data-toggle="modal" data-target="#popup_modalCrearAccion" class="btn btn-primary agregarAccion" title="Agregar acci&oacute;n" idAccion="0"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"> Agregar</a>
+                                <a href="javascript:void(0);" onclick="popupCreaEditaAccion(<?php echo $id; ?>, 0)" title="Agregar acci&oacute;n" class="btn btn-primary"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"> Agregar</a>
                             </div>
                         </div>
                         <br>
@@ -474,7 +474,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
             <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Crear Acci&oacute;n</h4>
+                    <h4 class="modal-title">Crea/Edita Acci&oacute;n</h4>
                 </div>
                 <div class="row">
                   <form role="form" id="formCrearAccion" name="formCrearAccion" method="post" action="" enctype="multipart/form-data">
@@ -513,7 +513,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                           <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                         </div>
                         <div class="col-md-3 text-right">
-                          <a class="btn btn-primary" id="btnCrearTipo" onclick="btnCrearAccion();">Aceptar</a>
+                          <a class="btn btn-primary" id="btnCrearTipo" onclick="btnCreaEditaAccion();">Aceptar</a>
                         </div>
                       </div>
                     </div>
@@ -543,12 +543,14 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
             <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Crear Gasto</h4>
+                    <h4 class="modal-title">Crea/Edita Gasto</h4>
                 </div>
                 <div class="row">
                   <form role="form" id="formCrearGasto" name="formCrearGasto" method="post" action="" enctype="multipart/form-data">
                     <input type="hidden" name="pg_casoid" id="pg_casoid" value="<?php echo $id;?>">
                     <input type="hidden" name="pg_idaccion" id="pg_idaccion" value="0">
+                    <input type="hidden" name="pg_idgasto" id="pg_idgasto" value="0">
+
                     <br>
                     <div class="col-md-offset-1 col-md-10">
                         <div class="row">
@@ -572,7 +574,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                                 <label>Concepto:</label>
                             </div>
                             <div class="col-md-7">
-                                <select id="pg_concepto" name="pg_concepto" class="form-control required">
+                                <select id="pg_idconcepto" name="pg_idconcepto" class="form-control required">
                                     <option value="">---Seleccionar---</option>
                                         <?php
                                             foreach ($colConceptos as $elem) {
@@ -598,7 +600,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                           <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                         </div>
                         <div class="col-md-3 text-right">
-                          <a class="btn btn-primary" id="btnCrearGasto" onclick="btnCrearGasto();">Aceptar</a>
+                          <a class="btn btn-primary" id="btnCrearGasto" onclick="btnCreaEditaGasto();">Aceptar</a>
                         </div>
                       </div>
                     </div>

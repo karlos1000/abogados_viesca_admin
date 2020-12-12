@@ -25,21 +25,10 @@ $(document).ready(function(){
     clearForm("formCrearTipo");
   });
 
-  // Popup accion
-  $('.agregarAccion').click(function() {
-    clearForm("formCrearAccion");
-    let idAccion = accounting.unformat($(this).attr("idAccion"));
-    $('#pa_idaccion').val( idAccion );
-
-    if(idAccion>0){
-      showLoading("cont_listagastos");
-      setTimeout(function(){
-        obtListaGastos();
-      }, 500);
-    }else{
-      $("#cont_gastos").hide();
-    }
+  $("#pg_monto").change(function (){
+    $(this).val(accounting.formatMoney( accounting.unformat($(this).val()) ));
   });
+
 });
 
 
@@ -139,6 +128,7 @@ function btnObtIdTitular(){
 }
 // Fin obtener titulares
 
+// Crear y editar caso
 function crearCaso(){
   var validator = $("#formCaso").validate({ });
   //Validar formulario
@@ -149,18 +139,19 @@ function crearCaso(){
     console.log(datosForm);
     params = paramsB64(datosForm);
     params['funct'] = 'crearCaso';
-    console.log(params);
+    // console.log(params);
     // return false;
     ajaxData(params, function(data){
       console.log(data);
 
       if(data.success){
-        alertify.success("Registro creado correctamente.");
+        let c_id = ( accounting.unformat($("#c_id").val()) > 0)?"editado":"creado";
+        alertify.success("Registro "+c_id+" correctamente.");
         setTimeout(function(){
           location.href="frmCasoEdit.php?id="+data.id+"";
-        }, 1000);
+        }, 500);
       }else{
-        alertify.error("El registro no fue creado, intentar nuevamente.");
+        alertify.error("El registro no fue "+c_id+", intentar nuevamente.");
       }
     });
   }else{
@@ -230,8 +221,38 @@ function btnCrearTipo() {
   }
 }
 
+
+// Popup crear y editar accion
+function popupCreaEditaAccion(casoId, idAccion){
+  clearForm("formCrearAccion");
+  console.log(idAccion);
+  $('#pa_idaccion').val( idAccion );
+  $('#popup_modalCrearAccion').modal('show');
+
+  if(idAccion>0){
+    //Recuperar datos para la edicion
+    let params = {funct: 'obtDatosAccion', idAccion:idAccion};
+    ajaxData(params, function(data){
+      // console.log(data);
+      if(data.success){
+        $("#pa_fechaaccion").val(data.datos.fechaAlta2);
+        $("#pa_accion").val(convertHTMLEntity(data.datos.nombre));
+        $("#pa_comentario").val(convertHTMLEntity(data.datos.comentarios));
+      }
+    });
+
+    //Cargar lista de gastos
+    showLoading("cont_listagastos");
+    setTimeout(function(){
+      obtListaGastos();
+    }, 800);
+  }else{
+    $("#cont_gastos").hide();
+  }
+}
+
 // Popup para crear accion
-function btnCrearAccion() {
+function btnCreaEditaAccion() {
   var validator = $("#formCrearAccion").validate({ });
   //Validar formulario
   if($("#formCrearAccion").valid()){
@@ -240,7 +261,7 @@ function btnCrearAccion() {
     var datosForm = $("#formCrearAccion").serializeJSON();
     console.log(datosForm);
     params = paramsB64(datosForm);
-    params['funct'] = 'crearAccion';
+    params['funct'] = 'creaEditaAccion';
     // console.log(params);
     // return false;
     ajaxData(params, function(data){
@@ -295,7 +316,7 @@ function obtListaGastos(){
 }
 // Fin obtener grid de gastos
 
-// Editar gasto
+/*// Editar gasto
 function editargasto(idGasto){
   console.log(idGasto);
 }
@@ -303,22 +324,34 @@ function editargasto(idGasto){
 // Eliminar gasto
 function eliminargasto(idGasto){
   console.log(idGasto);
-}
+}*/
 
 // Popup crear y editar gasto
-function popupCreaEditaGasto(casoId, idAccion, accion){
-  console.log(casoId);
-  console.log(idAccion);
-  console.log(accion);
+function popupCreaEditaGasto(idGasto, casoId, idAccion, accion){
   clearForm("formCrearGasto");
   $("#pg_accion").val(accion);
   $("#pg_idaccion").val(idAccion);
+  $("#pg_idgasto").val(idGasto);
   $('#popup_modalCrearGasto').modal('show');
 
-
+  if(idGasto>0){
+    //Recuperar datos para el gasto
+    let params = {funct: 'obtDatosGasto', idGasto:idGasto};
+    ajaxData(params, function(data){
+      console.log(data);
+      if(data.success){
+        $("#pg_fechagasto").val(data.datos.fechaAlta2);
+        $("#pg_idconcepto").val(data.datos.conceptoId);
+        $("#pg_monto").val( accounting.formatMoney(accounting.unformat(data.datos.monto)) );
+      }
+    });
+  }
 }
-// Crear gasto
-function btnCrearGasto(){
+// Crear y editar gasto
+function btnCreaEditaGasto(){
+  let idAccion = accounting.unformat($("#pg_idaccion").val());
+  console.log(idAccion);
+
   var validator = $("#formCrearGasto").validate({ });
   //Validar formulario
   if($("#formCrearGasto").valid()){
@@ -328,17 +361,21 @@ function btnCrearGasto(){
     var datosForm = $("#formCrearGasto").serializeJSON();
     console.log(datosForm);
     params = paramsB64(datosForm);
-    params['funct'] = 'crearGasto';
-    console.log(params);
-    return false;
+    params['funct'] = 'creaEditaGasto';
+    // console.log(params);
+    // return false;
     ajaxData(params, function(data){
       console.log(data);
       // hideLoading2("btnCrearGasto");
 
-      $('.modal').modal('hide');
+      // $('.modal').modal('hide');
+      $('#popup_modalCrearGasto').modal('hide');
       if(data.success){
-        // caso_acciones.refresh();
-        // caso_acciones.commit();
+        caso_acciones.refresh();
+        caso_acciones.commit();
+        //Recargar gastos
+        showLoading("cont_listagastos");
+        obtListaGastos();
         alertify.success("Registro creado correctamente.");
       }else{
         alertify.error("El registro no fue creado, intentar nuevamente.");

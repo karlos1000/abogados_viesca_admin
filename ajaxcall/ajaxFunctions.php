@@ -73,8 +73,11 @@ switch ($function){
     case "crearCliente": crearCliente(); break;
     case "crearTipo": crearTipo(); break;
     case "crearCaso": crearCaso(); break;
-    case "crearAccion": crearAccion(); break;
+    case "creaEditaAccion": creaEditaAccion(); break;
+    case "obtDatosAccion": obtDatosAccion(); break;
     case "tblListaGastos": tblListaGastos(); break;
+    case "creaEditaGasto": creaEditaGasto(); break;
+    case "obtDatosGasto": obtDatosGasto(); break;
 
     default:
       echo "Not valid call";
@@ -645,6 +648,7 @@ function crearCaso(){
 
   $arr = array("success"=>false);
   $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $idCaso = (isset($_GET['c_id']) && $_GET['c_id']!="")?$_GET['c_id']:0;
   $casosObj = new casosObj();
 
   // Setear datos
@@ -653,7 +657,14 @@ function crearCaso(){
   $casosObj->titularId = (isset($_GET['c_idtitular']) && $_GET['c_idtitular']!="")?$_GET['c_idtitular']:"";
   $casosObj->autorizadosIds = (isset($_GET['c_idsautorizados']) && $_GET['c_idsautorizados']!="")?$_GET['c_idsautorizados']:"";
   $casosObj->fechaAlta = (isset($_GET['c_falta']) && $_GET['c_falta']!="")?conversionFechas($_GET['c_falta']):"";
-  $casosObj->CrearCaso();
+
+  if($idCaso>0){
+    $casosObj->idCaso = $idCaso;
+    $resp = $casosObj->EditarCaso();
+  }else{
+    $casosObj->CrearCaso();
+    $resp = $casosObj->idCaso;
+  }
 
   if($casosObj->idCaso){
     $arr = array("success"=>true, "id"=>$casosObj->idCaso);
@@ -666,14 +677,15 @@ function crearCaso(){
   // exit();
 }
 
-// Crear accion
-function crearAccion(){
+// Crear y editar accion
+function creaEditaAccion(){
   $tz = obtDateTimeZone();
   unset($_GET['funct']); //remover el nombre de la funcion para evitar errores
   base64DecodeSubmit(0, $_GET);
 
   $arr = array("success"=>false);
   $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $idaccion = (isset($_GET['pa_idaccion']) && $_GET['pa_idaccion']!="")?$_GET['pa_idaccion']:0;
   $casoAccionesObj = new casoAccionesObj();
 
   // Setear datos
@@ -681,9 +693,16 @@ function crearAccion(){
   $casoAccionesObj->nombre = (isset($_GET['pa_accion']) && $_GET['pa_accion']!="")?$_GET['pa_accion']:"";
   $casoAccionesObj->comentarios = (isset($_GET['pa_comentario']) && $_GET['pa_comentario']!="")?$_GET['pa_comentario']:"";
   $casoAccionesObj->fechaAlta = (isset($_GET['pa_fechaaccion']) && $_GET['pa_fechaaccion']!="")?conversionFechas($_GET['pa_fechaaccion']):"";
-  $casoAccionesObj->CrearCasoAccion();
 
-  if($casoAccionesObj->idAccion){
+  if($idaccion>0){
+    $casoAccionesObj->idAccion = $idaccion;
+    $resp = $casoAccionesObj->EditarCasoAccion();
+  }else{
+    $casoAccionesObj->CrearCasoAccion();
+    $resp = $casoAccionesObj->idAccion;
+  }
+
+  if($resp){
     $arr = array("success"=>true);
   }
 
@@ -692,6 +711,22 @@ function crearAccion(){
   // print_r($_GET);
   // echo "</pre>";
   // exit();
+}
+
+// Obtener datos de la accion
+function obtDatosAccion(){
+  $tz = obtDateTimeZone();
+  $arr = array("success"=>false);
+  $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $idAccion = (isset($_GET['idAccion']) && $_GET['idAccion']!="")?$_GET['idAccion']:0;
+  $casoAccionesObj = new casoAccionesObj();
+
+  $datosAccion = $casoAccionesObj->CasoAccionesPorId($idAccion);
+  if($datosAccion->idAccion>0){
+    $arr = array("success"=>true, "datos"=>$datosAccion);
+  }
+
+  echo $callback . '(' . json_encode($arr) . ');';
 }
 
 // Obtener la lista de gastos
@@ -733,9 +768,9 @@ function tblListaGastos(){
                       <td>'.$item->concepto.'</td>
                       <td>'.$item->monto2.'</td>
                       <td>
-                        <!--<a href="#" data-toggle="modal" data-target="#popup_modalEditarGasto" class="editargasto" title="Editar gasto" idGasto="'.$item->idGasto.'"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>-->
-                        <a href="javascript:void(0);" onclick="editargasto('.$item->idGasto.')" title="Editar gasto"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>
-                        &nbsp; <a href="javascript:void(0);" onclick="eliminargasto('.$item->idGasto.')" title="Eliminar gasto"><img width="16px" src="../images/iconos/iconos_grid/eliminar.png"></a>
+                        <a href="javascript:void(0);" onclick="popupCreaEditaGasto('.$item->idGasto.', '.$item->casoId.', '.$item->accionId.', \''.$item->concepto.'\')" title="Editar gasto"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>
+                        <!-- &nbsp;<a href="javascript:void(0);" onclick="editargasto('.$item->idGasto.')" title="Editar gasto"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>-->
+                        <!-- <a href="javascript:void(0);" onclick="eliminargasto('.$item->idGasto.')" title="Eliminar gasto"><img width="16px" src="../images/iconos/iconos_grid/eliminar.png"></a>-->
                       </td>
                   </tr>
                   ';
@@ -752,5 +787,53 @@ function tblListaGastos(){
   echo $callback . '(' . json_encode($arr) . ');';
 }
 
+// Crea y edita un gasto
+function creaEditaGasto(){
+  $tz = obtDateTimeZone();
+  unset($_GET['funct']); //remover el nombre de la funcion para evitar errores
+  base64DecodeSubmit(0, $_GET);
+
+  $arr = array("success"=>false);
+  $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $idGasto = (isset($_GET['pg_idgasto']) && $_GET['pg_idgasto']!="")?$_GET['pg_idgasto']:"";
+  $accionGastosObj = new accionGastosObj();
+
+  // Setear datos
+  $accionGastosObj->casoId = (isset($_GET['pg_casoid']) && $_GET['pg_casoid']!="")?$_GET['pg_casoid']:"";;
+  $accionGastosObj->accionId = (isset($_GET['pg_idaccion']) && $_GET['pg_idaccion']!="")?$_GET['pg_idaccion']:"";
+  $accionGastosObj->conceptoId = (isset($_GET['pg_idconcepto']) && $_GET['pg_idconcepto']!="")?$_GET['pg_idconcepto']:"";
+  $accionGastosObj->monto = (isset($_GET['pg_monto']) && $_GET['pg_monto']!="")?removerCaracteres($_GET['pg_monto']):0;
+  $accionGastosObj->fechaAlta = (isset($_GET['pg_fechagasto']) && $_GET['pg_fechagasto']!="")?conversionFechas($_GET['pg_fechagasto']):"";
+
+  if($idGasto>0){
+    $accionGastosObj->idGasto = $idGasto;
+    $resp = $accionGastosObj->EditarAccionGasto();
+  }else{
+    $accionGastosObj->CrearAccionGasto();
+    $resp = $accionGastosObj->idGasto;
+  }
+
+  if($resp){
+    $arr = array("success"=>true);
+  }
+
+  echo $callback . '(' . json_encode($arr) . ');';
+}
+
+// Obtener datos del gasto
+function obtDatosGasto(){
+  $tz = obtDateTimeZone();
+  $arr = array("success"=>false);
+  $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $idGasto = (isset($_GET['idGasto']) && $_GET['idGasto']!="")?$_GET['idGasto']:0;
+  $accionGastosObj = new accionGastosObj();
+
+  $datosGasto = $accionGastosObj->AccionGastosPorId($idGasto);
+  if($datosGasto->idGasto>0){
+    $arr = array("success"=>true, "datos"=>$datosGasto);
+  }
+
+  echo $callback . '(' . json_encode($arr) . ');';
+}
 
 ?>

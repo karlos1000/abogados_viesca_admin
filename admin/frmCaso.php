@@ -367,7 +367,7 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                     <div class="col-md-offset-1 col-md-10">
                         <div class="row">
                             <div class="col-md-4">
-                              <label for="pc_cliente">Cliente:</label>
+                              <label for="pc_cliente">Nombre completo:</label>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" class="form-control required" name="pc_cliente" id="pc_cliente">
