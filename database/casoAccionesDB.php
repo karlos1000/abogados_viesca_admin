@@ -78,4 +78,27 @@ class casoAccionesDB {
         return $ds;
     }
 
+    public function EliminarAccionDB($idAccion){
+        $ds = new DataServices();
+        $param[0] = "";
+        $query = array();
+
+        if($idAccion > 0){
+            $query[] = " idAccion=$idAccion ";
+        }
+
+        //En caso de llevar filtro
+        if(count($query) > 0){
+          $wordWhere = " WHERE ";
+          $setWhere = implode(" AND ", $query);
+          // echo $setWhere;
+          $param[0] = $wordWhere.$setWhere;
+        }
+
+        $result = $ds->Execute("EliminarAccionDB", $param);
+        $ds->CloseConnection();
+
+        return $result;
+    }
+
 }

@@ -242,6 +242,7 @@ class configuracionesGridObj {
                 // $link .= '<a href="#" data-toggle="modal" data-target="#popup_modalCrearAccion" class="agregarAccion" title="Editar acci&oacute;n" idAccion="{idAccion}"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>';
                 $link .= '<a href="javascript:void(0);" onclick="popupCreaEditaAccion({casoId}, {idAccion})" title="Editar acci&oacute;n"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>';
                 $link .= '&nbsp; <a href="javascript:void(0);" onclick="popupCreaEditaGasto(0, {casoId}, {idAccion}, \'{nombre}\')" title="Agregar gasto"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"></a>';
+                $link .= '&nbsp; <a href="javascript:void(0);" onclick="eliminarAccion({idAccion})" title="Eliminar acci&oacute;n"><img width="16px" src="../images/iconos/iconos_grid/eliminar.png"></a>';
                 $column->ItemTemplate = $link;
             }
             else{

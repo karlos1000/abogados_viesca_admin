@@ -252,7 +252,12 @@
 
   <!--Consultas caso acciones -->
   <Command id="ObtCasoAccionesDB">
-   <query>SELECT *, DATE_FORMAT(fechaAlta, "%d/%m/%Y") AS fechaAlta2 FROM caso_acciones ?</query>
+   <query>
+      SELECT *, DATE_FORMAT(fechaAlta, "%d/%m/%Y") AS fechaAlta2,
+      (select if(sum(monto)>0, concat("$", format(sum(monto), 2)), "$0.00") from accion_gastos where accionId=idAccion) AS tGastos
+      FROM caso_acciones
+      ?
+  </query>
   </Command>
   <Command id="CasoAccionesPorIdDB">
     <query>SELECT *, DATE_FORMAT(fechaAlta, "%d/%m/%Y") AS fechaAlta2 FROM caso_acciones WHERE idAccion=?</query>
@@ -262,6 +267,9 @@
   </Command>
   <Command id="EditarCasoAccionDB">
    <query>UPDATE caso_acciones SET casoId=?, nombre='?', comentarios='?', fechaAlta='?', fechaAct='?' WHERE idAccion=?</query>
+  </Command>
+  <Command id="EliminarAccionDB">
+    <query>DELETE FROM caso_acciones ?</query>
   </Command>
 
 
@@ -282,6 +290,9 @@
   </Command>
   <Command id="EditarAccionGastoDB">
    <query>UPDATE accion_gastos SET casoId=?, accionId=?, conceptoId=?, monto=?, fechaAlta='?', fechaAct='?' WHERE idGasto=?</query>
+  </Command>
+  <Command id="EliminarGastoDB">
+    <query>DELETE FROM accion_gastos ?</query>
   </Command>
 
 

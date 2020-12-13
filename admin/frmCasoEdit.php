@@ -53,7 +53,13 @@ $cliente = (isset($datosCliente->nombre))?$datosCliente->nombre:"";
 $titular = (isset($datosTitular->nombre))?$datosTitular->nombre:"";
 $fechaAlta = (isset($datosCaso->fechaAlta))?conversionFechaF2($datosCaso->fechaAlta):"";
 $fechaAct = (isset($datosCaso->fechaAct))?conversionFechaF6($datosCaso->fechaAct):"";
-$tGastos = formatoMoneda(0);
+//Obtener total de gastos
+$colGastos = $accionGastosObj->ObtAccionGastos(0, $id);
+$tGastos = 0;
+foreach($colGastos as $elem){
+    $tGastos += $elem->monto;
+}
+$tGastos = formatoMoneda($tGastos);
 $autorizadosIds = (isset($datosCaso->autorizadosIds))?$datosCaso->autorizadosIds:"";
 $arrIdsAutorizados = explode(",", $autorizadosIds);
 // Obtener grid de acciones
@@ -67,6 +73,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
 // print_r($datosTitular);
 // print_r($arrIdsAutorizados);
 // print_r($colConceptos);
+// print_r($colGastos);
 // echo "</pre>";
 
 
@@ -199,7 +206,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                                         <br/>
                                         <div class="row">
                                             <div class="col-md-3 text-right">
-                                                <label>Titular:</label>
+                                                <label>Responsable:</label>
                                             </div>
                                             <div class="col-md-7 form-group">
                                                 <input type="hidden" id="c_idtitular" name="c_idtitular" value="<?php echo $idtitular;?>"/>

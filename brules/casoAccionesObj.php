@@ -80,6 +80,11 @@ class casoAccionesObj extends configuracionesGridObj{
         return $resAct;
     }*/
 
+    public function Eliminar($idAccion=0){
+      $objDB = new casoAccionesDB();
+      return $objDB->EliminarAccionDB($idAccion);
+    }
+
     //Grid
     public function ObtAccionesGrid($casoId=0){
         $DataServices = new DataServices();
@@ -91,17 +96,12 @@ class casoAccionesObj extends configuracionesGridObj{
         $configGrid = new configuracionesGridObj();
 
         $configGrid->defineGrid($grid, $ds);
-        $configGrid->defineColumn($grid, "idAccion", "ID", false, true);
+        $configGrid->defineColumn($grid, "idAccion", "ID", true, true);
         $configGrid->defineColumn($grid, "fechaAlta2", "F. Alta", true, false, 1);
         $configGrid->defineColumn($grid, "nombre", "Acci&oacute;n", true, false, 1);
+        $configGrid->defineColumn($grid, "tGastos", "Gastos", true, false, 1);
         $configGrid->defineColumn($grid, "comentarios", "Comentarios", true, false, 1);
 
-        // $configGrid->defineColumn($grid, "tGastos", "Gastos", true, false, 1);
-        // $configGrid->defineColumn($grid, "nombre", "Nombre", true, false, 1);
-        // $configGrid->defineColumn($grid, "tratamientoId", "Tratamiento", true, false, 1);
-        // $configGrid->defineColumn($grid, "opcionId", "Opcion", true, false, 1);
-        // $configGrid->defineColumn($grid, "opcionInfo", "Mensaje", false, false);
-        // $configGrid->defineColumn($grid, "activo", "Activo", true, false, 0);
         // if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){
             $configGrid->defineColumnEdit($grid);
         // }
@@ -111,15 +111,5 @@ class casoAccionesObj extends configuracionesGridObj{
 
         return $grid;
     }
-
-    /* // Imp. obt nombre de Enfermedades por ids
-    public function obtNombreEnfermedadesPorIds($id){
-        $usrDS = new casoAccionesDB();
-        $obj = new casoAccionesObj();
-        $datosBD = new datosBD();
-        $result = $usrDS->obtNombreEnfermedadesPorIdsDB($id);
-
-        return $datosBD->setDatos($result, $obj);
-    } */
 
 }

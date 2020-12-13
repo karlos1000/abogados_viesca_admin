@@ -24,11 +24,11 @@ class accionGastosObj extends configuracionesGridObj{
     }
 
     //Obtener coleccion
-    public function ObtAccionGastos($accionId=0){
+    public function ObtAccionGastos($accionId=0, $casoId=0){
         $array = array();
         $ds = new accionGastosDB();
         $datosBD = new datosBD();
-        $result = $ds->ObtAccionGastosDB($accionId);
+        $result = $ds->ObtAccionGastosDB($accionId, $casoId);
         $array =  $datosBD->arrDatosObj($result);
 
         return $array;
@@ -82,6 +82,11 @@ class accionGastosObj extends configuracionesGridObj{
         return $resAct;
     }*/
 
+    public function Eliminar($idGasto=0, $idAccion=0){
+      $objDB = new accionGastosDB();
+      return $objDB->EliminarGastoDB($idGasto, $idAccion);
+    }
+
     //Grid
     public function ObtGastoGrid($accionId=0){
         $DataServices = new DataServices();
@@ -106,15 +111,5 @@ class accionGastosObj extends configuracionesGridObj{
 
         return $grid;
     }
-
-    /* // Imp. obt nombre de Enfermedades por ids
-    public function obtNombreEnfermedadesPorIds($id){
-        $usrDS = new accionGastosDB();
-        $obj = new accionGastosObj();
-        $datosBD = new datosBD();
-        $result = $usrDS->obtNombreEnfermedadesPorIdsDB($id);
-
-        return $datosBD->setDatos($result, $obj);
-    } */
 
 }

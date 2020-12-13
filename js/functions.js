@@ -225,7 +225,7 @@ function btnCrearTipo() {
 // Popup crear y editar accion
 function popupCreaEditaAccion(casoId, idAccion){
   clearForm("formCrearAccion");
-  console.log(idAccion);
+  // console.log(idAccion);
   $('#pa_idaccion').val( idAccion );
   $('#popup_modalCrearAccion').modal('show');
 
@@ -316,15 +316,6 @@ function obtListaGastos(){
 }
 // Fin obtener grid de gastos
 
-/*// Editar gasto
-function editargasto(idGasto){
-  console.log(idGasto);
-}
-
-// Eliminar gasto
-function eliminargasto(idGasto){
-  console.log(idGasto);
-}*/
 
 // Popup crear y editar gasto
 function popupCreaEditaGasto(idGasto, casoId, idAccion, accion){
@@ -350,7 +341,7 @@ function popupCreaEditaGasto(idGasto, casoId, idAccion, accion){
 // Crear y editar gasto
 function btnCreaEditaGasto(){
   let idAccion = accounting.unformat($("#pg_idaccion").val());
-  console.log(idAccion);
+  // console.log(idAccion);
 
   var validator = $("#formCrearGasto").validate({ });
   //Validar formulario
@@ -359,7 +350,7 @@ function btnCreaEditaGasto(){
     // showLoading("btnCrearGasto");
 
     var datosForm = $("#formCrearGasto").serializeJSON();
-    console.log(datosForm);
+    // console.log(datosForm);
     params = paramsB64(datosForm);
     params['funct'] = 'creaEditaGasto';
     // console.log(params);
@@ -385,4 +376,40 @@ function btnCreaEditaGasto(){
     validator.focusInvalid();
     return false;
   }
+}
+
+// Eliminar gasto
+function eliminargasto(idGasto){
+  alertify.confirm("<strong> Desea borrar este registro?</strong>", function(){
+    let params = {funct: 'eliminarGasto', idGasto:idGasto};
+
+    ajaxData(params, function(data){
+      // console.log(data);
+      if(data.success){
+        caso_acciones.refresh();
+        caso_acciones.commit();
+        //Recargar gastos
+        obtListaGastos();
+        alertify.success("Registro eliminado correctamente.");
+      }
+    });
+  },function(){
+  }).set({labels:{ok:'Aceptar', cancel: 'Cancelar'}, padding: false});
+}
+
+// Eliminar accion
+function eliminarAccion(idAccion){
+  alertify.confirm("<strong> Desea borrar este registro, si confirma se eliminar&aacute;n sus gastos asociados?</strong>", function(){
+    let params = {funct: 'eliminarAccion', idAccion:idAccion};
+
+    ajaxData(params, function(data){
+      // console.log(data);
+      if(data.success){
+        caso_acciones.refresh();
+        caso_acciones.commit();
+        alertify.success("Registro eliminado correctamente.");
+      }
+    });
+  },function(){
+  }).set({labels:{ok:'Aceptar', cancel: 'Cancelar'}, padding: false});
 }

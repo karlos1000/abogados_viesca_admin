@@ -178,7 +178,7 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                                         <br/>
                                         <div class="row">
                                             <div class="col-md-3 text-right">
-                                                <label>Titular:</label>
+                                                <label>Responsable:</label>
                                             </div>
                                             <div class="col-md-7 form-group">
                                                 <input type="hidden" id="c_idtitular" name="c_idtitular" value="0"/>

@@ -78,6 +78,8 @@ switch ($function){
     case "tblListaGastos": tblListaGastos(); break;
     case "creaEditaGasto": creaEditaGasto(); break;
     case "obtDatosGasto": obtDatosGasto(); break;
+    case "eliminarGasto": eliminarGasto(); break;
+    case "eliminarAccion": eliminarAccion(); break;
 
     default:
       echo "Not valid call";
@@ -729,6 +731,26 @@ function obtDatosAccion(){
   echo $callback . '(' . json_encode($arr) . ');';
 }
 
+// Eliminar accion
+function eliminarAccion(){
+  $tz = obtDateTimeZone();
+  $arr = array("success"=>false);
+  $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $idAccion = (isset($_GET['idAccion']) && $_GET['idAccion']!="")?$_GET['idAccion']:0;
+  $casoAccionesObj = new casoAccionesObj();
+  $accionGastosObj = new accionGastosObj();
+
+  // Eliminar la accion
+  $resp = $casoAccionesObj->Eliminar($idAccion);
+  if($resp){
+    // Elimina todos los gastos asociados a la accion
+    $resp2 = $accionGastosObj->Eliminar(0, $idAccion);
+    $arr = array("success"=>true);
+  }
+
+  echo $callback . '(' . json_encode($arr) . ');';
+}
+
 // Obtener la lista de gastos
 function tblListaGastos(){
   $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
@@ -770,7 +792,7 @@ function tblListaGastos(){
                       <td>
                         <a href="javascript:void(0);" onclick="popupCreaEditaGasto('.$item->idGasto.', '.$item->casoId.', '.$item->accionId.', \''.$item->concepto.'\')" title="Editar gasto"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>
                         <!-- &nbsp;<a href="javascript:void(0);" onclick="editargasto('.$item->idGasto.')" title="Editar gasto"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>-->
-                        <!-- <a href="javascript:void(0);" onclick="eliminargasto('.$item->idGasto.')" title="Eliminar gasto"><img width="16px" src="../images/iconos/iconos_grid/eliminar.png"></a>-->
+                        <a href="javascript:void(0);" onclick="eliminargasto('.$item->idGasto.')" title="Eliminar gasto"><img width="16px" src="../images/iconos/iconos_grid/eliminar.png"></a>
                       </td>
                   </tr>
                   ';
@@ -831,6 +853,22 @@ function obtDatosGasto(){
   $datosGasto = $accionGastosObj->AccionGastosPorId($idGasto);
   if($datosGasto->idGasto>0){
     $arr = array("success"=>true, "datos"=>$datosGasto);
+  }
+
+  echo $callback . '(' . json_encode($arr) . ');';
+}
+
+// Eliminar gasto
+function eliminarGasto(){
+  $tz = obtDateTimeZone();
+  $arr = array("success"=>false);
+  $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $idGasto = (isset($_GET['idGasto']) && $_GET['idGasto']!="")?$_GET['idGasto']:0;
+  $accionGastosObj = new accionGastosObj();
+
+  $resp = $accionGastosObj->Eliminar($idGasto);
+  if($resp){
+    $arr = array("success"=>true);
   }
 
   echo $callback . '(' . json_encode($arr) . ');';

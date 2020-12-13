@@ -5,13 +5,17 @@ include_once  $dirname.'/common/DataServices.php';
 class accionGastosDB {
 
     //method declaration
-    public function ObtAccionGastosDB($accionId){
+    public function ObtAccionGastosDB($accionId, $casoId){
         $ds = new DataServices();
         $param[0] = "";
         $query = array();
 
         if($accionId > 0){
             $query[] = " accionId=$accionId ";
+        }
+
+        if($casoId > 0){
+            $query[] = " casoId=$casoId ";
         }
 
         //En caso de llevar filtro
@@ -65,4 +69,30 @@ class accionGastosDB {
         return $ds;
     }
 
+    public function EliminarGastoDB($idGasto, $idAccion){
+        $ds = new DataServices();
+        $param[0] = "";
+        $query = array();
+
+        if($idGasto > 0){
+            $query[] = " idGasto=$idGasto ";
+        }
+
+        if($idAccion > 0){
+            $query[] = " accionId=$idAccion ";
+        }
+
+        //En caso de llevar filtro
+        if(count($query) > 0){
+          $wordWhere = " WHERE ";
+          $setWhere = implode(" AND ", $query);
+          // echo $setWhere;
+          $param[0] = $wordWhere.$setWhere;
+        }
+
+        $result = $ds->Execute("EliminarGastoDB", $param);
+        $ds->CloseConnection();
+
+        return $result;
+    }
 }
