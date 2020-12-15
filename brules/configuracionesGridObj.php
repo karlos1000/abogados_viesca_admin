@@ -133,6 +133,13 @@ class configuracionesGridObj {
                 $column->AddItem('Si',1);
             }
         }
+        elseif($grid->id=="cat_conceptos"){
+            if ($name_field == 'activo') {
+                $column = new GridDropDownColumn();
+                $column->AddItem('No',0);
+                $column->AddItem('Si',1);
+            }
+        }
 
 
         /*if($grid->id=="patentes_competencia"){
@@ -259,6 +266,12 @@ class configuracionesGridObj {
                 $column->ItemTemplate = $link;
             }
             elseif ($grid->id == "cat_tipo_casos") {
+                $link = '';
+                $link .= '<a class="kgrLinkEdit" onclick="grid_edit(this)" href="javascript:void 0" title="Editar"></a>';
+                $link .= '<a class="kgrLinkDelete" onclick="grid_delete(this)" href="javascript:void 0" title="Eliminar"></a>';
+                $column->ItemTemplate = $link;
+            }
+            elseif ($grid->id == "cat_conceptos") {
                 $link = '';
                 $link .= '<a class="kgrLinkEdit" onclick="grid_edit(this)" href="javascript:void 0" title="Editar"></a>';
                 $link .= '<a class="kgrLinkDelete" onclick="grid_delete(this)" href="javascript:void 0" title="Eliminar"></a>';

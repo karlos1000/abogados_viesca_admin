@@ -19,6 +19,7 @@ include_once '../brules/catAyudasObj.php';
 include_once '../brules/comunicadosObj.php';
 include_once '../brules/clientesObj.php';
 include_once '../brules/catTipoCasosObj.php';
+include_once '../brules/catConceptosObj.php';
 
 $selected = '';
 $result = '';
@@ -52,6 +53,10 @@ if(isset($_GET['catalog'])){
     elseif($selected == 'tipoCasos'){
         $accObj = new catTipoCasosObj();
         $result = $accObj->ObtTiposCasoGrid();
+    }
+    elseif($selected == 'conceptos'){
+        $accObj = new catConceptosObj();
+        $result = $accObj->ObtConceptosGrid();
     }
     elseif($selected == 'comunicados'){
         $accObj = new comunicadosObj();
@@ -130,6 +135,7 @@ if(isset($_GET['mensaje'])){
                                         <option value="roles" <?php echo ($selected == "roles") ? "selected" : ""; ?> >Roles</option>
                                         <option value="clientes" <?php echo ($selected == "clientes") ? "selected" : ""; ?> >Clientes</option>
                                         <option value="tipoCasos" <?php echo ($selected == "tipoCasos") ? "selected" : ""; ?> >Tipo Casos</option>
+                                        <option value="conceptos" <?php echo ($selected == "conceptos") ? "selected" : ""; ?> >Conceptos</option>
                                     </select>
                                 </div>
                             </div>

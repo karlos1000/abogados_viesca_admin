@@ -47,19 +47,19 @@ class catConceptosDB {
         $result = $ds->Execute("ActCampoEnfermedadDB", $param, false, true);
         $ds->CloseConnection();
         return $result;
-    }
+    }*/
 
-    public function EnfermedadesDataSet($ds){
+    public function ConceptosDataSet($ds){
         $dsO = new DataServices();
         $param[0] = "";
-        $ds->SelectCommand = $dsO->ExecuteDS("ObtCatEnfermedadesDB", $param);
+        $ds->SelectCommand = $dsO->ExecuteDS("ObtCatConceptosDB", $param);
         $param = null;
-        $ds->InsertCommand = $dsO->ExecuteDS("insEnfermedadGrid", $param);
-        $ds->UpdateCommand = $dsO->ExecuteDS("actEnfermedadGrid", $param);
-        $ds->DeleteCommand = $dsO->ExecuteDS("delEnfermedadGrid", $param);
+        $ds->InsertCommand = $dsO->ExecuteDS("insConceptoGrid", $param);
+        $ds->UpdateCommand = $dsO->ExecuteDS("actConceptoGrid", $param);
+        $ds->DeleteCommand = $dsO->ExecuteDS("delConceptoGrid", $param);
         $dsO->CloseConnection();
 
         return $ds;
-    } */
+    }
 
 }

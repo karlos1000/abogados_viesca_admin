@@ -65,24 +65,21 @@ class catConceptosObj extends configuracionesGridObj{
         $objDB = new catConceptosDB();
         $resAct = $objDB->ActCampoEnfermedadDB($param);
         return $resAct;
-    }
+    }*/
 
     //Grid
-    public function ObtEnfermedadesGrid(){
+    public function ObtConceptosGrid(){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
         $uDB = new catConceptosDB();
-        $ds = $uDB->EnfermedadesDataSet($ds);
-        $grid = new KoolGrid("cat_enfermedades");
+        $ds = $uDB->ConceptosDataSet($ds);
+        $grid = new KoolGrid("cat_conceptos");
         $configGrid = new configuracionesGridObj();
 
         $configGrid->defineGrid($grid, $ds);
-        $configGrid->defineColumn($grid, "idEnfermedad", "ID", false, true);
+        $configGrid->defineColumn($grid, "idConcepto", "ID", false, true);
         $configGrid->defineColumn($grid, "nombre", "Nombre", true, false, 1);
-        $configGrid->defineColumn($grid, "tratamientoId", "Tratamiento", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionId", "Opcion", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionInfo", "Mensaje", false, false);
         $configGrid->defineColumn($grid, "activo", "Activo", true, false, 0);
         // if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){
             $configGrid->defineColumnEdit($grid);
@@ -92,7 +89,7 @@ class catConceptosObj extends configuracionesGridObj{
         $grid->Process();
 
         return $grid;
-    } */
+    }
 
     /* // Imp. obt nombre de Enfermedades por ids
     public function obtNombreEnfermedadesPorIds($id){

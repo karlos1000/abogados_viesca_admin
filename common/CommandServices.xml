@@ -221,6 +221,15 @@
   <Command id="CrearConceptoDB">
    <query>INSERT INTO cat_conceptos (nombre, activo) VALUES ('?', '?')</query>
   </Command>
+  <Command id="insConceptoGrid">
+   <query>INSERT INTO cat_conceptos (nombre, activo) VALUES ('@nombre', '@activo')</query>
+  </Command>
+  <Command id="actConceptoGrid">
+   <query>UPDATE cat_conceptos SET nombre='@nombre', activo='@activo' WHERE idConcepto=@idConcepto</query>
+  </Command>
+  <Command id="delConceptoGrid">
+     <query>DELETE FROM cat_conceptos WHERE idConcepto=@idConcepto</query>
+   </Command>
 
 
   <!--Consultas clientes -->
