@@ -600,6 +600,7 @@ function crearCliente(){
   $clientesObj->telefono = (isset($_GET['pc_tel']) && $_GET['pc_tel']!="")?$_GET['pc_tel']:"";
   $clientesObj->email = (isset($_GET['pc_email']) && $_GET['pc_email']!="")?$_GET['pc_email']:"";
   $clientesObj->direccion = (isset($_GET['pc_dir']) && $_GET['pc_dir']!="")?$_GET['pc_dir']:"";
+  $clientesObj->empresa = (isset($_GET['pc_empresa']) && $_GET['pc_empresa']!="")?$_GET['pc_empresa']:"";
   $clientesObj->fechaAct = $tz->fechaHora;
   $clientesObj->fechaCreacion = $tz->fechaHora;
   $clientesObj->CrearCliente();

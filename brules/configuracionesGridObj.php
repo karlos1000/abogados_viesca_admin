@@ -126,6 +126,14 @@ class configuracionesGridObj {
                 $column->BoxHeight = "50px";
             }
         }
+        elseif($grid->id=="cat_tipo_casos"){
+            if ($name_field == 'activo') {
+                $column = new GridDropDownColumn();
+                $column->AddItem('No',0);
+                $column->AddItem('Si',1);
+            }
+        }
+
 
         /*if($grid->id=="patentes_competencia"){
             if($name_field == 'esPatente') {
@@ -243,6 +251,17 @@ class configuracionesGridObj {
                 $link .= '<a href="javascript:void(0);" onclick="popupCreaEditaAccion({casoId}, {idAccion})" title="Editar acci&oacute;n"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>';
                 $link .= '&nbsp; <a href="javascript:void(0);" onclick="popupCreaEditaGasto(0, {casoId}, {idAccion}, \'{nombre}\')" title="Agregar gasto"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"></a>';
                 $link .= '&nbsp; <a href="javascript:void(0);" onclick="eliminarAccion({idAccion})" title="Eliminar acci&oacute;n"><img width="16px" src="../images/iconos/iconos_grid/eliminar.png"></a>';
+                $column->ItemTemplate = $link;
+            }
+            elseif($grid->id == "clientes"){
+                $link = '';
+                $link .= '<a class="kgrLinkEdit" onclick="grid_edit(this)" href="javascript:void 0" title="Editar"></a>';
+                $column->ItemTemplate = $link;
+            }
+            elseif ($grid->id == "cat_tipo_casos") {
+                $link = '';
+                $link .= '<a class="kgrLinkEdit" onclick="grid_edit(this)" href="javascript:void 0" title="Editar"></a>';
+                $link .= '<a class="kgrLinkDelete" onclick="grid_delete(this)" href="javascript:void 0" title="Eliminar"></a>';
                 $column->ItemTemplate = $link;
             }
             else{

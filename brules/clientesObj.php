@@ -10,6 +10,7 @@ class clientesObj extends configuracionesGridObj{
     private $_telefono = '';
     private $_email = '';
     private $_direccion = '';
+    private $_empresa = '';
     private $_activo = 0;
     private $_fechaAct = '0000-00-00 00:00:00';
     private $_fechaCreacion = '0000-00-00 00:00:00';
@@ -62,42 +63,43 @@ class clientesObj extends configuracionesGridObj{
         $param[1] = $this->_telefono;
         $param[2] = $this->_email;
         $param[3] = $this->_direccion;
-        $param[4] = $this->_fechaAct;
-        $param[5] = $this->_fechaCreacion;
+        $param[4] = $this->_empresa;
+        $param[5] = $this->_fechaAct;
+        $param[6] = $this->_fechaCreacion;
 
         if($update){ //Para actualizar
-            $param[5] = $this->_idCliente;
+            $param[6] = $this->_idCliente;
         }
         return $param;
     }
 
-    /* public function ActCampoEnfermedad($campo, $valor, $id){
+    /* public function ActCampoCliente($campo, $valor, $id){
         $param[0] = $campo;
         $param[1] = $valor;
         $param[2] = $id;
 
         $objDB = new clientesDB();
-        $resAct = $objDB->ActCampoEnfermedadDB($param);
+        $resAct = $objDB->ActCampoClienteDB($param);
         return $resAct;
-    }
+    }*/
 
     //Grid
-    public function ObtEnfermedadesGrid(){
+    public function ObtClientesGrid(){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
         $uDB = new clientesDB();
-        $ds = $uDB->EnfermedadesDataSet($ds);
-        $grid = new KoolGrid("cat_enfermedades");
+        $ds = $uDB->ClientesDataSet($ds);
+        $grid = new KoolGrid("clientes");
         $configGrid = new configuracionesGridObj();
 
         $configGrid->defineGrid($grid, $ds);
-        $configGrid->defineColumn($grid, "idEnfermedad", "ID", false, true);
+        $configGrid->defineColumn($grid, "idCliente", "ID", false, true);
         $configGrid->defineColumn($grid, "nombre", "Nombre", true, false, 1);
-        $configGrid->defineColumn($grid, "tratamientoId", "Tratamiento", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionId", "Opcion", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionInfo", "Mensaje", false, false);
-        $configGrid->defineColumn($grid, "activo", "Activo", true, false, 0);
+        $configGrid->defineColumn($grid, "email", "Correo", true, false, 1);
+        $configGrid->defineColumn($grid, "telefono", "Tel&eacute;fono", true, false, 0);
+        $configGrid->defineColumn($grid, "direccion", "Direcci&oacute;n", true, false, 0);
+        $configGrid->defineColumn($grid, "empresa", "Empresa", true, false, 0);
         // if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){
             $configGrid->defineColumnEdit($grid);
         // }
@@ -106,7 +108,7 @@ class clientesObj extends configuracionesGridObj{
         $grid->Process();
 
         return $grid;
-    } */
+    }
 
     /* // Imp. obt nombre de Enfermedades por ids
     public function obtNombreEnfermedadesPorIds($id){

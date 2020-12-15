@@ -45,24 +45,21 @@ class catTipoCasosObj extends configuracionesGridObj{
         $objDB = new catTipoCasosDB();
         $resAct = $objDB->ActCampoEnfermedadDB($param);
         return $resAct;
-    }
+    }*/
 
     //Grid
-    public function ObtEnfermedadesGrid(){
+    public function ObtTiposCasoGrid(){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
         $uDB = new catTipoCasosDB();
-        $ds = $uDB->EnfermedadesDataSet($ds);
-        $grid = new KoolGrid("cat_enfermedades");
+        $ds = $uDB->TiposCasoDataSet($ds);
+        $grid = new KoolGrid("cat_tipo_casos");
         $configGrid = new configuracionesGridObj();
 
         $configGrid->defineGrid($grid, $ds);
-        $configGrid->defineColumn($grid, "idEnfermedad", "ID", false, true);
+        $configGrid->defineColumn($grid, "idTipo", "ID", false, true);
         $configGrid->defineColumn($grid, "nombre", "Nombre", true, false, 1);
-        $configGrid->defineColumn($grid, "tratamientoId", "Tratamiento", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionId", "Opcion", true, false, 1);
-        $configGrid->defineColumn($grid, "opcionInfo", "Mensaje", false, false);
         $configGrid->defineColumn($grid, "activo", "Activo", true, false, 0);
         // if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){
             $configGrid->defineColumnEdit($grid);
@@ -72,7 +69,7 @@ class catTipoCasosObj extends configuracionesGridObj{
         $grid->Process();
 
         return $grid;
-    } */
+    }
 
     public function CrearTipoCaso(){
         $objDB = new catTipoCasosDB();

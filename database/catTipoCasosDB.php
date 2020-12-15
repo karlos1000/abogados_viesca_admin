@@ -47,19 +47,19 @@ class catTipoCasosDB {
         $result = $ds->Execute("ActCampoEnfermedadDB", $param, false, true);
         $ds->CloseConnection();
         return $result;
-    }
+    }*/
 
-    public function EnfermedadesDataSet($ds){
+    public function TiposCasoDataSet($ds){
         $dsO = new DataServices();
         $param[0] = "";
-        $ds->SelectCommand = $dsO->ExecuteDS("ObtCatEnfermedadesDB", $param);
+        $ds->SelectCommand = $dsO->ExecuteDS("ObtCatTipoCasosDB", $param);
         $param = null;
-        $ds->InsertCommand = $dsO->ExecuteDS("insEnfermedadGrid", $param);
-        $ds->UpdateCommand = $dsO->ExecuteDS("actEnfermedadGrid", $param);
-        $ds->DeleteCommand = $dsO->ExecuteDS("delEnfermedadGrid", $param);
+        $ds->InsertCommand = $dsO->ExecuteDS("insTipoCasoGrid", $param);
+        $ds->UpdateCommand = $dsO->ExecuteDS("actTipoCasoGrid", $param);
+        $ds->DeleteCommand = $dsO->ExecuteDS("delTipoCasoGrid", $param);
         $dsO->CloseConnection();
 
         return $ds;
-    } */
+    }
 
 }

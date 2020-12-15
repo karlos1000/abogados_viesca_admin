@@ -377,6 +377,16 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                     <div class="col-md-offset-1 col-md-10">
                         <div class="row">
                             <div class="col-md-4">
+                              <label for="pc_email">Correo:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control email required" name="pc_email" id="pc_email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-1 col-md-10">
+                        <div class="row">
+                            <div class="col-md-4">
                               <label for="pc_tel">Tel&eacute;fono:</label>
                             </div>
                             <div class="col-md-8">
@@ -387,10 +397,10 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
                     <div class="col-md-offset-1 col-md-10">
                         <div class="row">
                             <div class="col-md-4">
-                              <label for="pc_email">Correo:</label>
+                              <label for="pc_empresa">Empresa:</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control email" name="pc_email" id="pc_email">
+                                <input type="text" class="form-control" name="pc_empresa" id="pc_empresa">
                             </div>
                         </div>
                     </div>

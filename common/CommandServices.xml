@@ -200,6 +200,15 @@
   <Command id="crearTipoCasoDB">
    <query>INSERT INTO cat_tipo_casos (nombre, activo) VALUES ('?', '?')</query>
   </Command>
+  <Command id="insTipoCasoGrid">
+   <query>INSERT INTO cat_tipo_casos (nombre, activo) VALUES ('@nombre', '@activo')</query>
+  </Command>
+  <Command id="actTipoCasoGrid">
+   <query>UPDATE cat_tipo_casos SET nombre='@nombre', activo='@activo' WHERE idTipo=@idTipo</query>
+  </Command>
+  <Command id="delTipoCasoGrid">
+     <query>DELETE FROM cat_tipo_casos WHERE idTipo=@idTipo</query>
+   </Command>
 
 
   <!--Consultas cat conceptos -->
@@ -222,10 +231,16 @@
     <query>SELECT * FROM clientes WHERE idCliente=?</query>
   </Command>
   <Command id="CrearClienteDB">
-   <query>INSERT INTO clientes (nombre, telefono, email, direccion, fechaAct, fechaCreacion) VALUES ('?', '?', '?', '?', '?', '?')</query>
+   <query>INSERT INTO clientes (nombre, telefono, email, direccion, empresa, fechaAct, fechaCreacion) VALUES ('?', '?', '?', '?', '?', '?', '?')</query>
   </Command>
   <Command id="EditarClienteDB">
-   <query>UPDATE clientes SET nombre='?', telefono='?', email='?', direccion='?', fechaAct='?' WHERE idCliente=?</query>
+   <query>UPDATE clientes SET nombre='?', telefono='?', email='?', direccion='?', empresa='?', fechaAct='?' WHERE idCliente=?</query>
+  </Command>
+  <Command id="insClienteGrid">
+   <query>INSERT INTO clientes (nombre, telefono, email, direccion, empresa, fechaAct, fechaCreacion) VALUES ('@nombre', '@telefono', '@email', '@direccion', '@empresa', NOW(), NOW())</query>
+  </Command>
+  <Command id="actClienteGrid">
+   <query>UPDATE clientes SET nombre='@nombre', telefono='@telefono', email='@email', direccion='@email', empresa='@empresa', fechaAct=NOW() WHERE idCliente=@idCliente</query>
   </Command>
 
 

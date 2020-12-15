@@ -17,6 +17,8 @@ include_once '../brules/rolesObj.php';
 include_once '../brules/catConfiguracionesObj.php';
 include_once '../brules/catAyudasObj.php';
 include_once '../brules/comunicadosObj.php';
+include_once '../brules/clientesObj.php';
+include_once '../brules/catTipoCasosObj.php';
 
 $selected = '';
 $result = '';
@@ -42,6 +44,14 @@ if(isset($_GET['catalog'])){
     elseif($selected == 'roles'){
         $accObj = new rolesObj();
         $result = $accObj->GetRolesGrid();
+    }
+    elseif($selected == 'clientes'){
+        $accObj = new clientesObj();
+        $result = $accObj->ObtClientesGrid();
+    }
+    elseif($selected == 'tipoCasos'){
+        $accObj = new catTipoCasosObj();
+        $result = $accObj->ObtTiposCasoGrid();
     }
     elseif($selected == 'comunicados'){
         $accObj = new comunicadosObj();
@@ -118,6 +128,8 @@ if(isset($_GET['mensaje'])){
                                         <option value="comunicados" <?php echo ($selected == "comunicados") ? "selected" : ""; ?> >Comunicados</option>
                                         <option value="usuarios" <?php echo ($selected == "usuarios") ? "selected" : ""; ?> >Usuarios</option>
                                         <option value="roles" <?php echo ($selected == "roles") ? "selected" : ""; ?> >Roles</option>
+                                        <option value="clientes" <?php echo ($selected == "clientes") ? "selected" : ""; ?> >Clientes</option>
+                                        <option value="tipoCasos" <?php echo ($selected == "tipoCasos") ? "selected" : ""; ?> >Tipo Casos</option>
                                     </select>
                                 </div>
                             </div>
