@@ -232,10 +232,11 @@
   <!--Consultas casos -->
   <Command id="ObtCasosDB">
     <query>
-      SELECT a.*, b.nombre AS cliente, c.nombre AS tipocaso, DATE_FORMAT(a.fechaAlta, "%d/%m/%Y") AS fechaAlta2, DATE_FORMAT(a.fechaAct, "%d/%m/%Y") AS fechaAct2
+      SELECT a.*, b.nombre AS cliente, c.nombre AS tipocaso, DATE_FORMAT(a.fechaAlta, "%d/%m/%Y") AS fechaAlta2, DATE_FORMAT(a.fechaAct, "%d/%m/%Y") AS fechaAct2, d.nombre AS titular
       FROM casos AS a
       LEFT JOIN clientes AS b ON b.idCliente=a.clienteId
       LEFT JOIN cat_tipo_casos AS c ON c.idTipo=a.tipoId
+      LEFT JOIN usuarios AS d ON d.idUsuario=a.titularId
       ?
     </query>
   </Command>
@@ -248,6 +249,9 @@
   <Command id="EditarCasoDB">
    <query>UPDATE casos SET clienteId=?, tipoId=?, titularId=?, autorizadosIds='?', fechaAlta='?', fechaAct='?' WHERE idCaso=?</query>
   </Command>
+  <Command id="ActCampoCasoDB">
+    <query>UPDATE casos SET ?='?' WHERE idCaso=?</query>
+   </Command>
 
 
   <!--Consultas caso acciones -->

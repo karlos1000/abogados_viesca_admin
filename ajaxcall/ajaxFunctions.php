@@ -689,6 +689,7 @@ function creaEditaAccion(){
   $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
   $idaccion = (isset($_GET['pa_idaccion']) && $_GET['pa_idaccion']!="")?$_GET['pa_idaccion']:0;
   $casoAccionesObj = new casoAccionesObj();
+  $casosObj = new casosObj();
 
   // Setear datos
   $casoAccionesObj->casoId = (isset($_GET['pa_casoid']) && $_GET['pa_casoid']!="")?$_GET['pa_casoid']:"";
@@ -706,6 +707,8 @@ function creaEditaAccion(){
 
   if($resp){
     $arr = array("success"=>true);
+    //Actualizar la fecha de ultima actualizacion
+    $casosObj->ActCampoCaso("fechaAct", $tz->fechaHora, trim($_GET['pa_casoid']));
   }
 
   echo $callback . '(' . json_encode($arr) . ');';
@@ -819,6 +822,7 @@ function creaEditaGasto(){
   $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
   $idGasto = (isset($_GET['pg_idgasto']) && $_GET['pg_idgasto']!="")?$_GET['pg_idgasto']:"";
   $accionGastosObj = new accionGastosObj();
+  $casosObj = new casosObj();
 
   // Setear datos
   $accionGastosObj->casoId = (isset($_GET['pg_casoid']) && $_GET['pg_casoid']!="")?$_GET['pg_casoid']:"";;
@@ -837,6 +841,8 @@ function creaEditaGasto(){
 
   if($resp){
     $arr = array("success"=>true);
+    //Actualizar la fecha de ultima actualizacion
+    $casosObj->ActCampoCaso("fechaAct", $tz->fechaHora, trim($_GET['pg_casoid']));
   }
 
   echo $callback . '(' . json_encode($arr) . ');';

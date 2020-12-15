@@ -72,16 +72,16 @@ class casosObj extends configuracionesGridObj{
         return $param;
     }
 
-    /* public function ActCampoEnfermedad($campo, $valor, $id){
+    public function ActCampoCaso($campo, $valor, $id){
         $param[0] = $campo;
         $param[1] = $valor;
         $param[2] = $id;
 
         $objDB = new casosDB();
-        $resAct = $objDB->ActCampoEnfermedadDB($param);
+        $resAct = $objDB->ActCampoCasoDB($param);
         return $resAct;
     }
-    */
+
 
     //Grid
     public function ObtListadoCasosGrid($filSel="", $filTexto="", $filEstatus=""){
@@ -95,6 +95,9 @@ class casosObj extends configuracionesGridObj{
 
         $configGrid->defineGrid($grid, $ds);
         $configGrid->defineColumn($grid, "idCaso", "ID", true, true);
+        if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){
+            $configGrid->defineColumn($grid, "titular", "Responsable", true, false, 1);
+        }
         $configGrid->defineColumn($grid, "cliente", "Cliente", true, false, 1);
         $configGrid->defineColumn($grid, "tipocaso", "Tipo", true, false, 1);
         $configGrid->defineColumn($grid, "fechaAlta2", "F. Alta", true, false, 1);

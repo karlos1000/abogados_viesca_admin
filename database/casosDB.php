@@ -49,12 +49,12 @@ class casosDB {
         return $result;
     }
 
-    /* public function ActCampoEnfermedadDB($param){
+    public function ActCampoCasoDB($param){
         $ds = new DataServices();
-        $result = $ds->Execute("ActCampoEnfermedadDB", $param, false, true);
+        $result = $ds->Execute("ActCampoCasoDB", $param, false, true);
         $ds->CloseConnection();
         return $result;
-    }*/
+    }
 
     public function CasosDataSet($ds){
         $dsO = new DataServices();
