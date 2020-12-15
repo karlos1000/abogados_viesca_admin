@@ -1,6 +1,6 @@
 <?php
 session_start();
-$checkRol = ($_SESSION['idRol']==1 || $_SESSION['idRol']==2) ?true :false;
+$checkRol = ($_SESSION['idRol']==1 || $_SESSION['idRol']==2 || $_SESSION['idRol']==3) ?true :false;
 
 if($_SESSION['status']!= "ok" || $checkRol!=true)
         header("location: logout.php");

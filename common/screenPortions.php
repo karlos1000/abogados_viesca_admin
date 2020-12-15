@@ -25,7 +25,7 @@ function getAdminMenu(){
       $menu .= '<li id="li_listadocasos"><a href="listadocasos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Mis Casos</p></a></li>';
     }
     elseif($_SESSION['idRol'] == 3){
-
+      $menu .= '<li id="li_listadocasos"><a href="listadocasos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Mis Casos</p></a></li>';
     }
     elseif($_SESSION['idRol'] == 4){
 

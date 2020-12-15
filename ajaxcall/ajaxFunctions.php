@@ -667,6 +667,7 @@ function crearCaso(){
   }else{
     $casosObj->CrearCaso();
     $resp = $casosObj->idCaso;
+    // TODO: Crear usuario y mandar correo de acceso al sistema, antes verificar si ya existe para no duplicar usuarios
   }
 
   if($casosObj->idCaso){
