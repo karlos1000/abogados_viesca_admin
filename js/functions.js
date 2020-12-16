@@ -133,7 +133,7 @@ function crearCaso(){
   var validator = $("#formCaso").validate({ });
   //Validar formulario
   if($("#formCaso").valid()){
-    // var htmlOriginal = showLoading('btnCrearCaso');
+    var htmlOriginal = showLoading('btnCrearCaso');
 
     var datosForm = $("#formCaso").serializeJSON();
     console.log(datosForm);

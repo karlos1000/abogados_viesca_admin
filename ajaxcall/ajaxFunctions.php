@@ -16,6 +16,7 @@ include_once $dirname.'/brules/catTipoCasosObj.php';
 include_once $dirname.'/brules/casosObj.php';
 include_once $dirname.'/brules/casoAccionesObj.php';
 include_once $dirname.'/brules/accionGastosObj.php';
+include_once $dirname.'/brules/EmailFunctionsObj.php';
 
 //Fisrt check the function name
 $function= $_GET['funct'];
@@ -653,6 +654,9 @@ function crearCaso(){
   $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
   $idCaso = (isset($_GET['c_id']) && $_GET['c_id']!="")?$_GET['c_id']:0;
   $casosObj = new casosObj();
+  $clientesObj = new clientesObj();
+  $usuariosObj = new usuariosObj();
+  $emailObj = new EmailFunctionsObj();
 
   // Setear datos
   $casosObj->clienteId = (isset($_GET['c_idcliente']) && $_GET['c_idcliente']!="")?$_GET['c_idcliente']:"";
@@ -667,7 +671,30 @@ function crearCaso(){
   }else{
     $casosObj->CrearCaso();
     $resp = $casosObj->idCaso;
-    // TODO: Crear usuario y mandar correo de acceso al sistema, antes verificar si ya existe para no duplicar usuarios
+    // Obtener el nombre del cliente
+    $datosCliente = $clientesObj->ClientePorId(trim($_GET['c_idcliente']));
+
+    //verificar si ya existe para no duplicar usuarios y si existe solo mandar correo con datos de acceso
+    $datosUsuario = $usuariosObj->UserByEmail($datosCliente->email);
+    if($datosUsuario->idUsuario>0){
+      //Solo mandar correo con datos de acceso
+      // $emailObj->EnviarDatosDeAcceso("carlos.ramirez@framelova.com", $datosUsuario->nombre, $datosUsuario->password);
+      $emailObj->EnviarDatosDeAcceso($datosUsuario->email, $datosUsuario->nombre, $datosUsuario->password);
+    }else{
+      $password = generarPassword(5, true, true, false, false);
+      $usuariosObj->idRol = 3;
+      $usuariosObj->nombre = $datosCliente->nombre;
+      $usuariosObj->email = $datosCliente->email;
+      $usuariosObj->password = $password;
+      $usuariosObj->activo = 1;
+      $usuariosObj->GuardarUsuario();
+
+      if($usuariosObj->idUsuario>0){
+        //Mandar correo
+        $emailObj->EnviarDatosDeAcceso("carlos.ramirez@framelova.com", $datosCliente->nombre, $password);
+        // $emailObj->EnviarDatosDeAcceso($datosCliente->email, $datosCliente->nombre, $password);
+      }
+    }
   }
 
   if($casosObj->idCaso){
