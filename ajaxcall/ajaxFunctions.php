@@ -691,8 +691,8 @@ function crearCaso(){
 
       if($usuariosObj->idUsuario>0){
         //Mandar correo
-        $emailObj->EnviarDatosDeAcceso("carlos.ramirez@framelova.com", $datosCliente->nombre, $password);
-        // $emailObj->EnviarDatosDeAcceso($datosCliente->email, $datosCliente->nombre, $password);
+        // $emailObj->EnviarDatosDeAcceso("carlos.ramirez@framelova.com", $datosCliente->nombre, $password);
+        $emailObj->EnviarDatosDeAcceso($datosCliente->email, $datosCliente->nombre, $password);
       }
     }
   }
