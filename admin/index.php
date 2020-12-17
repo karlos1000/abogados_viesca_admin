@@ -35,11 +35,13 @@ libreriasKool();
                         <h1 class="titulo">Bienvenido <span class="pull-right"><a id="btnAyudaweb" onclick="mostrarAyuda('web_inicio')" href="#fancyAyudaWeb"><img src="../images/icon_ayuda.png" width="20px"></a></span> </h1>
 
                         <div class="cont_iconos">
+                            <?php if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){ ?>
                             <div class="row">
                                  <div class="col-md-4">
                                     <a href="catalogos.php"><p><img src="../images/iconos/iconos_menu_lateral/aguilar_superadmin-03.png" class="icon-obras" title="Captura" alt="Captura"><br class="inicio">Cat&aacute;logos</p></a>
                                 </div>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

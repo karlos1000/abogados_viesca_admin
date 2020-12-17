@@ -12,10 +12,16 @@ libreriasKool();
 include_once '../brules/casosObj.php';
 $casosObj = new casosObj();
 
+//Obtener el id del cliente
+$idCliente = -1;
+if($_SESSION['idRol']==3){
+    $idCliente = $_SESSION['clienteId'];
+}
+
 $filSel = "";
 $filTexto = "";
 $filEstatus = "";
-$result = $casosObj->ObtListadoCasosGrid($filSel, $filTexto, $filEstatus);
+$result = $casosObj->ObtListadoCasosGrid($idCliente, $filSel, $filTexto, $filEstatus);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -48,7 +54,9 @@ $result = $casosObj->ObtListadoCasosGrid($filSel, $filTexto, $filEstatus);
 
                         <div class="row">
                             <div class="col-md-offset-8 col-md-2 text-right">
+                                <?php if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){ ?>
                                 <a href="frmCaso.php?id=0" class="btn btn-primary">Nuevo</a>
+                                <?php } ?>
                             </div>
                             <div class="col-md-2 text-right">
                                 <a href="index.php"><input type="button" id="regresar" value="Regresar" class="btn"></a>

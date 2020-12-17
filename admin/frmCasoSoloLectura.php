@@ -3,7 +3,7 @@ session_start();
 $idRol = $_SESSION['idRol'];
 $rol = true;
 switch ($idRol) {
-    case 1: case 2:  $rol = true; break;
+    case 1: case 2: case 3:  $rol = true; break;
     default: $rol = false; break;
 }
 if($_SESSION['status']!= "ok" || $rol!=true)
@@ -65,57 +65,13 @@ $arrIdsAutorizados = explode(",", $autorizadosIds);
 // Obtener grid de acciones
 $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
 
-// echo "<pre>";
-// print_r($colTipos);
-// print_r($colAbogados);
-// print_r($datosCaso);
-// print_r($datosCliente);
-// print_r($datosTitular);
-// print_r($arrIdsAutorizados);
-// print_r($colConceptos);
-// print_r($colGastos);
-// echo "</pre>";
-
-
-/* if(isset($_POST["idUsuario"])){
-	$usuarioGObj = new usuariosObj();
-    $idUsuario = $_POST["idUsuario"];
-    $idRolG = $_POST["idRol"];
-
-    $usuarioGObj->idUsuario = $idUsuario;
-    $usuarioGObj->idRol = $idRolG;
-    $usuarioGObj->nombre = $_POST["nombreU"];
-    $usuarioGObj->email = $_POST["emailU"];
-    $usuarioGObj->password = $_POST["passU"];
-    $usuarioGObj->activo = $_POST["activoU"];
-
-    $res = 0;
-    if($idUsuario == 0){
-    	$usuarioGObj->GuardarUsuario();
-        $idUsuario = $usuarioGObj->idUsuario;
-        if($idUsuario > 0){
-            $res = 1;
-        }
-    }else{
-    	$res = $usuarioGObj->EditarUsuario();
-    }
-
-
-    if($res > 0){
-        $msjResponse .= "Cambios guardados";
-        header("location: catalogos.php?catalog=usuarios");
-    }
-    else{
-        $msjResponse .= "No hay cambios que guardar";
-    }
-} */
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Editar Caso</title>
+    <title>Ver Caso</title>
     <?php echo estilosPagina(true); ?>
 </head>
 
@@ -132,10 +88,10 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                     </div>
 
                     <div class="col-md-10">
-                        <h1 class="titulo">Editar Caso<span class="pull-right"><a id="btnAyudaweb" onclick="mostrarAyuda('web_prospectos')" href="#fancyAyudaWeb"><img src="../images/icon_ayuda.png" width="20px"></a></span></h1>
+                        <h1 class="titulo">Ver Caso<span class="pull-right"><a id="btnAyudaweb" onclick="mostrarAyuda('web_prospectos')" href="#fancyAyudaWeb"><img src="../images/icon_ayuda.png" width="20px"></a></span></h1>
                         <ol class="breadcrumb">
                             <li><a href="listadocasos.php">Mis casos</a></li>
-                            <li class="active">Editar caso</li>
+                            <li class="active">Ver caso</li>
                         </ol>
 
                         <!--Mostrar en caso de presionar el boton de guardar-->
@@ -148,7 +104,6 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
 
                         <div class="row">
                             <div class="col-md-offset-8 col-md-2">
-                                <a onclick="crearCaso()" class="btn btn-primary" role="button" id="btnCrearCaso">Guardar</a>
                             </div>
                             <div class="col-md-2">
                                 <a href="listadocasos.php" class="btn btn-danger" role="button">Regresar</a>
@@ -159,14 +114,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                         <form role="form" id="formCaso" name="formCaso" method="post" action="">
                             <input type="hidden" name="form_caso">
                             <input type="hidden" name="c_id" id="c_id" value="<?php echo $id;?>">
-                            <input type="hidden" name="c_colaccion" id="c_colaccion" value="1">
-
-                            <!--
-                            <input type="hidden" name="usuarioIdCreador" id="usuarioIdCreador" value="<?php echo $_SESSION['idUsuario'];?>">
-                            <input type="hidden" name="dp_ids_deptos" id="dp_ids_deptos" value="<?php echo $idsDeptos; ?>">
-                            <input type="hidden" id="dp_borrarP" value="<?php echo $borrarP; ?>">
-                            <input type="hidden" id="salvarSinCrearVer" name="salvarSinCrearVer" value="0">
-                            <input type="hidden" id="check_soloLectura" value="<?php echo $soloLectura;?>"> -->
+                            <input type="hidden" name="c_colaccion" id="c_colaccion" value="0">
 
                             <div class="content_wrapper">
                                 <div class="row">
@@ -194,7 +142,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                                                 <label>Tipo:</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <select id="c_tipo" name="c_tipo" class="form-control required" style="width:90%;display:inline-block;">
+                                                <select id="c_tipo" name="c_tipo" class="form-control required sel_sololectura" style="width:90%;display:inline-block;">
                                                     <option value="">---Seleccionar---</option>
                                                         <?php
                                                             foreach ($colTipos as $elem) {
@@ -213,13 +161,13 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                                             <div class="col-md-7 form-group">
                                                 <input type="hidden" id="c_idtitular" name="c_idtitular" value="<?php echo $idtitular;?>"/>
                                                 <input type="text" id="c_titular" name="c_titular" value="<?php echo $titular;?>" class="form-control required" readonly style="width:80%;display:inline-block;"/>
-                                                <button type="button" class="btn btn-primary" role="button" title="Buscar" id="busca_titular" value="Buscar" onclick="obtListaTitulares();">
+                                                <!-- <button type="button" class="btn btn-primary" role="button" title="Buscar" id="busca_titular" value="Buscar" onclick="obtListaTitulares();">
                                                     <span class="glyphicon glyphicon-search"></span>
-                                                </button>
+                                                </button> -->
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="col-md-3 text-right">
                                                 <label>Autorizados:</label>
                                             </div>
@@ -238,7 +186,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                                                 </select>
                                                 <input type="hidden" id="c_idsautorizados" name="c_idsautorizados" value="<?php echo $autorizadosIds;?>" />
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <!-- columna 2 -->
@@ -272,12 +220,12 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                             </div>
                         </form>
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="text-right col-md-12">
                                 <a href="javascript:void(0);" onclick="popupCreaEditaAccion(<?php echo $id; ?>, 0)" title="Agregar acci&oacute;n" class="btn btn-primary"><img width="16px" src="../images/iconos/iconos_grid/agregar.png"> Agregar</a>
                             </div>
                         </div>
-                        <br>
+                        <br> -->
                         <form name="grids" method="post">
                             <?php
                             echo $koolajax->Render();
@@ -483,7 +431,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
             <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Crea/Edita Acci&oacute;n</h4>
+                    <h4 class="modal-title">Detalle Acci&oacute;n</h4>
                 </div>
                 <div class="row">
                   <form role="form" id="formCrearAccion" name="formCrearAccion" method="post" action="" enctype="multipart/form-data">
@@ -496,7 +444,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                                 <label>Fecha:</label>
                             </div>
                             <div class="col-md-7">
-                                <input class="form-control inputfechaGral required" type="text" name="pa_fechaaccion" id="pa_fechaaccion" value="<?php echo $tz->fechaF2;?>" style="width:50%;display:inline-block;" readonly>
+                                <input class="form-control required" type="text" name="pa_fechaaccion" id="pa_fechaaccion" value="<?php echo $tz->fechaF2;?>" style="width:50%;display:inline-block;" readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -504,7 +452,7 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                               <label for="pa_accion">Acci&oacute;n:</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" class="form-control required" name="pa_accion" id="pa_accion">
+                                <input type="text" class="form-control required" name="pa_accion" id="pa_accion" readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -512,17 +460,18 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                               <label for="pa_comentario">Comentario:</label>
                             </div>
                             <div class="col-md-7">
-                                <textarea class="form-control" name="pa_comentario" id="pa_comentario" rows="6"></textarea>
+                                <textarea class="form-control" name="pa_comentario" id="pa_comentario" rows="6" readonly></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-offset-1 col-md-10 col-md-offset-1">
                       <div class="row">
                         <div class="col-md-offset-6 col-md-3 text-right">
-                          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                          <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button> -->
                         </div>
                         <div class="col-md-3 text-right">
-                          <a class="btn btn-primary" id="btnCrearTipo" onclick="btnCreaEditaAccion();">Aceptar</a>
+                          <!-- <a class="btn btn-primary" id="btnCrearTipo" onclick="btnCreaEditaAccion();">Aceptar</a> -->
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                         </div>
                       </div>
                     </div>
