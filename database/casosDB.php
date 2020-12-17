@@ -62,7 +62,7 @@ class casosDB {
         $query = array();
 
         if($idCliente > 0){
-            $query[] = " a.clienteId=$idCliente ";
+            $query[] = " a.clienteId IN ($idCliente) ";
         }
 
         //En caso de llevar filtro
