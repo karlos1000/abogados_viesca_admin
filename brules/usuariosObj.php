@@ -13,6 +13,7 @@ class usuariosObj extends configuracionesGridObj{
     private $_email = '';
     private $_password = '';
     private $_activo = 0;
+    private $_clienteId = 0;
     private $_fechaCreacion = '0000-00-00 00:00:00';
     private $_fechaAct = '';
     //extras

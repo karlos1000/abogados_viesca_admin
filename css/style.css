@@ -1400,3 +1400,13 @@ tbody .bg_tr_selected {
 .ocultaCampo{
     display: none !important;
 }
+/* Fin para popup listado de busqueda */
+
+.sel_sololectura{
+    pointer-events: none;
+    /*opacity:0.5;*/
+    /*background: #dfdada;
+    border: 1px solid #9d9898;*/
+    background: #eeeeee;
+    border: 1px solid #dedede;
+}

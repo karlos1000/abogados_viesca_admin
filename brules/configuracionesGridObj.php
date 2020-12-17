@@ -230,7 +230,7 @@ class configuracionesGridObj {
     protected function defineColumnEdit($grid)
     {
         $column = new GridCustomColumn();
-        if($_SESSION['idRol']==1 ){
+        if($_SESSION['idRol']==1 ){  //Rol super administradores
             if($grid->id == "rolGrid"){
                 $column->ItemTemplate = '
                 <a class="kgrLinkEdit" onclick="grid_edit(this)" href="javascript:void 0" title="Editar"></a>';
@@ -284,7 +284,7 @@ class configuracionesGridObj {
                 // . '<a class="btnDesactivarUsuario" onclick="muestraDesactivarUsuario({idUsuario},\'usuariosGrid\',\'usuarios\',{activo})"  href="#fancyDesactivarUsuario" title="Activar/Desactivar usuario"><img src="../images/{nombreImg}" class="iconoDesactivar" ></a>'
                 ;
             }
-        }elseif($_SESSION['idRol']==2){
+        }elseif($_SESSION['idRol']==2){ //Rol administradores
               if ($grid->id=="comunicados") {
                 $column->ItemTemplate = '
                 <a class="kgrLinkEdit" onclick="grid_edit(this)" href="javascript:void 0" title="Editar"></a>'
@@ -304,7 +304,19 @@ class configuracionesGridObj {
                // . '<a class="btnDesactivarUsuario" onclick="muestraDesactivarUsuario({idUsuario},\'usuariosGrid\',\'usuarios\',{activo})"  href="#fancyDesactivarUsuario" title="Activar/Desactivar usuario"><img src="../images/{nombreImg}" class="iconoDesactivar" ></a>'
                ;
               }
+        }elseif($_SESSION['idRol']==3){  //Rol clientes
+            if($grid->id == "casos"){
+                $link = '';
+                $link .= '<a href="frmCasoSoloLectura.php?id={idCaso}" title="Ver"><img src="../images/iconos/iconos_grid/ver.png"></a>';
+                $column->ItemTemplate = $link;
+            }
+            if($grid->id == "caso_acciones"){
+                $link = '';
+                $link .= '<a href="javascript:void(0);" onclick="popupCreaEditaAccion({casoId}, {idAccion})" title="Ver detalle acci&oacute;n"><img width="16px" src="../images/iconos/iconos_grid/ver.png"></a>';
+                $column->ItemTemplate = $link;
+            }
         }
+
         $column->Align = "center";
         $column->HeaderText = "Acciones";
         $column->Width = "80px";

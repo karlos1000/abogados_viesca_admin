@@ -288,10 +288,13 @@ function obtListaGastos(){
   // showLoading("cont_listagastos");
   let usuarioIdCreador = 0; //accounting.unformat($("#usuarioIdCreador").val());
   let idAccion = accounting.unformat($("#pa_idaccion").val());
+  let colAccion = accounting.unformat($("#c_colaccion").val());
   // console.log(idAccion);
+  // console.log(colAccion);
+
   var idTabla = "grid_listagastos";
 
-  var params = {funct: 'tblListaGastos', idTabla:idTabla, idUsuario:usuarioIdCreador, idAccion:idAccion};
+  var params = {funct: 'tblListaGastos', idTabla:idTabla, idUsuario:usuarioIdCreador, idAccion:idAccion, colAccion:colAccion};
   ajaxData(params, function(data){
     hideLoading2("cont_listagastos");
     // console.log(data);

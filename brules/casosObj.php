@@ -84,12 +84,12 @@ class casosObj extends configuracionesGridObj{
 
 
     //Grid
-    public function ObtListadoCasosGrid($filSel="", $filTexto="", $filEstatus=""){
+    public function ObtListadoCasosGrid($idCliente=-1, $filSel="", $filTexto="", $filEstatus=""){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
         $uDB = new casosDB();
-        $ds = $uDB->CasosDataSet($ds);
+        $ds = $uDB->CasosDataSet($ds, $idCliente);
         $grid = new KoolGrid("casos");
         $configGrid = new configuracionesGridObj();
 

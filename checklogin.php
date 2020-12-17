@@ -19,14 +19,15 @@ if($user->idUsuario>0)
         $_SESSION['idUsuario'] = $user->idUsuario;
         $_SESSION['idRol'] = $user->idRol;
         $_SESSION['myusername'] = $user->nombre;
-        $_SESSION["status"] = "ok";        
-        
+        $_SESSION["status"] = "ok";
+        $_SESSION['clienteId'] = $user->clienteId;
+
         if($user->idRol == 1 || $user->idRol == 2){
             header("location:admin/index.php");
         }
         elseif ($user->idRol == 3) {
             header("location:admin/index.php");
-        }        
+        }
         else{
             header("location:index.php?login=error");
         }

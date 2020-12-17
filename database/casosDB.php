@@ -56,9 +56,24 @@ class casosDB {
         return $result;
     }
 
-    public function CasosDataSet($ds){
+    public function CasosDataSet($ds, $idCliente){
         $dsO = new DataServices();
         $param[0] = "";
+        $query = array();
+
+        if($idCliente > 0){
+            $query[] = " a.clienteId=$idCliente ";
+        }
+
+        //En caso de llevar filtro
+        if(count($query) > 0){
+          $wordWhere = " WHERE ";
+          $setWhere = implode(" AND ", $query);
+          // echo $setWhere;
+          $param[0] = $wordWhere.$setWhere;
+        }
+        // print_r($param);
+
         $ds->SelectCommand = $dsO->ExecuteDS("ObtCasosDB", $param);
         // $param = null;
         // $ds->InsertCommand = $dsO->ExecuteDS("insEnfermedadGrid", $param);

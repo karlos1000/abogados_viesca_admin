@@ -690,6 +690,9 @@ function crearCaso(){
       $usuariosObj->GuardarUsuario();
 
       if($usuariosObj->idUsuario>0){
+        //Agregar id del cliente en la tabla de usuarios
+        $usuariosObj->ActualizarUsuario("clienteId", trim($_GET['c_idcliente']), $usuariosObj->idUsuario);
+
         //Mandar correo
         // $emailObj->EnviarDatosDeAcceso("carlos.ramirez@framelova.com", $datosCliente->nombre, $password);
         $emailObj->EnviarDatosDeAcceso($datosCliente->email, $datosCliente->nombre, $password);
@@ -788,6 +791,7 @@ function tblListaGastos(){
   $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
   $idTabla = (isset($_GET['idTabla']) && $_GET['idTabla']!="")?$_GET['idTabla']:"";
   $idAccion = (isset($_GET['idAccion']) && $_GET['idAccion']!="")?$_GET['idAccion']:"";
+  $colAccion = (isset($_GET['colAccion']) && $_GET['colAccion']!="")?$_GET['colAccion']:0;
   // $idUsuario = (isset($_GET['idUsuario']) !="")?$_GET['idUsuario']:"";
 
   $accionGastosObj = new accionGastosObj();
@@ -808,7 +812,11 @@ function tblListaGastos(){
                     <th>Fecha <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
                     <th>Concepto <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
                     <th>Monto <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
-                    <th>Acciones <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>
+                    ';
+                    if($colAccion>0){
+                      $html .= '<th>Acciones <i class="fa fa-fw fa-sort " aria-hidden="true"></i></th>';
+                    }
+                  $html .= '
                 </tr>
             </thead>
             <tbody>
@@ -821,11 +829,15 @@ function tblListaGastos(){
                       <td>'.$item->fechaAlta2.'</td>
                       <td>'.$item->concepto.'</td>
                       <td>'.$item->monto2.'</td>
-                      <td>
+                      ';
+                      if($colAccion>0){
+                      $html .= '<td>
                         <a href="javascript:void(0);" onclick="popupCreaEditaGasto('.$item->idGasto.', '.$item->casoId.', '.$item->accionId.', \''.$item->concepto.'\')" title="Editar gasto"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>
                         <!-- &nbsp;<a href="javascript:void(0);" onclick="editargasto('.$item->idGasto.')" title="Editar gasto"><img width="16px" src="../images/iconos/iconos_grid/editar.png"></a>-->
                         <a href="javascript:void(0);" onclick="eliminargasto('.$item->idGasto.')" title="Eliminar gasto"><img width="16px" src="../images/iconos/iconos_grid/eliminar.png"></a>
-                      </td>
+                      </td>';
+                      }
+                    $html .= '
                   </tr>
                   ';
                 // }
