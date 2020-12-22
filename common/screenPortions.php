@@ -21,14 +21,14 @@ function getAdminMenu(){
 
     $menu .= '<li id="li_inicio"><a href="index.php"><img src="../images/iconos/iconos_menu_lateral/inicio.png"><p>Inicio</p></a></li>';
     if($_SESSION['idRol'] == 1 || $_SESSION['idRol'] == 2){
-      $menu .= '<li id="li_catalogos"><a href="catalogos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Cat&aacute;logos</p></a></li>';
       $menu .= '<li id="li_listadocasos"><a href="listadocasos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Mis Casos</p></a></li>';
+      $menu .= '<li id="li_catalogos"><a href="catalogos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Cat&aacute;logos</p></a></li>';
     }
     elseif($_SESSION['idRol'] == 3){
       $menu .= '<li id="li_listadocasos"><a href="listadocasos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Mis Casos</p></a></li>';
     }
     elseif($_SESSION['idRol'] == 4){
-
+      $menu .= '<li id="li_listadocasos"><a href="listadocasos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Casos</p></a></li>';
     }
 
     $menu .= '<li><a href="../admin/logout.php"><img src="../images/iconos/iconos_menu_lateral/salir.png"><p>Cerrar Sesi&oacute;n</p></a></li>';
@@ -242,7 +242,7 @@ function scriptsPagina($level=false){
   $link .= ' <script type="text/javascript" src="'.$level.'js/jquery.timepicker.min.js?upd='.$upd.'"></script>';
   $link .= ' <script type="text/javascript" src="'.$level.'js/jquery-ui-timepicker.js?upd='.$upd.'"></script>';
   */
-  
+
   $link .= ' <script type="text/javascript" src="'.$level.'js/spanish_datapicker.js?upd='.$upd.'"></script>';
   $link .= ' <script type="text/javascript" src="'.$level.'js/functionsGlobals.js?upd='.$upd.'"></script>'; //Solo para las funciones globales para todo el sitio
   $link .= ' <script type="text/javascript" src="'.$level.'js/functions.js?upd='.$upd.'"></script>';

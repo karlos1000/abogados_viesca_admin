@@ -56,13 +56,17 @@ class casosDB {
         return $result;
     }
 
-    public function CasosDataSet($ds, $idCliente){
+    public function CasosDataSet($ds, $idCliente, $idAbogado){
         $dsO = new DataServices();
         $param[0] = "";
         $query = array();
 
         if($idCliente > 0){
             $query[] = " a.clienteId IN ($idCliente) ";
+        }
+        if($idAbogado > 0){
+            $idAbogado = $idAbogado.",";
+            $query[] =  " a.autorizadosIds LIKE '%".$idAbogado."%' ";
         }
 
         //En caso de llevar filtro

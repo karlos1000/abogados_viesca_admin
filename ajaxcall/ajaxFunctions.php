@@ -81,6 +81,7 @@ switch ($function){
     case "obtDatosGasto": obtDatosGasto(); break;
     case "eliminarGasto": eliminarGasto(); break;
     case "eliminarAccion": eliminarAccion(); break;
+    case "obtTotalGastos": obtTotalGastos(); break;
 
     default:
       echo "Not valid call";
@@ -662,7 +663,7 @@ function crearCaso(){
   $casosObj->clienteId = (isset($_GET['c_idcliente']) && $_GET['c_idcliente']!="")?$_GET['c_idcliente']:"";
   $casosObj->tipoId = (isset($_GET['c_tipo']) && $_GET['c_tipo']!="")?$_GET['c_tipo']:"";
   $casosObj->titularId = (isset($_GET['c_idtitular']) && $_GET['c_idtitular']!="")?$_GET['c_idtitular']:"";
-  $casosObj->autorizadosIds = (isset($_GET['c_idsautorizados']) && $_GET['c_idsautorizados']!="")?$_GET['c_idsautorizados']:"";
+  $casosObj->autorizadosIds = (isset($_GET['c_idsautorizados']) && $_GET['c_idsautorizados']!="")?$_GET['c_idsautorizados'].",":""; //Se le agrega una "," para facilitar la busqueda en sql
   $casosObj->fechaAlta = (isset($_GET['c_falta']) && $_GET['c_falta']!="")?conversionFechas($_GET['c_falta']):"";
 
   if($idCaso>0){
@@ -916,6 +917,28 @@ function eliminarGasto(){
   $resp = $accionGastosObj->Eliminar($idGasto);
   if($resp){
     $arr = array("success"=>true);
+  }
+
+  echo $callback . '(' . json_encode($arr) . ');';
+}
+
+// Obtener el total general de los gastos
+function obtTotalGastos(){
+  $tz = obtDateTimeZone();
+  $arr = array("success"=>false);
+  $callback = (isset($_GET['callback']) && $_GET['callback']!="")?$_GET['callback']:"";
+  $idCaso = (isset($_GET['idCaso']) && $_GET['idCaso']!="")?$_GET['idCaso']:0;
+  $accionGastosObj = new accionGastosObj();
+
+  $colGastos = $accionGastosObj->ObtAccionGastos(0, $idCaso);
+  $tGastos = 0;
+  foreach($colGastos as $elem){
+    $tGastos += $elem->monto;
+  }
+
+  if($tGastos>0){
+    $tGastos = formatoMoneda($tGastos);
+    $arr = array("success"=>true, "tGastos"=>$tGastos);
   }
 
   echo $callback . '(' . json_encode($arr) . ');';

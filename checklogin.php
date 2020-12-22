@@ -25,7 +25,7 @@ if($user->idUsuario>0)
         if($user->idRol == 1 || $user->idRol == 2){
             header("location:admin/index.php");
         }
-        elseif ($user->idRol == 3) {
+        elseif ($user->idRol == 3 || $user->idRol==4) {
             header("location:admin/index.php");
         }
         else{

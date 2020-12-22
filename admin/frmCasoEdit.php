@@ -3,7 +3,7 @@ session_start();
 $idRol = $_SESSION['idRol'];
 $rol = true;
 switch ($idRol) {
-    case 1: case 2:  $rol = true; break;
+    case 1: case 2: case 4:  $rol = true; break;
     default: $rol = false; break;
 }
 if($_SESSION['status']!= "ok" || $rol!=true)

@@ -370,6 +370,7 @@ function btnCreaEditaGasto(){
         //Recargar gastos
         showLoading("cont_listagastos");
         obtListaGastos();
+        obtTotalGastos(accounting.unformat($("#c_id").val()));
         alertify.success("Registro creado correctamente.");
       }else{
         alertify.error("El registro no fue creado, intentar nuevamente.");
@@ -393,6 +394,7 @@ function eliminargasto(idGasto){
         caso_acciones.commit();
         //Recargar gastos
         obtListaGastos();
+        obtTotalGastos(accounting.unformat($("#c_id").val()));
         alertify.success("Registro eliminado correctamente.");
       }
     });
@@ -410,9 +412,21 @@ function eliminarAccion(idAccion){
       if(data.success){
         caso_acciones.refresh();
         caso_acciones.commit();
+        obtTotalGastos(accounting.unformat($("#c_id").val()));
         alertify.success("Registro eliminado correctamente.");
       }
     });
   },function(){
   }).set({labels:{ok:'Aceptar', cancel: 'Cancelar'}, padding: false});
+}
+
+// Obtener el total general de los gastos
+function obtTotalGastos(idCaso){
+  let params = {funct: 'obtTotalGastos', idCaso:idCaso};
+  ajaxData(params, function(data){
+    // console.log(data);
+    if(data.success){
+      $("#c_tgastos").val(data.tGastos);
+    }
+  });
 }

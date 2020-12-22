@@ -1,6 +1,6 @@
 <?php
 session_start();
-$checkRol = ($_SESSION['idRol']==1 || $_SESSION['idRol']==2 || $_SESSION['idRol']==3) ?true :false;
+$checkRol = ($_SESSION['idRol']==1 || $_SESSION['idRol']==2 || $_SESSION['idRol']==3 || $_SESSION['idRol']==4) ?true :false;
 
 if($_SESSION['status']!= "ok" || $checkRol!=true)
         header("location: logout.php");
@@ -17,11 +17,16 @@ $idCliente = -1;
 if($_SESSION['idRol']==3){
     $idCliente = $_SESSION['clienteId'];
 }
+//Obtener aquellos que pertenecen al abogado
+$idAbogado = -1;
+if($_SESSION['idRol']==4){
+    $idAbogado = $_SESSION['idUsuario'];
+}
 
 $filSel = "";
 $filTexto = "";
 $filEstatus = "";
-$result = $casosObj->ObtListadoCasosGrid($idCliente, $filSel, $filTexto, $filEstatus);
+$result = $casosObj->ObtListadoCasosGrid($idCliente, $idAbogado, $filSel, $filTexto, $filEstatus);
 ?>
 <!DOCTYPE html>
 <html lang="es">
