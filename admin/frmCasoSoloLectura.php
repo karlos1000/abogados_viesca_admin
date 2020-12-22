@@ -63,7 +63,7 @@ $tGastos = formatoMoneda($tGastos);
 $autorizadosIds = (isset($datosCaso->autorizadosIds))?$datosCaso->autorizadosIds:"";
 $arrIdsAutorizados = explode(",", $autorizadosIds);
 // Obtener grid de acciones
-$gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
+$gridAcciones = $casoAccionesObj->ObtAccionesGrid($id,1);
 
 ?>
 <!DOCTYPE html>
@@ -207,14 +207,14 @@ $gridAcciones = $casoAccionesObj->ObtAccionesGrid($id);
                                                 <input class="form-control" type="text" name="c_fact" id="c_fact" value="<?php echo $fechaAct;?>" style="width:50%;display:inline-block;" readonly>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <!--<div class="row">
                                             <div class="col-md-3 text-right">
                                                 <label>Total Gastos:</label>
                                             </div>
                                             <div class="col-md-7">
                                                 <input class="form-control text-right" type="text" name="c_tgastos" id="c_tgastos" value="<?php echo $tGastos;?>" style="width:50%;display:inline-block;" readonly>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>

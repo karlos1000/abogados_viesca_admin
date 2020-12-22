@@ -87,10 +87,10 @@ $result = $casosObj->ObtListadoCasosGrid($idCliente, $idAbogado, $filSel, $filTe
                                     <div class="col-md-2 col-sm-2 col-xs-2">
                                         <select class="form-control " id="filEstatus" name="filEstatus">
                                             <option value="">--Seleccionar--</option>
-                                            <?php
+                                            ?php
                                             foreach ($colEstatus as $elem) { ?>
-                                                <option value="<?php echo $elem->idEstatus;?>"><?php echo $elem->nombre; ?></option>
-                                            <?php } ?>
+                                                <option value="?php echo $elem->idEstatus;?>">?php echo $elem->nombre; ?></option>
+                                            ?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-3">

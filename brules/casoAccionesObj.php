@@ -86,7 +86,7 @@ class casoAccionesObj extends configuracionesGridObj{
     }
 
     //Grid
-    public function ObtAccionesGrid($casoId=0){
+    public function ObtAccionesGrid($casoId=0,$isCst=0){
         $DataServices = new DataServices();
         $dbConn = $DataServices->getConnection();
         $ds = new MySQLiDataSource($dbConn);
@@ -99,7 +99,9 @@ class casoAccionesObj extends configuracionesGridObj{
         $configGrid->defineColumn($grid, "idAccion", "ID", true, true);
         $configGrid->defineColumn($grid, "fechaAlta2", "F. Alta", true, false, 1);
         $configGrid->defineColumn($grid, "nombre", "Acci&oacute;n", true, false, 1);
-        $configGrid->defineColumn($grid, "tGastos", "Gastos", true, false, 1);
+        if($isCst == 0){
+            $configGrid->defineColumn($grid, "tGastos", "Gastos", true, false, 1);
+        }
         $configGrid->defineColumn($grid, "comentarios", "Comentarios", true, false, 1);
 
         // if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){

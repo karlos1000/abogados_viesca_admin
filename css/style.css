@@ -11,15 +11,15 @@
 }
 header {
     height: 110px;
-    background: #0067a7;
+    background: #2a2a29;
     /*background-image: url(../images/interna.jpg);*/
     color: #fff;
 }
  h1 {
     font-size: 31px;
-    text-transform: uppercase;
-    font-family:'Lato', Helvetica, Arial, Lucida, sans-serif;
-    color: #b92a1c;
+    text-transform: capitalize;
+    font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+    color: #2a2a29;
 }
  h2 {
     font-size: 25px;
@@ -53,7 +53,7 @@ section.section-internas .container {
 }
 /*INICIO ========================================*/
 section#inicio {
-    /* background: url(../images/imagen-home.jpg); */
+    background: url(../images/imagen-home.jpg);
     background-size: cover;
     margin: 10% 0;
     width: 100%;
@@ -64,7 +64,7 @@ section#inicio {
 }
 section#inicio:before {
     content: "";
-    background: #00000069;
+    background: rgba(196,43,47,0.79);
     position: absolute;
     top: 0;
     right: 0;
@@ -77,7 +77,7 @@ section#inicio:before {
     text-align: center;
 }
 body {
-    background: #eff3f6;
+    background: #ffffff;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -116,12 +116,12 @@ input:-webkit-autofill {
     background-color: #eff3f6;
 }
 section#inicio .logo {
-    background: #fff !important;
+    background: NONE !important;
     padding: 50px !important;
     width: 64% !important;
     margin: 0 auto;
     margin-bottom: 20px !important;
-	height: 195px;
+    height: 195px;
 }
 
 a.btn, .btn:hover {
@@ -140,7 +140,7 @@ section#inicio .logo img {
 a {
     color: #444444;}
 a:focus, a:hover {
-    color: #11a9a1;
+    color: #c42b2f;
 }
 ol.breadcrumb a {
     color: #133475;
@@ -149,7 +149,7 @@ ol.breadcrumb li.active {
     color: #030e2d;
 }
 a.btn:hover, .btn:hover, .office2010blueKGR .kgrRefresh:hover, span.kgrInsert:hover {
-    background: #11a9a1 !important;
+    background: #2a2a29 !important;
 }
 .btn-primary.focus, .btn-primary:focus {
     border: none;
@@ -158,7 +158,7 @@ a.btn:hover, .btn:hover, .office2010blueKGR .kgrRefresh:hover, span.kgrInsert:ho
 }
 /* FIN DE enlaces ===============================*/
 .user.text-right.cursorPointer {
-    background: #b92a1c;
+    background: #c42b2f;
     padding: 10px 5px;
     line-height: 15px;
     text-align: center;
@@ -177,9 +177,10 @@ input {
 label.col-md-3 {
     /* margin: 17px 0; */
     vertical-align: middle;
-	color:#838485;
-	text-align:right;
-	text-transform: uppercase;
+    color: #f9f9f9;
+    text-align:right;
+    text-transform: uppercase;
+    display: none;
 }
 /*BOTONES*/
 button.btn.btn-lg.btn-primary.btn-block {
@@ -199,13 +200,13 @@ button.btn.btn-lg.btn-primary.btn-block {
     border-radius: 0;
 }
 a.btn, .btn {
-    background-color: #009abf !important;
+    background-color: #c42b2f !important;
 }
 .btn-delete{
-    background-color: red !important;
+    background-color: #e40000 !important;
 }
 .btn-delete:hover{
-    background-color: orange !important;
+    background-color: #2a2a29 !important;
 }
 /*fin de botones*/
 /*formularios */
@@ -231,6 +232,10 @@ input#usr_pass, input#usr_email {
     background: #ffffff29 !important;
     border: none;
     margin: 0;
+    width: 100%;
+}
+.login-form ::placeholder {
+    color: #fff;
 }
 .cont_error{
     margin: 15px 0;
@@ -263,10 +268,10 @@ section.section-internas {
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
     color: #FFF;
-    background: #b92a1c;
+    background: #c42b2f;
 }
 .nav>li:hover, .nav>li.active {
-    background: #b92a1c;
+    background: rgb(196 43 47);
 }
 .user{
     line-height: 50px;
@@ -291,16 +296,16 @@ img.icon-obras {
 .cont_iconos a p {
     width: 100px;
     height: 100px;
-    background: rgb(0, 154, 191);
-    border: 5px solid #f4f4f4;
+    background: rgb(42 42 41);
+    border: 5px solid #ffffff;
     border-radius: 50%;
-	    transition: .5s;
+    transition: .5s;
     box-shadow: 5px 5px 5px rgba(204, 204, 204, 0.5);
     text-align: center;
     margin: 10px auto;
 }
 .cont_iconos a p:hover {
-    background: #0F8A83;
+    background: #c42b2f;
 }
 .cont_iconos{
     /* margin: 30px 0; */
@@ -349,7 +354,7 @@ img.icon-obras {
 
 /*Estilos para el grid bootstrap*/
 section.section-internas>.panel-body>.container-fluid {
-    background: #eff3f6;
+    background: #ffffff;
     position: relative;
 }
 div#fechaInicio_datepicker, div#fechaFin_datepicker {
@@ -456,15 +461,16 @@ ul.nav.navbar-nav img {
     max-width: 30px;
 }
 .navbar-header {
-	background: #b92a1c;
+	background: rgb(196 43 47);
 	background-size: cover;
 	color: #fff !important;
 	font-weight: 800;
 	letter-spacing: 1px;
+	border-bottom: 1px solid #2a2a29;
 }
 	h1.titulo {
-    padding-bottom: .5em;
-    border-bottom: 1px solid #999;
+    padding-bottom: .4em;
+    border-bottom: 3px solid #c42b2f;
     font-weight: bold;
     margin: 15px 1px;
     /* width: 103% !important; */
@@ -754,7 +760,7 @@ a.btn.btn-primary {
     margin-left: 15px;
 }
 .office2010blueKGR .kgrHeader {
-	background: #0067a7 !important;
+	background: #c42b2f !important;
 	border: none!important;
 	text-align: center !important;
 	text-transform: uppercase;
@@ -1006,7 +1012,7 @@ section.section-internas {
 }
 
 ul.nav.navbar-nav {
-    background: #757575;
+    background: #2a2a29;
     height: 600px;
 }
 
@@ -1023,11 +1029,12 @@ header:before {
 }
 
 .kgrPager.kgrNextPrevAndNumericPager {
-    background: #ccc !important;
+    background: #2a2a29 !important;
     color: #fff !important;
 }
-
-
+.office2010blueKGR .kgrFilterCell {
+    background: rgb(196 43 47 / 70%) !important;
+}
 tbody tr:nth-child(odd) {
     background: #f9f9f9;
 }
@@ -1067,7 +1074,7 @@ section#inicio .container {
 }
 
 .logo {
-    background: #fff;
+    /* background: #fff; */
     padding: 50px;
     width: 64%;
     margin: 0 auto;
@@ -1084,7 +1091,8 @@ button.btn.btn-lg.btn-primary.btn-block:hover {
 }
 
 .login-form .form-group {
-    background: #fff !important;
+    background: #fff0 !important;
+    border: 1px solid #fff;
 }
 
 .form-group.col-md-12.registro {
@@ -1100,8 +1108,9 @@ button.btn.btn-lg.btn-primary.btn-block:hover {
 }
 
 button.btn.btn-lg.btn-primary.btn-block {
-    background: #b72a1c !important;
+    background: none !important;
     border-radius: 0;
+    border: 1px solid #fff;
 }
 
 button.btn.btn-lg.btn-primary.btn-block:hover {
