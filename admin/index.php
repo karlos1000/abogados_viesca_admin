@@ -38,7 +38,10 @@ libreriasKool();
                             <?php if($_SESSION['idRol']==1 || $_SESSION['idRol']==2){ ?>
                             <div class="row">
                                  <div class="col-md-4">
-                                    <a href="catalogos.php"><p><img src="../images/iconos/iconos_menu_lateral/aguilar_superadmin-03.png" class="icon-obras" title="Captura" alt="Captura"><br class="inicio">Cat&aacute;logos</p></a>
+                                    <a href="catalogos.php"><p><img src="../images/iconos/iconos_menu_lateral/catalogos.png" class="icon-obras" title="Cat&aacute;logos" alt="Cat&aacute;logos"><br class="inicio">Cat&aacute;logos</p></a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="catalogos.php"><p><img src="../images/iconos/iconos_menu_lateral/mis-casos.png" class="icon-obras" title="Mis Casos" alt="Mis Casos"><br class="inicio">Mis Casos</p></a>
                                 </div>
                             </div>
                             <?php } ?>
