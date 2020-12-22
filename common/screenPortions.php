@@ -21,9 +21,8 @@ function getAdminMenu(){
 
     $menu .= '<li id="li_inicio"><a href="index.php"><img src="../images/iconos/iconos_menu_lateral/inicio.png"><p>Inicio</p></a></li>';
     if($_SESSION['idRol'] == 1 || $_SESSION['idRol'] == 2){
-
+      $menu .= '<li id="li_listadocasos"><a href="listadocasos.php"><img src="../images/iconos/iconos_menu_lateral/mis-casos.png"><p>Mis Casos</p></a></li>';
       $menu .= '<li id="li_catalogos"><a href="catalogos.php"><img src="../images/iconos/iconos_menu_lateral/catalogos.png"><p>Cat&aacute;logos</p></a></li>';
-      $menu .= '<li id="li_listadocasos"><a href="listadocasos.php"><img src="../images/iconos/iconos_menu_lateral/mis-casos.png"><p>Mis Casos</p></a></li>';	      
     }
     elseif($_SESSION['idRol'] == 3){
       $menu .= '<li id="li_listadocasos"><a href="listadocasos.php"><img src="../images/iconos/iconos_menu_lateral/mis-casos.png"><p>Mis Casos</p></a></li>';
