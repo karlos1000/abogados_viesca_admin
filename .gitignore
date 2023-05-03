@@ -4,3 +4,4 @@ common/config.php
 
 *.rar
 *.zip
+*.sql
